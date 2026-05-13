@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENSURE Lab — ENvironmental SUstainability and REsilience · Texas A&M</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: #1a1a1a;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  transition: background .35s, padding .35s, box-shadow .35s;
+}
+nav.solid {
+  background: #fff;
+  padding: 14px 48px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.07);
+}
+.nav-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; transition: color .3s;
+}
+nav:not(.solid) .nav-logo { color: #fff; }
+nav.solid .nav-logo { color: #1a1a1a; }
+
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: .78rem; letter-spacing: .04em;
+  text-decoration: none; transition: color .25s, opacity .25s;
+}
+nav:not(.solid) .nav-links a { color: rgba(255,255,255,.72); }
+nav:not(.solid) .nav-links a:hover { color: #fff; }
+nav.solid .nav-links a { color: rgba(26,26,26,.5); }
+nav.solid .nav-links a:hover { color: #2d7a3e; }
+.nav-cta {
+  background: #2d7a3e; color: #fff !important;
+  padding: 9px 20px; border-radius: 100px;
+  font-weight: 500; opacity: 1 !important;
+  transition: background .25s !important;
+}
+.nav-cta:hover { background: #1e5a2c !important; }
+
+/* ─── HERO VIDEO ─── */
+#hero {
+  position: relative;
+  height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: #0d1f10;
+}
+/* Animated canvas fallback — always visible underneath video */
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+#hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+#hero-video.loaded { opacity: .82; }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(8,20,10,.3) 0%,
+    rgba(8,20,10,.45) 60%,
+    rgba(8,20,10,.7) 100%
+  );
+}
+.hero-text {
+  position: relative; z-index: 3;
+  text-align: center;
+  color: #fff;
+  padding: 0 40px;
+}
+.hero-text h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 400; line-height: 1.12;
+  letter-spacing: -.01em;
+}
+.hero-text h1 span { display: block; }
+
+/* scroll cue */
+.hero-scroll-cue {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: rgba(255,255,255,.4); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 1px; height: 44px; background: rgba(255,255,255,.15);
+  position: relative; overflow: hidden;
+}
+.hero-scroll-line::after {
+  content: ''; position: absolute; top: -100%; left: 0;
+  width: 100%; height: 50%; background: rgba(255,255,255,.5);
+  animation: drip 1.8s ease-in-out infinite;
+}
+@keyframes drip { to { top: 200%; } }
+
+/* ─── VISION SECTION ─── */
+/* Exact CrowtherLab structure: photo slideshow LEFT, big statement text RIGHT */
+#vision {
+  background: #f2f2f2;
+  padding: 80px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+/* Photo slideshow */
+.slideshow {
+  position: relative;
+  overflow: hidden;
+}
+.slides {
+  display: flex;
+  transition: transform .5s ease;
+}
+.slide {
+  min-width: 100%;
+  aspect-ratio: 4/3;
+  background: #1e3d28;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.slide-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+  transition: transform .4s ease;
+}
+.slide-inner {
+  width: 100%; height: 100%;
+  transition: transform .5s ease;
+  position: relative;
+}
+.slide-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.slide:hover .slide-inner { transform: scale(1.03); }
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.7); font-size: .65rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 10px 16px; text-align: center;
+}
+.slide-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.88);
+  border: none; cursor: pointer;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; color: #1a1a1a;
+  transition: background .25s;
+  z-index: 2;
+}
+.slide-btn:hover { background: #fff; }
+.slide-btn.prev { left: 12px; }
+.slide-btn.next { right: 12px; }
+.slide-dots {
+  display: flex; justify-content: center; gap: 6px; margin-top: 14px;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(26,26,26,.18); cursor: pointer; transition: background .3s;
+}
+.dot.active { background: #2d7a3e; }
+
+/* Vision text right side */
+.vision-text {}
+.vision-headline {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 400; line-height: 1.22;
+  color: #1a1a1a; margin-bottom: 22px;
+}
+.vision-body {
+  font-size: 1rem; line-height: 1.82;
+  color: rgba(26,26,26,.62);
+}
+
+/* ─── PROJECT SECTIONS ─── */
+/* Each project: full-width, image left ~44%, text right ~56% */
+/* On hover: image zooms, "Learn more" appears */
+.project {
+  display: grid;
+  grid-template-columns: 44% 56%;
+  min-height: 420px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  transition: background .3s;
+  background: #fff;
+}
+.project:hover { background: #f7faf7; }
+
+/* Alternate: even projects flip image right */
+.project.flip { grid-template-columns: 56% 44%; }
+.project.flip .proj-img { order: 2; }
+.project.flip .proj-text { order: 1; }
+
+.proj-img {
+  overflow: hidden; position: relative;
+  background: #c8d8c2;
+  min-height: 460px;
+}
+.proj-img-inner {
+  width: 100%; height: 100%;
+  transition: transform .7s ease;
+  position: absolute; inset: 0;
+}
+.proj-img-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.project:hover .proj-img-inner { transform: scale(1.05); }
+
+.proj-text {
+  padding: 80px 80px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.project.flip .proj-text {
+  padding: 80px 72px 80px 80px;
+}
+.proj-label {
+  font-size: .66rem; letter-spacing: .22em; text-transform: uppercase;
+  color: #2d7a3e; font-weight: 600; margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.proj-label::before { content: ''; width: 20px; height: 1px; background: #2d7a3e; }
+.proj-statement {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 400; line-height: 1.15;
+  color: #1a1a1a; margin-bottom: 24px;
+  transition: color .3s;
+}
+.project:hover .proj-statement { color: #2d7a3e; }
+.proj-body {
+  font-size: .96rem; line-height: 1.84;
+  color: rgba(26,26,26,.58); margin-bottom: 32px;
+}
+.proj-more {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .85rem; font-weight: 500; letter-spacing: .06em;
+  color: #2d7a3e;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity .3s, transform .3s;
+}
+.project:hover .proj-more { opacity: 1; transform: translateX(0); }
+
+/* Projects section header */
+.projects-header {
+  padding: 72px 64px 0;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+.projects-header .section-label {
+  font-size: .66rem; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(26,26,26,.35); font-weight: 500;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 0;
+}
+.projects-header .section-label::after {
+  content: ''; flex: 1; height: 1px; background: rgba(0,0,0,.08);
+}
+
+/* ─── NEWS SECTION ─── */
+#news {
+  background: #f2f2f2;
+  padding: 80px 64px;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+.news-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 44px;
+}
+.news-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 400; color: #1a1a1a;
+}
+.news-all {
+  font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(26,26,26,.35); text-decoration: none; transition: color .25s;
+}
+.news-all:hover { color: #2d7a3e; }
+
+/* Featured news: image left, title right — same CrowtherLab pattern */
+.news-featured {
+  background: #fff; margin-bottom: 2px;
+  display: grid; grid-template-columns: 360px 1fr;
+  min-height: 200px; text-decoration: none; color: inherit;
+  transition: background .25s; cursor: pointer;
+}
+.news-featured:hover { background: #eef5ef; }
+.news-feat-img {
+  overflow: hidden; position: relative; min-height: 200px;
+}
+.news-feat-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block; transition: transform .4s;
+}
+.news-featured:hover .news-feat-img img { transform: scale(1.05); }
+.news-feat-text { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; }
+
+/* Regular news grid */
+.news-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.news-card {
+  background: #fff; padding: 36px 32px;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: background .25s; cursor: pointer;
+}
+.news-card:hover { background: #eef5ef; }
+.news-type {
+  font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #2d7a3e; font-weight: 600; margin-bottom: 6px;
+}
+.news-date { font-size: .68rem; color: rgba(26,26,26,.38); margin-bottom: 10px; display: block; }
+.news-headline {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem; font-weight: 400;
+  color: #1a1a1a; line-height: 1.42;
+  transition: color .25s;
+}
+.news-card:hover .news-headline,
+.news-featured:hover .news-headline { color: #2d7a3e; }
+
+/* placeholder */
+.news-ph {
+  background: #fff; padding: 30px 28px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px dashed rgba(45,122,62,.15);
+  text-align: center; color: rgba(45,122,62,.35);
+}
+.news-ph span { display: block; font-size: 1.4rem; margin-bottom: 7px; }
+.news-ph p { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.7; }
+
+/* ─── CONTACT ─── */
+#contact {
+  background: #1a2e1c;
+  padding: 80px 64px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.contact-left {}
+.contact-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 400; color: #fff;
+  line-height: 1.2; margin-bottom: 20px;
+}
+.contact-title em { font-style: italic; color: #8fc99a; }
+.contact-body { font-size: .94rem; line-height: 1.82; color: rgba(255,255,255,.45); margin-bottom: 36px; }
+.contact-links { display: flex; flex-direction: column; }
+.clink {
+  display: flex; align-items: flex-start; gap: 13px;
+  padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  text-decoration: none; color: rgba(255,255,255,.48); font-size: .87rem;
+  transition: color .25s;
+}
+.clink:hover { color: #8fc99a; }
+.clink-icon { width: 18px; font-size: .88rem; flex-shrink: 0; padding-top: 1px; }
+
+.contact-form { display: flex; flex-direction: column; gap: 13px; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.fg { display: flex; flex-direction: column; gap: 5px; }
+.fg label { font-size: .61rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.25); }
+.fg input, .fg textarea, .fg select {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 3px; padding: 11px 13px;
+  color: #fff; font-family: 'DM Sans', sans-serif; font-size: .88rem;
+  outline: none; transition: border-color .3s;
+}
+.fg input:focus, .fg textarea:focus { border-color: rgba(143,201,154,.4); }
+.fg textarea { height: 105px; resize: none; }
+.fg select { color: rgba(255,255,255,.6); }
+.fg select option { background: #1a2e1c; }
+.btn-submit {
+  background: #2d7a3e; color: #fff; border: none; cursor: pointer;
+  padding: 13px 28px; border-radius: 100px;
+  font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: .85rem;
+  letter-spacing: .04em; align-self: flex-start;
+  transition: background .25s;
+}
+.btn-submit:hover { background: #3d9a52; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #0f1e14;
+  padding: 36px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.footer-logo {
+  font-size: .82rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.7); text-decoration: none;
+}
+.footer-copy { font-size: .72rem; color: rgba(255,255,255,.2); }
+.footer-tagline { font-size: .74rem; color: rgba(255,255,255,.28); text-align: right; max-width: 260px; line-height: 1.6; }
+
+
+footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,255,.05);}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:12px;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:600;margin-bottom:14px;}
+.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
+.footer-nav-link:hover{color:#8fc99a;}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);line-height:1.7;}
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+</style>
+</head>
+<body>
+<!-- CARBON COUNTER STRIP -->
+<style>
+#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:64px;background:rgba(15,30,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.co2-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes co2blink{0%,100%{opacity:1}50%{opacity:0.1}}
+.co2-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:"DM Sans",sans-serif;}
+#co2-digits{font-family:"DM Serif Display",serif;font-size:2rem;font-weight:400;color:#8fc99a;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1;}
+.co2-unit{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:"DM Sans",sans-serif;align-self:flex-end;padding-bottom:4px;}
+.co2-link{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(143,201,154,.55);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px;transition:color .2s;}
+.co2-link:hover{color:#8fc99a;}
+#nav{top:64px!important;}
+</style>
+<div id="co2-strip">
+  <span class="co2-dot"></span>
+  <span class="co2-label">CO&#8322; emitted since you opened this page</span>
+  <span id="co2-digits">0</span>
+  <span class="co2-unit">tonnes</span>
+  <a href="carbon-visualization.html" class="co2-link">know more &rarr;</a>
+</div>
+<script>
+(function(){
+  var el=document.getElementById("co2-digits");
+  var RATE=1186;
+  var t0=Date.now();
+  setInterval(function(){el.textContent=Math.round(RATE*(Date.now()-t0)/1000).toLocaleString();},80);
+})();
+</script>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ENSURE Lab</a>
+  <ul class="nav-links">
+    <li><a href="#vision">Welcome</a></li>
+    <li><a href="#projects">Research</a></li>
+    <li><a href="news.html">News</a></li><li><a href="team.html">Our Team</a></li>
+    <li><a href="#contact" class="nav-cta">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO VIDEO ─── -->
+<section id="hero">
+  <!-- Animated canvas background — always shows. Video fades in on top when available. -->
+  <canvas id="hero-canvas"></canvas>
+
+  <video id="hero-video" autoplay muted loop playsinline
+    src="websitevideo-1.mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>
+      <span>Inspired by sustainability.</span>
+      <span>Driven by science.</span>
+    </h1>
+  </div>
+  <div class="hero-scroll-cue">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── VISION — photo slideshow + mission statement ─── -->
+<section id="vision">
+  <!-- LEFT: photo carousel — replace emoji with real <img> tags when ready -->
+  <div class="slideshow reveal">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <div class="slide-inner">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80&fit=crop" alt="Sustainable Architecture">
+        </div>
+        <div class="slide-label">Sustainable Building Design · Texas A&M College of Architecture</div>
+      </div>
+      <div class="slide">
+        <div class="slide-inner">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80&fit=crop" alt="Climate Research">
+        </div>
+        <div class="slide-label">Life Cycle Assessment & Climate Modeling</div>
+      </div>
+      <div class="slide">
+        <div class="slide-inner">
+          <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=900&q=80&fit=crop" alt="VR Training Lab">
+        </div>
+        <div class="slide-label">Virtual Reality Training Lab</div>
+      </div>
+      <div class="slide">
+        <div class="slide-inner">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&fit=crop" alt="Community Living Lab">
+        </div>
+        <div class="slide-label">Port Arthur Living Lab — Community Co-Design</div>
+      </div>
+      <div class="slide">
+        <div class="slide-inner">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80&fit=crop" alt="Data & Modeling">
+        </div>
+        <div class="slide-label">Predictive Analytics & Data-Driven Design</div>
+      </div>
+    </div>
+    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
+    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
+    <div class="slide-dots" id="dots"></div>
+  </div>
+
+  <!-- RIGHT: big mission statement -->
+  <div class="vision-text reveal d1">
+    <h2 class="vision-headline">
+      ENSURE Lab studies buildings across lifetimes, generating knowledge to reduce carbon emissions and strengthen climate resilience.
+    </h2>
+    <p class="vision-body">
+      We are an interdisciplinary team of researchers at Texas A&M University's College of Architecture studying how buildings, materials, and communities perform under changing environmental conditions. Our work combines life cycle assessment, climate-aware modeling, data-driven decision support, materials research, community engagement, and immersive training tools — creating the scientific foundation for a lower-carbon, more resilient built environment.
+    </p>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<div id="projects">
+  <div class="projects-header">
+    <div class="section-label">What We Believe</div>
+  </div>
+
+  <!-- 1 — MATTER MATTERS -->
+  <a class="project" href="lca.html">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=85&fit=crop" alt="Materials and embodied carbon">
+      </div>
+    </div>
+    <div class="proj-text">
+      <div class="proj-label">Life Cycle Assessment & Environmental Impacts</div>
+      <h3 class="proj-statement">
+        Matter matters.
+      </h3>
+      <p class="proj-body">
+        Every material in a building carries a hidden carbon cost — in the mines, the factories, the trucks, and the landfills. Most of the world counts only the energy a building uses while occupied. We count everything. Across the full life cycle — from raw extraction to end-of-life demolition — we measure what buildings are actually made of and what that costs the planet. Because you can't reduce what you don't measure.
+      </p>
+      <span class="proj-more">Explore this research →</span>
+    </div>
+  </a>
+
+  <!-- 2 — BUILDINGS OUTLIVE THEIR BLUEPRINTS — flipped -->
+  <a class="project flip" href="climate.html">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1000&q=85&fit=crop" alt="Climate change and building performance">
+      </div>
+    </div>
+    <div class="proj-text">
+      <div class="proj-label">Climate-Aware Design & Optimization</div>
+      <h3 class="proj-statement">
+        Buildings outlive their blueprints.
+      </h3>
+      <p class="proj-body">
+        A building designed for today's climate will live through tomorrow's. By 2080, the city it stands in may be hotter, drier, and more volatile than anything its engineers imagined. We optimize buildings not for the world they're born into, but for the world they'll age through — jointly minimizing energy, carbon, and water across every future climate scenario we can model.
+      </p>
+      <span class="proj-more">Explore this research →</span>
+    </div>
+  </a>
+
+  <!-- 3 — RESILIENCE IS PERSONAL -->
+  <a class="project" href="living-labs.html">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1000&q=85&fit=crop" alt="Community resilience and living labs">
+      </div>
+    </div>
+    <div class="proj-text">
+      <div class="proj-label">Sustainability–Resilience Nexus & Living Labs</div>
+      <h3 class="proj-statement">
+        Resilience is personal.
+      </h3>
+      <p class="proj-body">
+        Port Arthur, Texas has flooded repeatedly. Medellín has faced decades of instability. Indramayu watches the sea rise. Climate resilience isn't an abstract policy goal for these communities — it's survival. We don't design solutions for them. We design with them. Our Living Lab approach puts affected residents, local businesses, and community organizations at the center of every decision, ensuring that what we build together is something they can actually use.
+      </p>
+      <span class="proj-more">Explore this research →</span>
+    </div>
+  </a>
+
+  <!-- 4 — SEE IT TO BUILD IT — flipped -->
+  <a class="project flip" href="vr-training.html">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=1000&q=85&fit=crop" alt="Virtual reality and immersive training">
+      </div>
+    </div>
+    <div class="proj-text">
+      <div class="proj-label">Human-Centered Immersive Training & Simulation</div>
+      <h3 class="proj-statement">
+        See it to build it.
+      </h3>
+      <p class="proj-body">
+        Understanding how a building performs — or how to construct one safely — is hard to teach from a textbook. We put people inside virtual buildings, virtual construction sites, and virtual extreme environments instead. Students adjust insulation and window ratios and watch energy use change in real time. Workers assemble walls block by block in a simulation before they ever touch a real one. Astronauts train for environments they've never been in. The technology is new. The idea is ancient: the best way to learn something is to do it.
+      </p>
+      <span class="proj-more">Explore this research →</span>
+    </div>
+  </a>
+
+</div><!-- /projects -->
+
+<!-- ─── NEWS ─── -->
+<section id="news">
+  <div class="news-top reveal">
+    <h2 class="news-title">News & Updates</h2>
+    <a href="news.html" class="news-all">See all →</a>
+  </div>
+
+  <!-- Featured news item — image left, text right -->
+  <a class="news-featured reveal d1" href="#" >
+    <div class="news-feat-img">
+      <img src="https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?w=700&q=80&fit=crop" alt="Best Paper Award">
+    </div>
+    <div class="news-feat-text">
+      <div class="news-type">Award</div>
+      <span class="news-date">2024</span>
+      <div class="news-headline">
+        Maryam Abbasi Kamazani wins Best Paper Award at the International Conference on Net Zero Carbon Built Environment for climate-aware LCA optimization research.
+      </div>
+    </div>
+  </a>
+
+  <!-- 3-column news grid -->
+  <div class="news-grid reveal d2">
+    <a class="news-card" href="#" >
+      <div class="news-type">Funding</div>
+      <span class="news-date">Active Grant</span>
+      <div class="news-headline">NSF funds prognostic multi-objective optimization of building energy–carbon–water nexus across all U.S. climate zones</div>
+    </a>
+    <a class="news-card" href="#" >
+      <div class="news-type">Funding</div>
+      <span class="news-date">Active Grant · DOE ARPA-E</span>
+      <div class="news-headline">Life cycle assessment of 3D-printed hempcrete walls for large-scale additive construction receives DOE ARPA-E funding</div>
+    </a>
+    <a class="news-card" href="#" >
+      <div class="news-type">Collaboration</div>
+      <span class="news-date">Ongoing</span>
+      <div class="news-headline">7-country Living Lab collaboration spans Port Arthur TX, Medellín Colombia and Indramayu Indonesia on climate resilience</div>
+    </a>
+    <a class="news-card" href="#" >
+      <div class="news-type">Research</div>
+      <span class="news-date">2024</span>
+      <div class="news-headline">New NSF-funded collaboration with Penn State examines how hygrothermal climate stress degrades building envelope performance over 100+ years</div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="contact-left reveal">
+    <h2 class="contact-title">Join us or <em>collaborate.</em></h2>
+    <p class="contact-body">
+      We welcome inquiries from prospective PhD students, postdoctoral researchers, industry partners, and collaborators. If our work resonates with you, reach out.
+    </p>
+    <div class="contact-links">
+      <a class="clink" href="#">
+        <span class="clink-icon">✉</span>[Lab email — placeholder]
+      </a>
+      <a class="clink" href="#">
+        <span class="clink-icon">📍</span>
+        Francis Hall 208C, College of Architecture, Texas A&M University, 789 Ross Street, College Station, TX 77843-3137
+      </a>
+      <a class="clink" href="#">
+        <span class="clink-icon">🔗</span>[LinkedIn — placeholder]
+      </a>
+      <a class="clink" href="#">
+        <span class="clink-icon">📚</span>[Google Scholar — placeholder]
+      </a>
+      <a class="clink" href="#">
+        <span class="clink-icon">📞</span>[Phone — placeholder]
+      </a>
+    </div>
+  </div>
+  <div class="reveal d2">
+    <form class="contact-form" onsubmit="return false">
+      <div class="cf-row">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Jane"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="you@university.edu"></div>
+      <div class="fg">
+        <label>I am a...</label>
+        <select>
+          <option>Prospective PhD Student</option>
+          <option>Potential Collaborator</option>
+          <option>Industry Partner</option>
+          <option>Journalist / Media</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Message</label><textarea placeholder="I'm interested in..."></textarea></div>
+      <button class="btn-submit" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="footer-logo">ENSURE Lab</a>
+      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Research</div>
+      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
+      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
+      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
+      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Site</div>
+      <a href="team.html" class="footer-nav-link">Our Team</a>
+      <a href="news.html" class="footer-nav-link">News & Updates</a>
+      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
+      <a href="index.html#contact" class="footer-nav-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Nav solid on scroll
+window.addEventListener('scroll', () =>
+  document.getElementById('nav').classList.toggle('solid', scrollY > 60)
+);
+
+// ── HERO CANVAS — animated environmental background
+// Always runs. Video fades in on top if it loads successfully.
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+
+  // Particle system — rising seeds/spores
+  const particles = [];
+  function Particle() {
+    this.reset = function() {
+      this.x = Math.random() * W;
+      this.y = H + Math.random() * 100;
+      this.size = Math.random() * 3 + 1;
+      this.speedY = Math.random() * 0.6 + 0.2;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.opacity = Math.random() * 0.5 + 0.1;
+      this.life = 0;
+      this.maxLife = Math.random() * 400 + 200;
+      this.isLeaf = Math.random() > 0.6;
+    };
+    this.reset();
+    this.y = Math.random() * H; // scatter initial positions
+  }
+  for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.008;
+
+    // Background gradient — deep forest layers
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0,   `hsl(${130 + Math.sin(t*0.3)*5}, 40%, ${8 + Math.sin(t*0.2)*2}%)`);
+    grad.addColorStop(0.4, `hsl(${128 + Math.sin(t*0.4)*4}, 38%, ${10 + Math.sin(t*0.3)*2}%)`);
+    grad.addColorStop(1,   `hsl(${126 + Math.sin(t*0.25)*6}, 35%, ${6 + Math.sin(t*0.2)*1}%)`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Volumetric light rays from top — like sunlight through canopy
+    for (let i = 0; i < 6; i++) {
+      const x = W * (0.1 + i * 0.16) + Math.sin(t * 0.3 + i) * 30;
+      const rayGrad = ctx.createLinearGradient(x, 0, x + 60, H * 0.7);
+      rayGrad.addColorStop(0,   `rgba(120, 200, 120, ${0.03 + Math.sin(t * 0.5 + i) * 0.015})`);
+      rayGrad.addColorStop(0.5, `rgba(80, 160, 80,  ${0.015 + Math.sin(t * 0.4 + i) * 0.01})`);
+      rayGrad.addColorStop(1,   'rgba(40, 100, 40, 0)');
+      ctx.beginPath();
+      ctx.moveTo(x - 20, 0);
+      ctx.lineTo(x + 80, 0);
+      ctx.lineTo(x + 120, H * 0.7);
+      ctx.lineTo(x - 40, H * 0.7);
+      ctx.closePath();
+      ctx.fillStyle = rayGrad;
+      ctx.fill();
+    }
+
+    // Horizon glow — warm amber sunrise at the bottom
+    const horizGrad = ctx.createRadialGradient(W/2, H * 1.1, 0, W/2, H * 1.1, W * 0.7);
+    horizGrad.addColorStop(0,   `rgba(60, 120, 50, ${0.12 + Math.sin(t * 0.2) * 0.03})`);
+    horizGrad.addColorStop(0.5, `rgba(30, 80, 30, ${0.06})`);
+    horizGrad.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = horizGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Tree silhouettes at bottom
+    drawTrees();
+
+    // Rising particles
+    particles.forEach(p => {
+      p.x += p.speedX + Math.sin(t + p.life * 0.01) * 0.3;
+      p.y -= p.speedY;
+      p.life++;
+      const lifeRatio = p.life / p.maxLife;
+      const alpha = p.opacity * (1 - Math.pow(lifeRatio - 0.5, 2) * 4);
+      if (p.y < -20 || p.life > p.maxLife) p.reset();
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, alpha);
+      if (p.isLeaf) {
+        // Leaf shape
+        ctx.translate(p.x, p.y);
+        ctx.rotate(t * 0.5 + p.life * 0.02);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size * 2, p.size, 0, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${120 + Math.random()*20}, 55%, ${50 + Math.random()*20}%)`;
+        ctx.fill();
+      } else {
+        // Seed/spore dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${110 + Math.sin(t + p.x) * 15}, 60%, 65%)`;
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  function drawTrees() {
+    const treeData = [
+      { x: W * 0.05, h: H * 0.35, w: 28 },
+      { x: W * 0.12, h: H * 0.42, w: 20 },
+      { x: W * 0.22, h: H * 0.38, w: 24 },
+      { x: W * 0.78, h: H * 0.40, w: 22 },
+      { x: W * 0.88, h: H * 0.35, w: 26 },
+      { x: W * 0.95, h: H * 0.44, w: 18 },
+    ];
+    treeData.forEach(tree => {
+      // Trunk
+      ctx.fillStyle = `rgba(10, 25, 12, 0.6)`;
+      ctx.fillRect(tree.x - 3, H - tree.h * 0.3, 6, tree.h * 0.3);
+      // Canopy layers
+      for (let layer = 0; layer < 3; layer++) {
+        const ly = H - tree.h * (0.25 + layer * 0.28);
+        const lw = tree.w * (1.4 - layer * 0.3) + Math.sin(t * 0.8 + tree.x) * 2;
+        const lh = tree.h * (0.28 - layer * 0.05);
+        const treeGrad = ctx.createRadialGradient(tree.x, ly, 0, tree.x, ly, lw);
+        treeGrad.addColorStop(0,   `rgba(${20 + layer*8}, ${55 + layer*12}, ${20 + layer*8}, 0.7)`);
+        treeGrad.addColorStop(0.6, `rgba(${15 + layer*5}, ${40 + layer*10}, ${15 + layer*5}, 0.5)`);
+        treeGrad.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.ellipse(tree.x, ly, lw, lh, 0, 0, Math.PI * 2);
+        ctx.fillStyle = treeGrad;
+        ctx.fill();
+      }
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  drawFrame();
+})();
+
+// ── VIDEO: fade in smoothly when it actually plays
+const vid = document.getElementById('hero-video');
+vid.addEventListener('playing', () => vid.classList.add('loaded'));
+vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
+// Also try playing on user interaction as fallback
+document.addEventListener('click', () => { if (vid.paused) vid.play().catch(() => {}); }, { once: true });
+
+// ── Slideshow
+let current = 0;
+const slides = document.getElementById('slides');
+const allSlides = slides.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const total = allSlides.length;
+
+allSlides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  current = (n + total) % total;
+  slides.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) =>
+    d.classList.toggle('active', i === current)
+  );
+}
+function moveSlide(dir) { goTo(current + dir); }
+setInterval(() => moveSlide(1), 4500);
+
+// ── Scroll reveal
+const obs = new IntersectionObserver(
+  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: .07 }
+);
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+const projObs = new IntersectionObserver(
+  es => es.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  }),
+  { threshold: .07 }
+);
+document.querySelectorAll('.project').forEach(p => {
+  p.style.opacity = '0';
+  p.style.transform = 'translateY(20px)';
+  p.style.transition = 'opacity .7s ease, transform .7s ease';
+  projObs.observe(p);
+});
+</script>
+</body>
+</html>

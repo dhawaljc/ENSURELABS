@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immersive Training & Simulation · ENSURE Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;color:#1a1a1a;background:#fff;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;transition:background .35s,padding .35s,box-shadow .35s;}
+nav.solid{background:#fff;padding:14px 48px;box-shadow:0 1px 0 rgba(0,0,0,.07);}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:color .3s;}
+nav:not(.solid) .nav-logo{color:#fff;}
+nav.solid .nav-logo{color:#1a1a1a;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-size:.78rem;letter-spacing:.04em;text-decoration:none;transition:color .25s;}
+nav:not(.solid) .nav-links a{color:rgba(255,255,255,.72);}
+nav:not(.solid) .nav-links a:hover{color:#fff;}
+nav.solid .nav-links a{color:rgba(26,26,26,.5);}
+nav.solid .nav-links a:hover{color:#2d7a3e;}
+.nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
+.nav-cta:hover{background:#1e5a2c!important;}
+
+footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,255,.05);}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:12px;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:600;margin-bottom:14px;}
+.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
+.footer-nav-link:hover{color:#8fc99a;}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);line-height:1.7;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+.pg-hero{position:relative;height:72vh;min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.pg-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.pg-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,20,10,.95) 0%,rgba(8,20,10,.55) 50%,rgba(8,20,10,.15) 100%);}
+.pg-hero-content{position:relative;z-index:2;padding:0 64px 72px;}
+.pg-breadcrumb{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.pg-breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .25s;}
+.pg-breadcrumb a:hover{color:#8fc99a;}
+.pg-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:14px;display:block;}
+.pg-title{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:400;line-height:1.06;color:#fff;}
+.pg-title em{font-style:italic;color:#8fc99a;}
+
+.overview{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:96px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.ov-img{border-radius:3px;overflow:hidden;aspect-ratio:4/3;}
+.ov-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.ov-img:hover img{transform:scale(1.03);}
+.ov-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:16px;display:block;}
+.ov-title{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,2.8vw,2.5rem);font-weight:400;line-height:1.18;color:#1a1a1a;margin-bottom:20px;}
+.ov-title em{font-style:italic;color:#2d7a3e;}
+.ov-body{font-size:.96rem;line-height:1.86;color:rgba(26,26,26,.62);}
+.ov-body p+p{margin-top:14px;}
+
+/* PLATFORMS — full-width alternating like homepage */
+.platforms{}
+.platform{display:grid;grid-template-columns:44% 56%;min-height:420px;border-bottom:1px solid rgba(0,0,0,.08);background:#fff;overflow:hidden;}
+.platform.flip{grid-template-columns:56% 44%;}
+.platform.flip .pl-img{order:2;}.platform.flip .pl-text{order:1;}
+.pl-img{overflow:hidden;position:relative;}
+.pl-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.platform:hover .pl-img img{transform:scale(1.04);}
+.pl-text{padding:72px 64px;display:flex;flex-direction:column;justify-content:center;}
+.pl-label{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.pl-label::before{content:'';width:18px;height:1px;background:#2d7a3e;}
+.pl-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;line-height:1.2;color:#1a1a1a;margin-bottom:16px;transition:color .3s;}
+.platform:hover .pl-title{color:#2d7a3e;}
+.pl-body{font-size:.93rem;line-height:1.82;color:rgba(26,26,26,.58);margin-bottom:24px;}
+.pl-funder{font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:#2d7a3e;border:1px solid rgba(45,122,62,.22);padding:5px 13px;border-radius:100px;display:inline-block;}
+
+.sec-header{padding:72px 64px 0;border-top:1px solid rgba(0,0,0,.07);}
+.sec-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(26,26,26,.35);font-weight:500;display:flex;align-items:center;gap:14px;margin-bottom:0;}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
+
+/* METRICS */
+.metrics{padding:80px 64px;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.metrics-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.metric{background:#fff;padding:36px 28px;transition:background .25s;cursor:default;}
+.metric:hover{background:#eef5ef;}
+.metric-num{font-family:'DM Serif Display',serif;font-size:3rem;color:#2d7a3e;line-height:1;margin-bottom:8px;}
+.metric-label{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(26,26,26,.4);margin-bottom:12px;display:block;}
+.metric-desc{font-size:.82rem;line-height:1.65;color:rgba(26,26,26,.55);}
+
+.team{padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.team-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.t-card{background:#f2f2f2;overflow:hidden;transition:background .25s;}
+.t-card:hover{background:#eef5ef;}
+.t-photo{height:180px;background:#1a2e1c;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.t-info{padding:20px 18px;}
+.t-name{font-family:'DM Serif Display',serif;font-size:.96rem;font-weight:400;color:#1a1a1a;margin-bottom:3px;}
+.t-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.t-bio{font-size:.75rem;line-height:1.6;color:rgba(26,26,26,.5);}
+.t-card-link-hint{display:block;margin:10px 18px 16px;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;opacity:0;transform:translateX(-5px);transition:opacity .25s,transform .25s;}
+.t-card:hover .t-card-link-hint{opacity:1;transform:translateX(0);}
+
+.pubs{padding:80px 64px;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.pubs-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.pub-item{background:#fff;padding:30px;margin-bottom:2px;display:grid;grid-template-columns:56px 1fr;gap:24px;align-items:start;transition:background .25s;}
+.pub-item:hover{background:#eef5ef;}
+.pub-year{font-family:'DM Serif Display',serif;font-size:1rem;color:rgba(45,122,62,.55);padding-top:2px;}
+.pub-title{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#1a1a1a;margin-bottom:6px;line-height:1.4;}
+.pub-meta{font-size:.76rem;color:rgba(26,26,26,.4);line-height:1.5;}
+.pub-tag{display:inline-block;margin-top:8px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;border:1px solid rgba(45,122,62,.2);padding:3px 10px;border-radius:100px;}
+.pub-ph{background:#fff;padding:60px;text-align:center;color:rgba(45,122,62,.3);}
+.pub-ph p{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.8;}
+
+.related{padding:80px 64px;}
+.related-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rel-card{text-decoration:none;color:inherit;background:#f2f2f2;transition:background .25s;overflow:hidden;display:block;}
+.rel-card:hover{background:#eef5ef;}
+.rel-img{height:190px;overflow:hidden;}
+.rel-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.rel-card:hover .rel-img img{transform:scale(1.05);}
+.rel-body{padding:26px;}
+.rel-eye{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.rel-name{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#1a1a1a;line-height:1.35;transition:color .25s;}
+.rel-card:hover .rel-name{color:#2d7a3e;}
+.rel-msg{font-size:.78rem;color:rgba(26,26,26,.45);margin-top:6px;}
+</style>
+</head>
+<body>
+<!-- CARBON COUNTER STRIP -->
+<style>
+#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:64px;background:rgba(15,30,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.co2-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes co2blink{0%,100%{opacity:1}50%{opacity:0.1}}
+.co2-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:"DM Sans",sans-serif;}
+#co2-digits{font-family:"DM Serif Display",serif;font-size:2rem;font-weight:400;color:#8fc99a;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1;}
+.co2-unit{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:"DM Sans",sans-serif;align-self:flex-end;padding-bottom:4px;}
+.co2-link{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(143,201,154,.55);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px;transition:color .2s;}
+.co2-link:hover{color:#8fc99a;}
+#nav{top:64px!important;}
+</style>
+<div id="co2-strip">
+  <span class="co2-dot"></span>
+  <span class="co2-label">CO&#8322; emitted since you opened this page</span>
+  <span id="co2-digits">0</span>
+  <span class="co2-unit">tonnes</span>
+  <a href="carbon-visualization.html" class="co2-link">know more &rarr;</a>
+</div>
+<script>
+(function(){
+  var el=document.getElementById("co2-digits");
+  var RATE=1186;
+  var t0=Date.now();
+  setInterval(function(){el.textContent=Math.round(RATE*(Date.now()-t0)/1000).toLocaleString();},80);
+})();
+</script>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">ENSURE Lab</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Welcome</a></li>
+    <li><a href="index.html#projects">Research</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Connect</a></li>
+  </ul>
+</nav>
+
+<div class="pg-hero">
+  <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=1600&q=85&fit=crop" alt="VR Training">
+  <div class="pg-hero-overlay"></div>
+  <div class="pg-hero-content">
+    <div class="pg-breadcrumb"><a href="index.html">Home</a> › <a href="index.html#projects">Research</a> › Immersive Training</div>
+    <span class="pg-eyebrow">Human-Centered Immersive Training & Simulation</span>
+    <h1 class="pg-title">See it to <em>build it.</em></h1>
+  </div>
+</div>
+
+<section class="overview reveal">
+  <div class="ov-img">
+    <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=900&q=80&fit=crop" alt="VR Research">
+  </div>
+  <div>
+    <span class="ov-eyebrow">The Research</span>
+    <h2 class="ov-title">The best way to learn something is to <em>do it.</em></h2>
+    <div class="ov-body">
+      <p>Understanding how a building performs — or how to construct one safely — is hard to teach from a textbook or a lecture. We put people inside virtual buildings, virtual construction sites, and virtual extreme environments instead.</p>
+      <p>Using eye-tracking, EEG, and behavioral data, we study how people learn and perform in unfamiliar, complex, and high-stakes environments. What spatial cues do people rely on? How does visual information overload affect task performance? How can training environments be designed to accelerate skill acquisition and retention?</p>
+      <p>This work is funded by NASA for astronaut training research, by NSF for construction workforce development, and by the New Frontiers in Research Fund for climate education and community resilience. The technology is new. The insight is old: doing beats observing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<div class="sec-header reveal">
+  <div class="sec-label">Our Platforms</div>
+</div>
+
+<div class="platforms">
+  <div class="platform reveal">
+    <div class="pl-img">
+      <img src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=900&q=80&fit=crop" alt="BIMThermoVR">
+    </div>
+    <div class="pl-text">
+      <div class="pl-label">Environmental Education</div>
+      <h3 class="pl-title">BIMThermoVR</h3>
+      <p class="pl-body">BIMThermoVR puts high school students inside a virtual single-family house. They adjust design variables — window-to-wall ratios, insulation levels, orientation — and watch how those choices affect embodied and operational energy outcomes in real time. Pre- and post-instruction surveys measure changes in environmental awareness and conceptual understanding of building sustainability. The goal: make energy and carbon tangible for young people before they become the designers, engineers, and policymakers of tomorrow.</p>
+      <span class="pl-funder">New Frontiers in Research Fund · NFRF</span>
+    </div>
+  </div>
+  <div class="platform flip reveal">
+    <div class="pl-img">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80&fit=crop" alt="Virtual Construction Lab">
+    </div>
+    <div class="pl-text">
+      <div class="pl-label">Construction Workforce Training</div>
+      <h3 class="pl-title">Virtual Construction Lab</h3>
+      <p class="pl-body">The Virtual Construction Lab is a gamified VR interface for training workers in construction assembly. Users progress through levels of development — from simplified Lego-style wall builds to detailed reinforced concrete assemblies with support tools. We evaluate user experience, behavior, and learning progression within the immersive environment, studying whether virtual training can substitute for resource-intensive physical field labs without sacrificing skill transfer.</p>
+      <span class="pl-funder">NSF · New Frontiers in Research Fund</span>
+    </div>
+  </div>
+  <div class="platform reveal">
+    <div class="pl-img">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80&fit=crop" alt="Astronaut Training">
+    </div>
+    <div class="pl-text">
+      <div class="pl-label">Spatial Cognition in Extreme Environments</div>
+      <h3 class="pl-title">Astronaut Training & Spatial Cognition Research</h3>
+      <p class="pl-body">How do people navigate environments that offer few spatial cues? What happens to spatial memory and task performance under the cognitive load of a suit, a mission, and an alien environment? Working with NASA-funded research, we use eye-tracking, EEG, and immersive simulation to study spatial cognition in altered and extreme conditions — research with implications for emergency evacuation, disaster response, and human performance in any environment that strips away familiar cues.</p>
+      <span class="pl-funder">NASA · NSF</span>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<section class="metrics">
+  <h2 class="metrics-title reveal">Research by the numbers</h2>
+  <div class="metrics-grid">
+    <div class="metric reveal">
+      <div class="metric-num">3</div>
+      <span class="metric-label">VR Platforms</span>
+      <div class="metric-desc">BIMThermoVR, Virtual Construction Lab, and the spatial cognition simulation environment for extreme conditions research.</div>
+    </div>
+    <div class="metric reveal d1">
+      <div class="metric-num">3</div>
+      <span class="metric-label">Funding Sources</span>
+      <div class="metric-desc">NASA, NSF, and the New Frontiers in Research Fund support active research across our three VR platforms.</div>
+    </div>
+    <div class="metric reveal d2">
+      <div class="metric-num">2</div>
+      <span class="metric-label">Audience Groups</span>
+      <div class="metric-desc">High school students learning sustainability concepts, and construction workers building hands-on skills — both through the same immersive technology.</div>
+    </div>
+    <div class="metric reveal d3">
+      <div class="metric-num">∞</div>
+      <span class="metric-label">Times safer than real</span>
+      <div class="metric-desc">Virtual environments allow people to make mistakes, learn from them, and repeat tasks without risk — accelerating skill acquisition in ways real-world training cannot match.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <h2 class="team-title reveal">People on this research</h2>
+  <div class="team-grid">
+    <a class="t-card reveal" href="team.html">
+      <div class="t-photo">👩‍🔬</div>
+      <div class="t-info">
+        <div class="t-name">Faezeh Salehi</div>
+        <div class="t-role">Ph.D. Candidate</div>
+        <div class="t-bio">Spatial cognition, VR/AR, eye-tracking & EEG. NASA & NSF-funded astronaut training and immersive simulation research.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d1" href="team.html">
+      <div class="t-photo">👨‍🏫</div>
+      <div class="t-info">
+        <div class="t-name">Manish Dixit, Ph.D., LEED AP</div>
+        <div class="t-role">Principal Investigator</div>
+        <div class="t-bio">VR/AR research, spatial cognition in extreme environments, BIM integration with immersive training platforms.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d2" href="team.html">
+      <div class="t-photo">🎓</div>
+      <div class="t-info">
+        <div class="t-name">Hassan Anifowose</div>
+        <div class="t-role">Ph.D. Alumni · 2022</div>
+        <div class="t-bio">Developed the Virtual Construction Lab as his dissertation research. Studied gamified VR for construction training and workforce development.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d3" href="team.html">
+      <div class="t-photo">🎓</div>
+      <div class="t-info">
+        <div class="t-name">Vahideh Karimimansoob</div>
+        <div class="t-role">M.S. Alumni · SPACE Lab</div>
+        <div class="t-bio">Spatial ability and perception in challenging environments, with a focus on heavy equipment operators in construction settings.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a></div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="pubs">
+  <h2 class="pubs-title reveal">Related Publications</h2>
+  <div class="pub-item reveal d1">
+    <div class="pub-year">2022</div>
+    <div>
+      <div class="pub-title">Virtual Construction Lab: Evaluating gamified VR for construction assembly training and workforce development</div>
+      <div class="pub-meta">Anifowose H., Dixit M. · [Journal — placeholder] · [DOI — placeholder]</div>
+      <span class="pub-tag">VR Training</span>
+    </div>
+  </div>
+  <div class="pub-ph reveal d2">
+    <p>Additional publications coming soon — please provide the full publication list</p>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related">
+  <h2 class="related-title reveal">Related Research</h2>
+  <div class="related-grid">
+    <a class="rel-card reveal" href="lca.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="LCA"></div>
+      <div class="rel-body"><div class="rel-eye">Life Cycle Assessment</div><div class="rel-name">Matter matters.</div><div class="rel-msg">Measuring the full carbon cost of what buildings are made of.</div></div>
+    </a>
+    <a class="rel-card reveal d1" href="climate.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80&fit=crop" alt="Climate"></div>
+      <div class="rel-body"><div class="rel-eye">Climate-Aware Design</div><div class="rel-name">Buildings outlive their blueprints.</div><div class="rel-msg">Optimizing for the climates buildings will actually live through.</div></div>
+    </a>
+    <a class="rel-card reveal d2" href="living-labs.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80&fit=crop" alt="Living Labs"></div>
+      <div class="rel-body"><div class="rel-eye">Resilience Nexus</div><div class="rel-name">Resilience is personal.</div><div class="rel-msg">Co-designing solutions with communities already facing climate change.</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="footer-logo">ENSURE Lab</a>
+      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Research</div>
+      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
+      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
+      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
+      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Site</div>
+      <a href="team.html" class="footer-nav-link">Our Team</a>
+      <a href="news.html" class="footer-nav-link">News & Updates</a>
+      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
+      <a href="index.html#contact" class="footer-nav-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>60));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

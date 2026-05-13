@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drowning in Carbon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;overflow-x:hidden}
+body{background:#f9f9f7;color:#111;font-family:'DM Sans',sans-serif}
+
+/* full-page fixed canvas — behind everything */
+#ballCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+
+#page{position:relative;z-index:1}
+
+/* ── COUNTER BAR ── */
+#counter-bar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(249,249,247,0.96);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,0.07);
+  padding:1rem clamp(1.5rem,5vw,5rem);
+  display:flex;align-items:center;justify-content:center;gap:0;
+}
+/* left third: label */
+.c-label{
+  font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:#888;display:flex;align-items:center;gap:0.5rem;
+  flex:1;justify-content:flex-start;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#c0392b;animation:blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.08}}
+/* center: the big digits */
+.c-center{
+  display:flex;align-items:baseline;gap:0.6rem;
+  flex:0 0 auto;
+}
+#counter-digits{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:0.02em;
+  color:#111;
+  line-height:1;
+}
+.c-unit{
+  font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:#aaa;align-self:flex-end;padding-bottom:0.3rem;
+}
+/* right third: back link */
+.c-right-spacer{flex:1;display:flex;justify-content:flex-end;align-items:center;}
+
+/* back link */
+.c-back{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(26,26,26,.38);text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:color .2s;}
+.c-back:hover{color:#2d7a3e;}
+.c-back svg{width:14px;height:14px;flex-shrink:0;}
+
+
+/* glass card */
+.glass{
+  background:rgba(255,255,255,0.90);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(0,0,0,0.07);
+  border-radius:4px;
+}
+
+:root{--pad:clamp(1.5rem,5vw,5rem)}
+
+/* ── HERO ── */
+.hero-wrap{
+  min-height:100vh;
+  padding:calc(var(--pad)*2.5 + 88px) var(--pad) calc(var(--pad)*2);
+  display:flex;align-items:center;
+}
+.hero-card{max-width:600px;padding:clamp(2rem,5vw,3.5rem)}
+.eyebrow{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:#c0392b;margin-bottom:1.3rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;line-height:1.06;margin-bottom:1.2rem}
+.hero-title em{font-style:italic;color:#444}
+.hero-body{font-size:0.95rem;color:#555;line-height:1.9;margin-bottom:2rem;max-width:420px}
+.hero-stat-row{border-top:1px solid rgba(0,0,0,0.08);padding-top:1.3rem;display:flex;gap:3rem;flex-wrap:wrap}
+.sn{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1;margin-bottom:0.2rem}
+.sl{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#999}
+
+/* ── COMPARISON ROWS ── */
+.comp-row{
+  padding:calc(var(--pad)*1.4) var(--pad);
+  display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);
+  flex-wrap:wrap;
+}
+.comp-row.right{justify-content:flex-end}
+
+/* text card */
+.comp-text{max-width:360px;padding:clamp(1.4rem,3vw,2.5rem)}
+.c-eyebrow{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#c0392b;margin-bottom:0.85rem;padding-left:0.6rem;border-left:2px solid #c0392b}
+.c-head{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.6vw,2rem);line-height:1.2;margin-bottom:0.8rem}
+.c-body{font-size:0.83rem;color:#555;line-height:1.9}
+.c-divider{width:24px;height:2px;background:#111;margin:0.85rem 0}
+
+/* image + number side-by-side card */
+.comp-visual{
+  flex-shrink:0;
+  padding:clamp(1.2rem,3vw,2rem);
+  display:flex;
+  align-items:flex-end;
+  gap:1.2rem;
+}
+.comp-img-col{
+  display:flex;flex-direction:column;align-items:center;gap:0.4rem;
+}
+.comp-img-col img{
+  display:block;
+  max-height:200px;
+  max-width:160px;
+  width:auto;height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,0.14));
+}
+/* Boeing is landscape so give it a wider constraint */
+.comp-img-col.wide img{
+  max-height:100px;
+  max-width:220px;
+}
+.comp-img-caption{
+  font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:#bbb;text-align:center;max-width:160px;line-height:1.4;
+}
+.comp-num-col{
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.comp-multiplier{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,7vw,5.5rem);
+  line-height:1;color:#111;
+  margin-bottom:0.2rem;
+}
+.comp-num-label{
+  font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:#888;max-width:160px;line-height:1.5;
+}
+
+/* ── INTERSTITIAL ── */
+.int-wrap{padding:calc(var(--pad)*2) var(--pad);display:flex;justify-content:center}
+.int-card{max-width:640px;text-align:center;padding:clamp(2.5rem,6vw,5rem)}
+.int-card.dark{background:rgba(10,10,10,0.91);color:#fff;border-color:rgba(255,255,255,0.05)}
+.int-num{font-family:'Playfair Display',serif;font-size:clamp(5rem,16vw,11rem);line-height:1}
+.int-unit{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#555;margin-bottom:1.4rem}
+.int-body{font-size:0.84rem;color:#888;line-height:1.9}
+
+/* ── BARS ── */
+.bar-wrap{padding:calc(var(--pad)*1.5) var(--pad);display:flex;justify-content:center}
+.bar-card{max-width:680px;width:100%;padding:clamp(1.5rem,4vw,3rem)}
+.bar-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:0.35rem}
+.bar-sub{font-size:0.72rem;color:#999;margin-bottom:2rem;line-height:1.6}
+.bar-group{margin-bottom:1rem}
+.bar-top{display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:4px}
+.bar-n{color:#111}.bar-v{color:#bbb}
+.bar-track{height:4px;background:rgba(0,0,0,0.07);overflow:hidden}
+.bar-fill{height:100%;width:0;transition:width 1.5s cubic-bezier(.16,1,.3,1)}
+
+/* ── FINAL ── */
+.final-wrap{padding:calc(var(--pad)*2) var(--pad) calc(var(--pad)*3);display:flex}
+.final-card{max-width:640px;padding:clamp(2rem,5vw,3.5rem)}
+.final-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.3rem);margin-bottom:1.2rem;line-height:1.1}
+.final-body{font-size:0.88rem;color:#555;line-height:1.95;margin-bottom:2.5rem}
+.stats-row{display:flex;gap:3rem;flex-wrap:wrap}
+.sb{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;margin-bottom:0.28rem}
+.sl2{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#999}
+
+.source{padding:1.2rem var(--pad);font-size:0.6rem;color:#ccc;letter-spacing:0.04em;background:rgba(255,255,255,0.8);border-top:1px solid rgba(0,0,0,0.06);position:relative;z-index:1}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:640px){
+  .comp-row,.comp-row.right{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<canvas id="ballCanvas"></canvas>
+
+<div id="counter-bar">
+  <div class="c-label"><span class="live-dot"></span>CO₂ emitted since page load</div>
+  <div class="c-center">
+    <span id="counter-digits">0</span>
+    <span class="c-unit">tonnes</span>
+  </div>
+  <div class="c-right-spacer"><a href="index.html" class="c-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>ENSURE Lab</a></div>
+</div>
+
+<div id="page">
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="hero-card glass reveal">
+      <div class="eyebrow">A data visualization · 2024</div>
+      <h1 class="hero-title">Drowning<br>in <em>Carbon</em></h1>
+      <p class="hero-body">Every second, the world releases 1,186 tonnes of CO₂. The spheres falling around you represent that mass — each one a tonne, more than a thousand every second, piling up at the bottom of this page without pause.</p>
+      <div class="hero-stat-row">
+        <div><div class="sn">1,186</div><div class="sl">tonnes per second</div></div>
+        <div><div class="sn">37.4 Gt</div><div class="sl">total fossil CO₂ · 2024</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 1 — per minute / Boeing 747 -->
+  <div class="comp-row">
+    <div class="comp-text glass reveal">
+      <div class="c-eyebrow">Every minute</div>
+      <h2 class="c-head">71,160 tonnes in 60 seconds</h2>
+      <div class="c-divider"></div>
+      <p class="c-body">Every minute, humanity emits as much CO₂ as the combined weight of 500 fully-loaded Boeing 747s. The gas is invisible — but the mass is very real, and it never stops accumulating.</p>
+    </div>
+    <div class="comp-visual glass reveal">
+      <div class="comp-img-col wide">
+        <img
+          src="https://pngimg.com/uploads/boeing/boeing_PNG35.png"
+          alt="Boeing 747"
+          onerror="this.style.display='none'">
+        <div class="comp-img-caption">Boeing 747 · ~412 t loaded</div>
+      </div>
+      <div class="comp-num-col">
+        <div class="comp-multiplier">500×</div>
+        <div class="comp-num-label">Boeing 747s by weight<br>every minute</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 — per hour / Statue of Liberty -->
+  <div class="comp-row right">
+    <div class="comp-visual glass reveal">
+      <div class="comp-img-col">
+        <img
+          src="https://pngimg.com/uploads/statue_of_liberty/statue_of_liberty_PNG37.png"
+          alt="Statue of Liberty"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Statue_of_Liberty_7.jpg/300px-Statue_of_Liberty_7.jpg'">
+        <div class="comp-img-caption">Statue of Liberty<br>New York · 93 m</div>
+      </div>
+      <div class="comp-num-col">
+        <div class="comp-multiplier">46k×</div>
+        <div class="comp-num-label">heavier than the Statue<br>of Liberty — per hour</div>
+      </div>
+    </div>
+    <div class="comp-text glass reveal">
+      <div class="c-eyebrow">Every hour · 4.27 million tonnes</div>
+      <h2 class="c-head">The Statue of Liberty,<br>buried 46,000 times over</h2>
+      <div class="c-divider"></div>
+      <p class="c-body">The Statue of Liberty weighs 91 tonnes. Every hour, the world emits CO₂ equivalent to 46,000 of them stacked together. She stands 93 m tall — the carbon would tower far above her torch.</p>
+    </div>
+  </div>
+
+  <!-- CARD 3 — per day / Eiffel Tower -->
+  <div class="comp-row">
+    <div class="comp-text glass reveal">
+      <div class="c-eyebrow">Every day · 102 million tonnes</div>
+      <h2 class="c-head">The Eiffel Tower<br>eclipsed every 24 hours</h2>
+      <div class="c-divider"></div>
+      <p class="c-body">The Eiffel Tower weighs 7,300 tonnes and stands 330 m tall. A single day's global CO₂ output outweighs it by 14,000 times. Every 24 hours, that cycle repeats — and 2024 was a record year.</p>
+    </div>
+    <div class="comp-visual glass reveal">
+      <div class="comp-img-col">
+        <img
+          src="https://pngimg.com/uploads/eiffel_tower/eiffel_tower_PNG41.png"
+          alt="Eiffel Tower"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tour_eiffel_at_sunrise_from_the_trocadero.jpg/338px-Tour_eiffel_at_sunrise_from_the_trocadero.jpg'">
+        <div class="comp-img-caption">Eiffel Tower<br>Paris · 330 m</div>
+      </div>
+      <div class="comp-num-col">
+        <div class="comp-multiplier">14k×</div>
+        <div class="comp-num-label">Eiffel Towers by mass<br>every day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERSTITIAL -->
+  <div class="int-wrap">
+    <div class="int-card glass dark reveal">
+      <div class="int-num">37.4</div>
+      <div class="int-unit">billion tonnes · fossil CO₂ · 2024 · a new record</div>
+      <p class="int-body">The 2024 Global Carbon Budget confirmed fossil CO₂ emissions rose 0.8% above the previous year's record. In the researchers' own words, there is still "no sign" the world has reached a peak.</p>
+    </div>
+  </div>
+
+  <!-- CARD 4 — per year / Burj Khalifa -->
+  <div class="comp-row right">
+    <div class="comp-visual glass reveal">
+      <div class="comp-img-col">
+        <img
+          src="https://pngimg.com/uploads/skyscraper/skyscraper_PNG29.png"
+          alt="Burj Khalifa"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Burj_Khalifa.jpg/251px-Burj_Khalifa.jpg'">
+        <div class="comp-img-caption">Burj Khalifa<br>Dubai · 830 m</div>
+      </div>
+      <div class="comp-num-col">
+        <div class="comp-multiplier">45B×</div>
+        <div class="comp-num-label">times the mass of<br>all humans — per year</div>
+      </div>
+    </div>
+    <div class="comp-text glass reveal">
+      <div class="c-eyebrow">Every year · 37.4 billion tonnes</div>
+      <h2 class="c-head">No landmark is<br>large enough</h2>
+      <div class="c-divider"></div>
+      <p class="c-body">The Burj Khalifa stands 830 m — the tallest building on earth. There is no structure large enough to frame a year's CO₂. Watch the pile growing at the bottom — it accumulates for as long as you stay on this page.</p>
+    </div>
+  </div>
+
+  <!-- BARS -->
+  <div class="bar-wrap">
+    <div class="bar-card glass">
+      <h2 class="bar-title reveal">Where it comes from</h2>
+      <p class="bar-sub reveal">Share of global fossil CO₂ by source · 2024 · Global Carbon Budget</p>
+      <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">Coal</span><span class="bar-v">41% · 15.3 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#111" data-w="41"></div></div></div>
+      <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">Oil</span><span class="bar-v">32% · 12.0 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#555" data-w="32"></div></div></div>
+      <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">Natural gas</span><span class="bar-v">21% · 7.9 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#888" data-w="21"></div></div></div>
+      <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">Cement &amp; industry</span><span class="bar-v">6% · 2.2 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#bbb" data-w="6"></div></div></div>
+      <div style="margin-top:2.2rem">
+        <h2 class="bar-title reveal" style="font-size:clamp(1.1rem,2vw,1.5rem);margin-bottom:0.3rem">Who emits the most</h2>
+        <p class="bar-sub reveal">Share by country / region · 2024</p>
+        <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">China</span><span class="bar-v">30% · 11.4 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#111" data-w="30"></div></div></div>
+        <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">United States</span><span class="bar-v">14% · 5.2 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#444" data-w="14"></div></div></div>
+        <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">European Union</span><span class="bar-v">8% · 3.0 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#666" data-w="8"></div></div></div>
+        <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">India</span><span class="bar-v">7% · 2.8 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#888" data-w="7"></div></div></div>
+        <div class="bar-group reveal"><div class="bar-top"><span class="bar-n">Rest of world</span><span class="bar-v">41% · 15.1 Gt</span></div><div class="bar-track"><div class="bar-fill" style="background:#bbb" data-w="41"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="final-wrap">
+    <div class="final-card glass reveal">
+      <h2 class="final-title">The atmosphere<br>doesn't forget</h2>
+      <p class="final-body">CO₂ emitted today will warm the planet for hundreds of years. Atmospheric concentration reached 422.8 ppm in 2024 — the highest in over 3 million years, 52% above pre-industrial levels. At current rates, the remaining 1.5°C carbon budget runs out within five years.</p>
+      <div class="stats-row">
+        <div><div class="sb">422.8</div><div class="sl2">ppm CO₂ · 2024</div></div>
+        <div><div class="sb">+52%</div><div class="sl2">above pre-industrial</div></div>
+        <div><div class="sb">~5 yrs</div><div class="sl2">to 1.5°C budget</div></div>
+        <div><div class="sb">+0.8%</div><div class="sl2">growth in 2024</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="source">
+    Sources: Global Carbon Budget 2024 (Global Carbon Project) &nbsp;·&nbsp;
+    IEA Global Energy Review 2025 &nbsp;·&nbsp;
+    Nature Reviews Earth &amp; Environment, April 2025 &nbsp;·&nbsp;
+    NOAA Global Monitoring Lab &nbsp;·&nbsp;
+    Images: pngimg.com
+  </div>
+</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   DRAW ONE 3D SPHERE
+   Radial gradient: bright top-left → dark edge
+   + specular glint + soft shadow beneath
+───────────────────────────────────────────── */
+function drawSphere(ctx, x, y, r) {
+  const body = ctx.createRadialGradient(
+    x - r*0.30, y - r*0.32, r*0.03,
+    x + r*0.08, y + r*0.08, r*1.0
+  );
+  body.addColorStop(0,    '#dcdcdc');
+  body.addColorStop(0.18, '#585858');
+  body.addColorStop(0.55, '#141414');
+  body.addColorStop(1,    '#000');
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2);
+  ctx.fillStyle = body;
+  ctx.fill();
+
+  const glint = ctx.createRadialGradient(
+    x - r*0.25, y - r*0.28, 0,
+    x - r*0.25, y - r*0.28, r*0.36
+  );
+  glint.addColorStop(0,   'rgba(255,255,255,0.85)');
+  glint.addColorStop(0.45,'rgba(255,255,255,0.14)');
+  glint.addColorStop(1,   'rgba(255,255,255,0)');
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2);
+  ctx.fillStyle = glint;
+  ctx.fill();
+
+  // soft squashed shadow under the ball
+  ctx.save();
+  ctx.scale(1, 0.22);
+  const sh = ctx.createRadialGradient(x, (y+r)/0.22, 0, x, (y+r)/0.22, r*0.95);
+  sh.addColorStop(0,   'rgba(0,0,0,0.22)');
+  sh.addColorStop(0.5, 'rgba(0,0,0,0.07)');
+  sh.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.beginPath();
+  ctx.arc(x, (y+r)/0.22, r*0.9, 0, Math.PI*2);
+  ctx.fillStyle = sh;
+  ctx.fill();
+  ctx.restore();
+}
+
+/* ─────────────────────────────────────────────
+   PHYSICS ENGINE
+   Per-pixel height map for the settled pile.
+   Each settling ball carves its exact circular
+   arc into the floor map so subsequent balls
+   nestle into the natural gaps — like real
+   sphere packing.
+───────────────────────────────────────────── */
+const BALL_R   = 4.2;   // px radius
+const GRAVITY  = 0.38;
+const BOUNCE   = 0.26;  // higher → more visible bouncing before rest
+const FRICTION = 0.84;
+
+let W, H;
+let floor;            // Float32Array, one cell per pixel column
+let balls  = [];
+let settled = [];     // settled subset (kept for incremental pile draw)
+
+function initFloor() {
+  const len = Math.ceil(W) + 4;
+  floor = new Float32Array(len).fill(H);
+}
+
+/* The key to a realistic pile: per-pixel arc stamping */
+function stampBall(b) {
+  const x0 = Math.max(0, Math.floor(b.x - b.r));
+  const x1 = Math.min(floor.length - 1, Math.ceil(b.x + b.r));
+  for (let c = x0; c <= x1; c++) {
+    const dx  = c - b.x;
+    const arc = Math.sqrt(Math.max(0, b.r*b.r - dx*dx));
+    const top = b.y - arc;
+    if (top < floor[c]) floor[c] = top;
+  }
+}
+
+/* Lowest floor-top in the column range covered by ball at (x,r) */
+function floorUnder(x, r) {
+  const x0 = Math.max(0, Math.floor(x - r));
+  const x1 = Math.min(floor.length - 1, Math.ceil(x + r));
+  let min = H;
+  for (let c = x0; c <= x1; c++) if (floor[c] < min) min = floor[c];
+  return min;
+}
+
+function spawnBall() {
+  balls.push({
+    x:  BALL_R + Math.random() * (W - BALL_R*2),
+    y:  -BALL_R*2 - Math.random()*H*0.12,
+    vx: (Math.random()-0.5)*0.55,
+    vy: 0.4 + Math.random()*1.1,
+    r:  BALL_R,
+    settled: false
+  });
+}
+
+function stepPhysics() {
+  for (let i = 0; i < balls.length; i++) {
+    const b = balls[i];
+    if (b.settled) continue;
+
+    b.vy += GRAVITY;
+    b.x  += b.vx;
+    b.y  += b.vy;
+    b.vx *= 0.997; // tiny air drag
+
+    // wall bounce
+    if (b.x - b.r < 0)   { b.x = b.r;      b.vx =  Math.abs(b.vx)*0.4; }
+    if (b.x + b.r > W)   { b.x = W - b.r;   b.vx = -Math.abs(b.vx)*0.4; }
+
+    // pile / floor collision
+    const top = floorUnder(b.x, b.r);
+    if (b.y + b.r >= top) {
+      b.y   = top - b.r;
+      b.vy *= -BOUNCE;
+      b.vx *= FRICTION;
+      // small random nudge — prevents perfectly vertical towers,
+      // encourages balls to roll into natural gaps
+      b.vx += (Math.random()-0.5)*0.18;
+
+      if (Math.abs(b.vy) < 0.22 && Math.abs(b.vx) < 0.22) {
+        b.vy = 0; b.vx = 0;
+        b.settled = true;
+        settled.push(b);
+        stampBall(b);
+      }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CANVAS + RENDER LOOP
+   Pile is painted incrementally onto an offscreen
+   canvas so we don't redraw thousands of settled
+   spheres every frame — only new ones get added.
+───────────────────────────────────────────── */
+const cv  = document.getElementById('ballCanvas');
+const ctx = cv.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+
+let pileCV = null, pileCTX = null;
+let pileDrawn = 0;
+
+function rebuildCanvas() {
+  W = window.innerWidth;
+  H = window.innerHeight;
+  cv.width  = W * dpr;
+  cv.height = H * dpr;
+  cv.style.width  = W + 'px';
+  cv.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  initFloor();
+
+  // Rebuild pile offscreen canvas
+  pileCV = document.createElement('canvas');
+  pileCV.width  = W * dpr;
+  pileCV.height = H * dpr;
+  pileCTX = pileCV.getContext('2d');
+  pileCTX.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  // Re-stamp all existing settled balls on resize
+  if (settled.length) {
+    initFloor(); // reset floor
+    settled.forEach(b => stampBall(b));
+    settled.forEach(b => drawSphere(pileCTX, b.x, b.y, b.r));
+  }
+  pileDrawn = settled.length;
+}
+
+rebuildCanvas();
+window.addEventListener('resize', rebuildCanvas);
+
+const SPAWN_RATE = 55; // visual balls per second
+let lastT = performance.now();
+let spawnAccum = 0;
+const MAX_BALLS = 9000;
+
+function frame(now) {
+  const dt = Math.min((now - lastT)/1000, 0.05);
+  lastT = now;
+
+  // Spawn
+  spawnAccum += SPAWN_RATE * dt;
+  const n = Math.min(Math.floor(spawnAccum), 20);
+  spawnAccum -= n;
+  for (let i = 0; i < n; i++) spawnBall();
+
+  // Prune only falling balls if over cap
+  if (balls.length > MAX_BALLS) {
+    let pruned = 0;
+    for (let i = 0; i < balls.length && pruned < 40; i++) {
+      if (!balls[i].settled) { balls.splice(i,1); pruned++; i--; }
+    }
+  }
+
+  stepPhysics();
+
+  // Incrementally paint new settled balls onto pile canvas
+  for (let i = pileDrawn; i < settled.length; i++) {
+    drawSphere(pileCTX, settled[i].x, settled[i].y, settled[i].r);
+  }
+  pileDrawn = settled.length;
+
+  // Main render
+  ctx.clearRect(0, 0, W, H);
+  // Composite pile (static)
+  ctx.drawImage(pileCV, 0, 0, pileCV.width, pileCV.height, 0, 0, W, H);
+  // Draw falling balls on top
+  for (const b of balls) {
+    if (!b.settled) drawSphere(ctx, b.x, b.y, b.r);
+  }
+
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+
+/* ─────────────────────────────────────────────
+   COUNTER
+───────────────────────────────────────────── */
+const counterEl = document.getElementById('counter-digits');
+const RATE = 1186;
+const startTime = Date.now();
+setInterval(() => {
+  counterEl.textContent = Math.round(RATE*(Date.now()-startTime)/1000).toLocaleString();
+}, 80);
+
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL + BAR ANIMATION
+───────────────────────────────────────────── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      e.target.querySelectorAll('.bar-fill').forEach(b => { b.style.width = b.dataset.w+'%'; });
+      ro.unobserve(e.target);
+    }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>

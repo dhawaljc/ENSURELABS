@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resilience Nexus & Living Labs · ENSURE Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;color:#1a1a1a;background:#fff;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;transition:background .35s,padding .35s,box-shadow .35s;}
+nav.solid{background:#fff;padding:14px 48px;box-shadow:0 1px 0 rgba(0,0,0,.07);}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:color .3s;}
+nav:not(.solid) .nav-logo{color:#fff;}
+nav.solid .nav-logo{color:#1a1a1a;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-size:.78rem;letter-spacing:.04em;text-decoration:none;transition:color .25s;}
+nav:not(.solid) .nav-links a{color:rgba(255,255,255,.72);}
+nav:not(.solid) .nav-links a:hover{color:#fff;}
+nav.solid .nav-links a{color:rgba(26,26,26,.5);}
+nav.solid .nav-links a:hover{color:#2d7a3e;}
+.nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
+.nav-cta:hover{background:#1e5a2c!important;}
+
+footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,255,.05);}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:12px;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:600;margin-bottom:14px;}
+.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
+.footer-nav-link:hover{color:#8fc99a;}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);line-height:1.7;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+.pg-hero{position:relative;height:72vh;min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.pg-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.pg-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,20,10,.95) 0%,rgba(8,20,10,.55) 50%,rgba(8,20,10,.15) 100%);}
+.pg-hero-content{position:relative;z-index:2;padding:0 64px 72px;}
+.pg-breadcrumb{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.pg-breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .25s;}
+.pg-breadcrumb a:hover{color:#8fc99a;}
+.pg-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:14px;display:block;}
+.pg-title{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:400;line-height:1.06;color:#fff;}
+.pg-title em{font-style:italic;color:#8fc99a;}
+
+.overview{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:96px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.ov-img{border-radius:3px;overflow:hidden;aspect-ratio:4/3;}
+.ov-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.ov-img:hover img{transform:scale(1.03);}
+.ov-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:16px;display:block;}
+.ov-title{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,2.8vw,2.5rem);font-weight:400;line-height:1.18;color:#1a1a1a;margin-bottom:20px;}
+.ov-title em{font-style:italic;color:#2d7a3e;}
+.ov-body{font-size:.96rem;line-height:1.86;color:rgba(26,26,26,.62);}
+.ov-body p+p{margin-top:14px;}
+
+/* LIVING LABS SECTION */
+.labs-section{padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.labs-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;}
+.labs-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;}
+.labs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.lab-card{overflow:hidden;transition:background .25s;cursor:default;}
+.lab-card:hover .lab-img img{transform:scale(1.05);}
+.lab-img{height:260px;overflow:hidden;}
+.lab-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.lab-body{background:#f2f2f2;padding:32px;transition:background .25s;}
+.lab-card:hover .lab-body{background:#eef5ef;}
+.lab-country{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:10px;}
+.lab-name{font-family:'DM Serif Display',serif;font-size:1.25rem;font-weight:400;color:#1a1a1a;margin-bottom:12px;}
+.lab-desc{font-size:.84rem;line-height:1.72;color:rgba(26,26,26,.57);}
+.lab-focus{margin-top:14px;font-size:.72rem;color:rgba(26,26,26,.4);letter-spacing:.04em;}
+
+/* TWO-PRONGED APPROACH */
+.approach{background:#1a2e1c;padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.approach-label{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:16px;display:block;}
+.approach-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:#fff;margin-bottom:56px;line-height:1.18;}
+.approach-title em{font-style:italic;color:#8fc99a;}
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.prong{background:rgba(255,255,255,.04);padding:44px;border-top:2px solid rgba(255,255,255,.08);transition:border-color .3s;}
+.prong:hover{border-top-color:#2d7a3e;}
+.prong-num{font-family:'DM Serif Display',serif;font-size:3rem;color:rgba(143,201,154,.15);line-height:1;margin-bottom:20px;}
+.prong-title{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:#fff;margin-bottom:14px;}
+.prong-body{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.5);}
+
+.team{padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.team-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.t-card{background:#f2f2f2;overflow:hidden;transition:background .25s;}
+.t-card:hover{background:#eef5ef;}
+.t-photo{height:180px;background:#1a2e1c;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.t-info{padding:20px 18px;}
+.t-name{font-family:'DM Serif Display',serif;font-size:.96rem;font-weight:400;color:#1a1a1a;margin-bottom:3px;}
+.t-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.t-bio{font-size:.75rem;line-height:1.6;color:rgba(26,26,26,.5);}
+.t-card-link-hint{display:block;margin:10px 18px 16px;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;opacity:0;transform:translateX(-5px);transition:opacity .25s,transform .25s;}
+.t-card:hover .t-card-link-hint{opacity:1;transform:translateX(0);}
+
+/* PARTNERS */
+.partners{padding:80px 64px;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.partners-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:14px;}
+.partners-sub{font-size:.96rem;line-height:1.8;color:rgba(26,26,26,.58);margin-bottom:48px;}
+.partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.partner-card{background:#fff;padding:32px 28px;transition:background .25s;cursor:default;}
+.partner-card:hover{background:#eef5ef;}
+.partner-flag{font-size:2rem;margin-bottom:12px;display:block;}
+.partner-name{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#1a1a1a;margin-bottom:6px;}
+.partner-inst{font-size:.76rem;color:rgba(26,26,26,.45);line-height:1.5;}
+
+.pubs{padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
+.pubs-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.pub-ph{background:#f2f2f2;padding:60px;text-align:center;color:rgba(45,122,62,.3);}
+.pub-ph p{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.8;}
+
+.related{padding:80px 64px;}
+.related-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rel-card{text-decoration:none;color:inherit;background:#f2f2f2;transition:background .25s;overflow:hidden;display:block;}
+.rel-card:hover{background:#eef5ef;}
+.rel-img{height:190px;overflow:hidden;}
+.rel-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.rel-card:hover .rel-img img{transform:scale(1.05);}
+.rel-body{padding:26px;}
+.rel-eye{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.rel-name{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#1a1a1a;line-height:1.35;transition:color .25s;}
+.rel-card:hover .rel-name{color:#2d7a3e;}
+.rel-msg{font-size:.78rem;color:rgba(26,26,26,.45);margin-top:6px;}
+</style>
+</head>
+<body>
+<!-- CARBON COUNTER STRIP -->
+<style>
+#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:64px;background:rgba(15,30,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.co2-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes co2blink{0%,100%{opacity:1}50%{opacity:0.1}}
+.co2-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:"DM Sans",sans-serif;}
+#co2-digits{font-family:"DM Serif Display",serif;font-size:2rem;font-weight:400;color:#8fc99a;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1;}
+.co2-unit{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:"DM Sans",sans-serif;align-self:flex-end;padding-bottom:4px;}
+.co2-link{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(143,201,154,.55);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px;transition:color .2s;}
+.co2-link:hover{color:#8fc99a;}
+#nav{top:64px!important;}
+</style>
+<div id="co2-strip">
+  <span class="co2-dot"></span>
+  <span class="co2-label">CO&#8322; emitted since you opened this page</span>
+  <span id="co2-digits">0</span>
+  <span class="co2-unit">tonnes</span>
+  <a href="carbon-visualization.html" class="co2-link">know more &rarr;</a>
+</div>
+<script>
+(function(){
+  var el=document.getElementById("co2-digits");
+  var RATE=1186;
+  var t0=Date.now();
+  setInterval(function(){el.textContent=Math.round(RATE*(Date.now()-t0)/1000).toLocaleString();},80);
+})();
+</script>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">ENSURE Lab</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Welcome</a></li>
+    <li><a href="index.html#projects">Research</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Connect</a></li>
+  </ul>
+</nav>
+
+<div class="pg-hero">
+  <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&q=85&fit=crop" alt="Living Labs">
+  <div class="pg-hero-overlay"></div>
+  <div class="pg-hero-content">
+    <div class="pg-breadcrumb"><a href="index.html">Home</a> › <a href="index.html#projects">Research</a> › Living Labs</div>
+    <span class="pg-eyebrow">Sustainability–Resilience Nexus & Living Labs</span>
+    <h1 class="pg-title">Resilience is <em>personal.</em></h1>
+  </div>
+</div>
+
+<section class="overview reveal">
+  <div class="ov-img">
+    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=900&q=80&fit=crop" alt="Community Co-Design">
+  </div>
+  <div>
+    <span class="ov-eyebrow">The Research</span>
+    <h2 class="ov-title">We design <em>with</em> communities, not <em>for</em> them.</h2>
+    <div class="ov-body">
+      <p>Port Arthur, Texas has flooded repeatedly. Medellín has faced decades of instability. Indramayu watches the sea rise. Climate resilience isn't an abstract policy goal for these communities — it is survival.</p>
+      <p>In our two-pronged approach, we first connect life cycle carbon emissions with material durability and service life — helping designers understand how long materials last and how that changes their environmental footprint. Then we take those findings into the field, co-designing adaptation strategies with affected residents, local businesses, and community organizations.</p>
+      <p>This is a multinational collaboration across seven countries — United States, Canada, Norway, United Kingdom, Switzerland, Indonesia, and Colombia — funded by Canada's New Frontiers in Research Fund.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVING LABS -->
+<section class="labs-section">
+  <div class="labs-header">
+    <h2 class="labs-title reveal">Three Living Labs</h2>
+  </div>
+  <div class="labs-grid">
+    <div class="lab-card reveal">
+      <div class="lab-img">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80&fit=crop" alt="Port Arthur Texas">
+      </div>
+      <div class="lab-body">
+        <div class="lab-country">United States</div>
+        <div class="lab-name">Port Arthur, Texas</div>
+        <div class="lab-desc">Located on the Texas Gulf Coast, Port Arthur has experienced repeated flooding, petrochemical exposure, and economic disinvestment. Our primary Living Lab engages residents, local nonprofits, and city officials in co-designing resilient building strategies for a community that has seen too little attention from the research community.</div>
+        <div class="lab-focus">Focus: Flood resilience · Built environment adaptation · Community preparedness</div>
+      </div>
+    </div>
+    <div class="lab-card reveal d1">
+      <div class="lab-img">
+        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=700&q=80&fit=crop" alt="Medellin Colombia">
+      </div>
+      <div class="lab-body">
+        <div class="lab-country">Colombia</div>
+        <div class="lab-name">Medellín, Colombia</div>
+        <div class="lab-desc">Once one of the world's most dangerous cities, Medellín has undergone a remarkable urban transformation. Our Living Lab here focuses on how informal settlements in hillside neighborhoods can be made more resilient to the increasing intensity of rainfall events and landslide risk driven by climate change.</div>
+        <div class="lab-focus">Focus: Hillside housing · Landslide risk · Urban transformation</div>
+      </div>
+    </div>
+    <div class="lab-card reveal d2">
+      <div class="lab-img">
+        <img src="https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=700&q=80&fit=crop" alt="Indramayu Indonesia">
+      </div>
+      <div class="lab-body">
+        <div class="lab-country">Indonesia</div>
+        <div class="lab-name">Indramayu, Indonesia</div>
+        <div class="lab-desc">Indramayu faces sea-level rise, land subsidence, and threats to agriculture and fisheries that have sustained its communities for generations. Our research here extends beyond buildings into the broader resilience of food systems, water management, and livelihoods under accelerating climate pressure.</div>
+        <div class="lab-focus">Focus: Coastal resilience · Agriculture · Watershed management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO-PRONGED APPROACH -->
+<section class="approach">
+  <span class="approach-label reveal">Our Framework</span>
+  <h2 class="approach-title reveal d1">A two-pronged approach to <em>sustainable resilience</em></h2>
+  <div class="approach-grid">
+    <div class="prong reveal">
+      <div class="prong-num">01</div>
+      <div class="prong-title">Carbon meets durability</div>
+      <div class="prong-body">We connect environmental sustainability — measured through life cycle carbon emissions — to climate resilience through durability and service life assessments. A material that degrades faster requires more replacement, generating more carbon. A more durable material costs more upfront but less over time. Our analytical framework reveals these trade-offs at the design stage, enabling material selection decisions grounded in both carbon intensity and resilience performance.</div>
+    </div>
+    <div class="prong reveal d1">
+      <div class="prong-num">02</div>
+      <div class="prong-title">Co-design with communities</div>
+      <div class="prong-body">We apply a Living Lab approach to ensure communities are involved in both identifying key climate challenges and designing solutions. Our participatory co-design model engages affected residents, local businesses, and organizations active in disaster preparedness, response, and recovery. The goal: solutions that are socially acceptable, technically sound, and actually implementable within the cost and supply chain constraints of the communities they serve.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <h2 class="team-title reveal">People on this research</h2>
+  <div class="team-grid">
+    <a class="t-card reveal" href="team.html">
+      <div class="t-photo">🏘️</div>
+      <div class="t-info">
+        <div class="t-name">Mana Nemati Aghdam</div>
+        <div class="t-role">Ph.D. Student</div>
+        <div class="t-bio">Carbon-resilience nexus, material LCA for vulnerable communities in hazard-prone regions.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d1" href="team.html">
+      <div class="t-photo">👨‍🏫</div>
+      <div class="t-info">
+        <div class="t-name">Manish Dixit, Ph.D., LEED AP</div>
+        <div class="t-role">Principal Investigator</div>
+        <div class="t-bio">Community-centered design, life-cycle resilience, international collaboration coordination.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d2" href="team.html">
+      <div class="t-photo">🌍</div>
+      <div class="t-info">
+        <div class="t-name">International Partners</div>
+        <div class="t-role">7 Countries · 15+ Institutions</div>
+        <div class="t-bio">Architecture, psychology, materials science, social science, construction science, and community development experts across the US, Canada, Norway, UK, Switzerland, Indonesia, and Colombia.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d3" href="team.html">
+      <div class="t-photo">🏗️</div>
+      <div class="t-info">
+        <div class="t-name">Sejal Sanjay Shanbhag</div>
+        <div class="t-role">Ph.D. Student</div>
+        <div class="t-bio">Durability and service life analysis supporting the sustainability–resilience nexus framework.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a></div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+  <h2 class="partners-title reveal">International Partners</h2>
+  <p class="partners-sub reveal d1">This research brings together expertise from architecture, social science, psychology, behavioral science, construction science, materials science, and community development across seven countries.</p>
+  <div class="partner-grid">
+    <div class="partner-card reveal"><span class="partner-flag">🇺🇸</span><div class="partner-name">United States</div><div class="partner-inst">Texas A&M University · College of Architecture</div></div>
+    <div class="partner-card reveal d1"><span class="partner-flag">🇨🇦</span><div class="partner-name">Canada</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal d2"><span class="partner-flag">🇳🇴</span><div class="partner-name">Norway</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal d3"><span class="partner-flag">🇬🇧</span><div class="partner-name">United Kingdom</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal"><span class="partner-flag">🇨🇭</span><div class="partner-name">Switzerland</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal d1"><span class="partner-flag">🇮🇩</span><div class="partner-name">Indonesia</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal d2"><span class="partner-flag">🇨🇴</span><div class="partner-name">Colombia</div><div class="partner-inst">[Partner institution — placeholder]</div></div>
+    <div class="partner-card reveal d3"><span class="partner-flag">🌍</span><div class="partner-name">Funding</div><div class="partner-inst">New Frontiers in Research Fund · Canada Research Coordinating Committee</div></div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="pubs">
+  <h2 class="pubs-title reveal">Related Publications</h2>
+  <div class="pub-ph reveal d1">
+    <p>Publications from this research are coming soon — please provide the full publication list</p>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related">
+  <h2 class="related-title reveal">Related Research</h2>
+  <div class="related-grid">
+    <a class="rel-card reveal" href="lca.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="LCA"></div>
+      <div class="rel-body"><div class="rel-eye">Life Cycle Assessment</div><div class="rel-name">Matter matters.</div><div class="rel-msg">Measuring the full carbon cost of what buildings are made of.</div></div>
+    </a>
+    <a class="rel-card reveal d1" href="climate.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80&fit=crop" alt="Climate"></div>
+      <div class="rel-body"><div class="rel-eye">Climate-Aware Design</div><div class="rel-name">Buildings outlive their blueprints.</div><div class="rel-msg">Optimizing for the climates buildings will actually live through.</div></div>
+    </a>
+    <a class="rel-card reveal d2" href="vr-training.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=600&q=80&fit=crop" alt="VR"></div>
+      <div class="rel-body"><div class="rel-eye">Immersive Training</div><div class="rel-name">See it to build it.</div><div class="rel-msg">Teaching sustainability through virtual reality and simulation.</div></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="footer-logo">ENSURE Lab</a>
+      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Research</div>
+      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
+      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
+      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
+      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Site</div>
+      <a href="team.html" class="footer-nav-link">Our Team</a>
+      <a href="news.html" class="footer-nav-link">News & Updates</a>
+      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
+      <a href="index.html#contact" class="footer-nav-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>60));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
