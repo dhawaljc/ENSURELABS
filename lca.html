@@ -22,16 +22,10 @@ nav.solid .nav-links a{color:rgba(26,26,26,.5);}
 nav.solid .nav-links a:hover{color:#2d7a3e;}
 .nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
 .nav-cta:hover{background:#1e5a2c!important;}
-
-footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,255,.05);}
-.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
-.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:12px;}
-.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7;}
-.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:600;margin-bottom:14px;}
-.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
-.footer-nav-link:hover{color:#8fc99a;}
-.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);line-height:1.7;}
-
+footer{background:#0f1e14;padding:36px 64px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);text-align:right;max-width:260px;line-height:1.6;}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
@@ -76,7 +70,7 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 .team{padding:80px 64px;border-bottom:1px solid rgba(0,0,0,.07);}
 .team-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
-.t-card{background:#f2f2f2;overflow:hidden;transition:background .25s;text-decoration:none;color:inherit;display:block;cursor:pointer;}
+.t-card{background:#f2f2f2;overflow:hidden;transition:background .25s;cursor:default;}
 .t-card:hover{background:#eef5ef;}
 .t-photo{height:180px;background:#1a2e1c;display:flex;align-items:center;justify-content:center;font-size:3.5rem;overflow:hidden;}
 .t-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
@@ -85,8 +79,6 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 .t-name{font-family:'DM Serif Display',serif;font-size:.96rem;font-weight:400;color:#1a1a1a;margin-bottom:3px;}
 .t-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
 .t-bio{font-size:.75rem;line-height:1.6;color:rgba(26,26,26,.5);}
-.t-card-link-hint{display:block;margin:10px 18px 16px;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;opacity:0;transform:translateX(-5px);transition:opacity .25s,transform .25s;}
-.t-card:hover .t-card-link-hint{opacity:1;transform:translateX(0);}
 
 /* PUBS */
 .pubs{padding:80px 64px;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
@@ -119,15 +111,15 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 <body>
 <!-- CARBON COUNTER STRIP -->
 <style>
-#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:64px;background:rgba(15,30,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.co2-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
+#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:36px;background:rgba(15,30,20,0.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.co2-dot{width:6px;height:6px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
 @keyframes co2blink{0%,100%{opacity:1}50%{opacity:0.1}}
-.co2-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:"DM Sans",sans-serif;}
-#co2-digits{font-family:"DM Serif Display",serif;font-size:2rem;font-weight:400;color:#8fc99a;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1;}
-.co2-unit{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:"DM Sans",sans-serif;align-self:flex-end;padding-bottom:4px;}
-.co2-link{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(143,201,154,.55);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px;transition:color .2s;}
+.co2-label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:"DM Sans",sans-serif;}
+#co2-digits{font-family:"DM Sans",sans-serif;font-size:.82rem;font-weight:600;color:#8fc99a;letter-spacing:.04em;font-variant-numeric:tabular-nums;}
+.co2-unit{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:"DM Sans",sans-serif;}
+.co2-link{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(143,201,154,.5);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.1);padding-left:10px;margin-left:2px;transition:color .2s;}
 .co2-link:hover{color:#8fc99a;}
-#nav{top:64px!important;}
+#nav{top:36px!important;}
 </style>
 <div id="co2-strip">
   <span class="co2-dot"></span>
@@ -166,6 +158,227 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
     <h1 class="pg-title">Matter <em>matters.</em></h1>
   </div>
 </div>
+
+
+<!-- ANIMATED VISUALIZATION: LCA -->
+<section id="viz-lca" style="padding:80px 64px 96px;background:#0d1a0f;border-bottom:1px solid rgba(255,255,255,.05);">
+<style>
+#viz-lca{font-family:'DM Sans',sans-serif;}
+#viz-lca .vt{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;color:#fff;margin-bottom:10px;line-height:1.2;}
+#viz-lca .vt em{color:#8fc99a;font-style:italic;}
+#viz-lca .vs{font-size:.9rem;color:rgba(255,255,255,.35);margin-bottom:48px;max-width:600px;line-height:1.7;}
+.lca-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+/* Wheel */
+.wheel-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+#lcaWheel{display:block;max-width:100%;cursor:pointer;}
+/* Tooltip panel */
+.lca-tooltip{background:rgba(20,40,22,.96);border:1px solid rgba(143,201,154,.2);padding:28px 30px;min-height:200px;transition:opacity .3s;}
+.lca-tooltip-icon{font-size:2.4rem;margin-bottom:12px;display:block;}
+.lca-tooltip-stage{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:8px;}
+.lca-tooltip-title{font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:10px;line-height:1.3;}
+.lca-tooltip-pct{font-family:'DM Serif Display',serif;font-size:2rem;color:#8fc99a;margin-bottom:8px;}
+.lca-tooltip-body{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.65;}
+.lca-tooltip-hint{font-size:.66rem;color:rgba(143,201,154,.3);margin-top:16px;letter-spacing:.04em;}
+/* Hemp strip */
+.hemp-strip{display:flex;gap:3px;margin-top:40px;}
+.hemp-tile{flex:1;background:rgba(143,201,154,.06);border:1px solid rgba(143,201,154,.12);padding:20px 16px;text-align:center;}
+.hemp-tile-num{font-family:'DM Serif Display',serif;font-size:1.6rem;color:#8fc99a;line-height:1;}
+.hemp-tile-label{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.45;}
+</style>
+
+<div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(143,201,154,.45);margin-bottom:14px;">What We Found</div>
+<div class="vt">Buildings have a <em>hidden carbon story</em><br>before anyone moves in.</div>
+<p class="vs">Think of it like baking a cake — the ingredients, the oven, the delivery truck all use energy before you eat a single slice. Buildings are the same. Hover any stage of the circle to explore what we measured.</p>
+
+<div class="lca-layout">
+  <!-- Wheel -->
+  <div class="wheel-wrap">
+    <svg id="lcaWheel" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" width="480" height="480">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Segments drawn by JS -->
+      <g id="wheelSegs"></g>
+      <!-- Rotating dotted ring -->
+      <circle id="spinRing" cx="240" cy="240" r="195" fill="none"
+        stroke="rgba(143,201,154,.12)" stroke-width="1"
+        stroke-dasharray="6 10"/>
+      <!-- Center circle -->
+      <circle cx="240" cy="240" r="78" fill="#0d1a0f" stroke="rgba(143,201,154,.15)" stroke-width="1"/>
+      <text x="240" y="230" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#8fc99a">Life Cycle</text>
+      <text x="240" y="250" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#8fc99a">of a Building</text>
+      <text x="240" y="270" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,.25)">hover each stage</text>
+      <!-- Emoji icons positioned by JS -->
+      <g id="wheelIcons"></g>
+    </svg>
+  </div>
+
+  <!-- Info panel -->
+  <div>
+    <div class="lca-tooltip" id="lcaPanel">
+      <span class="lca-tooltip-icon" id="tipIcon">🌍</span>
+      <div class="lca-tooltip-stage" id="tipStage">Life Cycle Assessment</div>
+      <div class="lca-tooltip-title" id="tipTitle">Every building has a full life story</div>
+      <div class="lca-tooltip-pct" id="tipPct"></div>
+      <div class="lca-tooltip-body" id="tipBody">Most people only think about the energy a building uses while people live in it. But we measure the whole journey — from digging up raw materials all the way to demolition. Hover each coloured segment to explore each stage.</div>
+      <div class="lca-tooltip-hint">← Hover any stage on the wheel</div>
+    </div>
+
+    <div class="hemp-strip" style="margin-top:32px;">
+      <div class="hemp-tile"><div class="hemp-tile-num" id="h1">3×</div><div class="hemp-tile-label">Less carbon to make hempcrete vs concrete</div></div>
+      <div class="hemp-tile"><div class="hemp-tile-num">🌿</div><div class="hemp-tile-label">Hemp absorbs CO₂ as it grows — locking it in the wall</div></div>
+      <div class="hemp-tile"><div class="hemp-tile-num" id="h3">55%</div><div class="hemp-tile-label">Lower net warming impact counting the hemp's CO₂ capture</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var stages = [
+    {
+      label:'Raw Materials',icon:'⛏️',pct:'~20%',
+      color:'#3a7d44',hoverColor:'#5aad64',
+      title:'Digging up the ingredients',
+      body:'Before a single brick is laid, we need steel, concrete, timber, insulation, and glass. Mining and processing these raw materials releases a surprising amount of CO₂ — roughly 20% of a building\'s total life-cycle carbon happens before construction even starts.'
+    },
+    {
+      label:'Manufacturing',icon:'🏭',pct:'~35%',
+      color:'#2d6e38',hoverColor:'#4a9e58',
+      title:'Making it in the factory',
+      body:'This is the biggest single carbon chunk. Turning raw ore into steel, limestone into cement, and sand into glass all require enormous heat. Our research showed that the factory stage alone accounts for about a third of a building\'s total carbon footprint.'
+    },
+    {
+      label:'Transport',icon:'🚚',pct:'~10%',
+      color:'#265f30',hoverColor:'#3d8f4a',
+      title:'Getting it to the building site',
+      body:'All those materials need to travel — sometimes thousands of miles. Trucks, ships, and trains burning diesel add up. This is where local and bio-based materials like hempcrete can dramatically cut emissions, since the hemp is often grown nearby.'
+    },
+    {
+      label:'Construction',icon:'🏗️',pct:'~10%',
+      color:'#1e5028',hoverColor:'#2d7a3c',
+      title:'Building it on site',
+      body:'The cranes, concrete mixers, and equipment on a construction site all burn fuel. Waste is generated too. Our hybrid models can trace every machine-hour back to a carbon cost, helping project managers make smarter choices during the build.'
+    },
+    {
+      label:'Occupation',icon:'🏠',pct:'~20%',
+      color:'#174020',hoverColor:'#256030',
+      title:'Heating, cooling, and living',
+      body:'Once people move in, energy bills begin — and so does operational carbon. Heating in winter, cooling in summer, lighting, and hot water. Surprisingly, this stage is often smaller than people think when the building is well-designed for future climates.'
+    },
+    {
+      label:'End of Life',icon:'♻️',pct:'~5%',
+      color:'#102f18',hoverColor:'#1c4f28',
+      title:'Demolition and what comes after',
+      body:'When a building comes down, materials can be recycled, reused, or sent to landfill. Hempcrete is compostable. Concrete can be crushed and reused. Good end-of-life planning can actually recover some of the carbon cost of the whole building.'
+    }
+  ];
+
+  var svg = document.getElementById('lcaWheel');
+  var segsG = document.getElementById('wheelSegs');
+  var iconsG = document.getElementById('wheelIcons');
+  var cx=240, cy=240, R=200, r=100;
+  var total = stages.length;
+  var gap = 0.03; // radians gap between segments
+
+  // Draw segments
+  stages.forEach(function(s,i){
+    var startAngle = (i/total)*Math.PI*2 - Math.PI/2 + gap/2;
+    var endAngle   = ((i+1)/total)*Math.PI*2 - Math.PI/2 - gap/2;
+    var midAngle   = (startAngle+endAngle)/2;
+
+    function polar(angle,rad){ return [cx+rad*Math.cos(angle), cy+rad*Math.sin(angle)]; }
+    var o1=polar(startAngle,R), o2=polar(endAngle,R);
+    var i1=polar(endAngle,r),   i2=polar(startAngle,r);
+    var large = endAngle-startAngle > Math.PI ? 1 : 0;
+
+    var d = [
+      'M',o1[0],o1[1],
+      'A',R,R,0,large,1,o2[0],o2[1],
+      'L',i1[0],i1[1],
+      'A',r,r,0,large,0,i2[0],i2[1],
+      'Z'
+    ].join(' ');
+
+    var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',d);
+    path.setAttribute('fill',s.color);
+    path.setAttribute('stroke','#0d1a0f');
+    path.setAttribute('stroke-width','2');
+    path.style.cursor='pointer';
+    path.style.transition='fill .25s';
+
+    // Animate in
+    path.style.opacity='0';
+    path.style.transformOrigin=cx+'px '+cy+'px';
+
+    segsG.appendChild(path);
+
+    // Icon in the segment midpoint
+    var iconR = (R+r)/2;
+    var ix=cx+iconR*Math.cos(midAngle), iy=cy+iconR*Math.sin(midAngle);
+    var fo = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
+    fo.setAttribute('x',ix-18); fo.setAttribute('y',iy-18);
+    fo.setAttribute('width','36'); fo.setAttribute('height','36');
+    fo.style.pointerEvents='none';
+    fo.style.opacity='0';
+    fo.innerHTML='<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:22px;text-align:center;line-height:36px;">'+s.icon+'</div>';
+    iconsG.appendChild(fo);
+
+    // Hover
+    path.addEventListener('mouseenter',function(){
+      path.setAttribute('fill',s.hoverColor);
+      path.setAttribute('filter','url(#glow)');
+      setPanel(s);
+    });
+    path.addEventListener('mouseleave',function(){
+      path.setAttribute('fill',s.color);
+      path.removeAttribute('filter');
+    });
+
+    s._path = path;
+    s._fo = fo;
+    s._midAngle = midAngle;
+  });
+
+  function setPanel(s){
+    document.getElementById('tipIcon').textContent=s.icon;
+    document.getElementById('tipStage').textContent=s.label;
+    document.getElementById('tipTitle').textContent=s.title;
+    document.getElementById('tipPct').textContent=s.pct+' of total carbon';
+    document.getElementById('tipBody').textContent=s.body;
+    document.querySelector('.lca-tooltip-hint').style.display='none';
+  }
+
+  // Spin animation on ring
+  var spinRing = document.getElementById('spinRing');
+  var spinAngle = 0;
+  function spinLoop(){
+    spinAngle = (spinAngle+0.15)%360;
+    spinRing.setAttribute('transform','rotate('+spinAngle+',240,240)');
+    requestAnimationFrame(spinLoop);
+  }
+  spinLoop();
+
+  // Intersection observer — animate segments in when scrolled into view
+  var fired=false;
+  var obs=new IntersectionObserver(function(en){
+    if(en[0].isIntersecting&&!fired){
+      fired=true;
+      stages.forEach(function(s,i){
+        setTimeout(function(){
+          s._path.style.transition='opacity .5s ease, fill .25s';
+          s._path.style.opacity='1';
+          s._fo.style.transition='opacity .4s ease .2s';
+          s._fo.style.opacity='1';
+        }, i*120);
+      });
+    }
+  },{threshold:.2});
+  obs.observe(document.getElementById('viz-lca'));
+})();
+</script>
+</section>
+
 
 <!-- OVERVIEW -->
 <section class="overview reveal">
@@ -212,31 +425,39 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 <section class="team">
   <h2 class="team-title reveal">People on this research</h2>
   <div class="team-grid">
-    <a class="t-card reveal" href="team.html">
-      <div class="t-photo">👩‍💻</div>
+    <div class="t-card reveal">
+      <div class="t-photo"><img src="Kamazani.jpg" alt="Maryam Abbasi Kamazani" onerror="this.outerHTML='👩‍💻'"></div>
       <div class="t-info">
         <div class="t-name">Maryam Abbasi Kamazani</div>
         <div class="t-role">Ph.D. Candidate</div>
         <div class="t-bio">LCA, multi-objective optimization, climate-aware modeling. Best Paper Award — Net Zero Carbon Built Environment Conference.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d1" href="team.html">
-      <div class="t-photo">🌿</div>
+      </div>
+    </div>
+    <div class="t-card reveal d1">
+      <div class="t-photo"><img src="Norouzi.jpg" alt="Yasaman Norouzi" onerror="this.outerHTML='🌿'"></div>
       <div class="t-info">
         <div class="t-name">Yasaman Norouzi</div>
         <div class="t-role">Ph.D. Candidate</div>
         <div class="t-bio">LCA of 3D-printed hempcrete, building envelope optimization. DOE ARPA-E funded.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d2" href="team.html">
-      <div class="t-photo">🏗️</div>
+      </div>
+    </div>
+    <div class="t-card reveal d2">
+      <div class="t-photo"><img src="Shanbhag.jpg" alt="Sejal Sanjay Shanbhag" onerror="this.outerHTML='🏗️'"></div>
       <div class="t-info">
         <div class="t-name">Sejal Sanjay Shanbhag</div>
         <div class="t-role">Ph.D. Student</div>
         <div class="t-bio">LCA and optimization for low-carbon, climate-responsive building design.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d3" href="team.html">
-      <div class="t-photo">👨‍🏫</div>
+      </div>
+    </div>
+    <div class="t-card reveal d3">
+      <div class="t-photo"><img src="Dixit.jpg" alt="Manish K. Dixit" onerror="this.outerHTML='👨‍🏫'"></div>
       <div class="t-info">
         <div class="t-name">Manish Dixit, Ph.D., LEED AP</div>
         <div class="t-role">Principal Investigator</div>
         <div class="t-bio">Life-cycle energy and environmental modeling. IEA Annex 57 & 72 National Expert.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PUBLICATIONS -->
@@ -245,23 +466,54 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
   <div class="pub-item reveal d1">
     <div class="pub-year">2024</div>
     <div>
-      <div class="pub-title">Nexus-centered prognostic multi-objective optimization of building envelope performance under future climate and energy scenarios</div>
-      <div class="pub-meta">Abbasi Kamazani M., Dixit M. · [Journal — placeholder] · DOI: [placeholder]</div>
-      <span class="pub-tag">NSF-Funded</span>
-    </div>
-  </div>
-  <div class="pub-item reveal d2">
-    <div class="pub-year">2024</div>
-    <div>
-      <div class="pub-title">Cradle-to-grave life cycle assessment of hempcrete for large-scale extrusion-based 3D printing</div>
-      <div class="pub-meta">Norouzi Y., Shanbhag S., Abu Ennab L., Dixit M. · [Journal — placeholder]</div>
+      <div class="pub-title">Examining the global warming potential of hempcrete in the United States: A cradle-to-gate life cycle assessment</div>
+      <div class="pub-meta">Shanbhag S.S., Dixit M.K., & Sideris P. · Developments in the Built Environment, 20, 100572 · 2024</div>
       <span class="pub-tag">DOE ARPA-E</span>
     </div>
   </div>
-  <div class="pub-ph reveal d3">
-    <p>Additional publications coming soon — please provide the full publication list</p>
+  <div class="pub-item reveal d2">
+    <div class="pub-year">2026</div>
+    <div>
+      <div class="pub-title">A Review of Advantages and Challenges of Using Hempcrete for 3D Printing in Construction</div>
+      <div class="pub-meta">Norouzi Y. & Dixit M.K. · Journal of Building Engineering, 115298 · 2026</div>
+      <span class="pub-tag">DOE ARPA-E</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d3">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Multi-objective genetic optimization of embodied and operational energy and carbon impacts of buildings in current and future scenarios</div>
+      <div class="pub-meta">Kamazani M.A., Dixit M.K., & Shanbhag S.S. · Energy and Buildings, 338, 115748 · 2025</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-item reveal">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Optimizing interconnected embodied and operational energy of buildings: An embodied energy factor approach</div>
+      <div class="pub-meta">Kamazani M.A., Dixit M.K., & Shanbhag S.S. · Building and Environment, 276, 112902 · 2025</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d1">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Understanding carbon-negative potential of hempcrete using a life cycle assessment approach</div>
+      <div class="pub-meta">Shanbhag S.S. & Dixit M.K. · NTZR Conference, Springer Nature Switzerland, pp. 169–182 · 2024</div>
+      <span class="pub-tag">DOE ARPA-E</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d2">
+    <div class="pub-year">2023</div>
+    <div>
+      <div class="pub-title">Multi-objective optimization of embodied and operational energy and carbon emission of a building envelope</div>
+      <div class="pub-meta">Kamazani M.A. & Dixit M.K. · Journal of Cleaner Production, 428, 139510 · 2023</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
   </div>
 </section>
+
+
 
 <!-- RELATED RESEARCH -->
 <section class="related">
@@ -295,29 +547,9 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 </section>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-col">
-      <a href="index.html" class="footer-logo">ENSURE Lab</a>
-      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
-    </div>
-    <div class="footer-col footer-nav-col">
-      <div class="footer-nav-label">Research</div>
-      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
-      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
-      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
-      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
-    </div>
-    <div class="footer-col footer-nav-col">
-      <div class="footer-nav-label">Site</div>
-      <a href="team.html" class="footer-nav-link">Our Team</a>
-      <a href="news.html" class="footer-nav-link">News & Updates</a>
-      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
-      <a href="index.html#contact" class="footer-nav-link">Contact</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
-    </div>
-  </div>
+  <a href="index.html" class="footer-logo">ENSURE Lab</a>
+  <div class="footer-copy">© ENSURE Lab · Texas A&M University · College of Architecture</div>
+  <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
 </footer>
 
 <script>
