@@ -22,16 +22,10 @@ nav.solid .nav-links a{color:rgba(26,26,26,.5);}
 nav.solid .nav-links a:hover{color:#2d7a3e;}
 .nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
 .nav-cta:hover{background:#1e5a2c!important;}
-
-footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,255,.05);}
-.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
-.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:12px;}
-.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.7;}
-.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);font-weight:600;margin-bottom:14px;}
-.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.38);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
-.footer-nav-link:hover{color:#8fc99a;}
-.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);line-height:1.7;}
-
+footer{background:#0f1e14;padding:36px 64px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.28);text-align:right;max-width:260px;line-height:1.6;}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
@@ -90,8 +84,6 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 .t-name{font-family:'DM Serif Display',serif;font-size:.96rem;font-weight:400;color:#1a1a1a;margin-bottom:3px;}
 .t-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
 .t-bio{font-size:.75rem;line-height:1.6;color:rgba(26,26,26,.5);}
-.t-card-link-hint{display:block;margin:10px 18px 16px;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;opacity:0;transform:translateX(-5px);transition:opacity .25s,transform .25s;}
-.t-card:hover .t-card-link-hint{opacity:1;transform:translateX(0);}
 
 .pubs{padding:80px 64px;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
 .pubs-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#1a1a1a;margin-bottom:48px;}
@@ -122,15 +114,15 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 <body>
 <!-- CARBON COUNTER STRIP -->
 <style>
-#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:64px;background:rgba(15,30,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.co2-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
+#co2-strip{position:fixed;top:0;left:0;right:0;z-index:400;height:36px;background:rgba(15,30,20,0.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.co2-dot{width:6px;height:6px;border-radius:50%;background:#c0392b;animation:co2blink 1.4s ease-in-out infinite;flex-shrink:0}
 @keyframes co2blink{0%,100%{opacity:1}50%{opacity:0.1}}
-.co2-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:"DM Sans",sans-serif;}
-#co2-digits{font-family:"DM Serif Display",serif;font-size:2rem;font-weight:400;color:#8fc99a;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1;}
-.co2-unit{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:"DM Sans",sans-serif;align-self:flex-end;padding-bottom:4px;}
-.co2-link{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(143,201,154,.55);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;margin-left:4px;transition:color .2s;}
+.co2-label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:"DM Sans",sans-serif;}
+#co2-digits{font-family:"DM Sans",sans-serif;font-size:.82rem;font-weight:600;color:#8fc99a;letter-spacing:.04em;font-variant-numeric:tabular-nums;}
+.co2-unit{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:"DM Sans",sans-serif;}
+.co2-link{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(143,201,154,.5);text-decoration:none;font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.1);padding-left:10px;margin-left:2px;transition:color .2s;}
 .co2-link:hover{color:#8fc99a;}
-#nav{top:64px!important;}
+#nav{top:36px!important;}
 </style>
 <div id="co2-strip">
   <span class="co2-dot"></span>
@@ -182,6 +174,136 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
       <p>This prognostic stance — anticipating rather than reacting to climate change — is what separates our work from conventional energy modeling. Funded by the National Science Foundation.</p>
     </div>
   </div>
+</section>
+
+
+<!-- ANIMATED VISUALIZATION: Climate -->
+<section id="viz-climate" style="padding:80px 64px 96px;background:#0d1a0f;border-bottom:1px solid rgba(255,255,255,.05);">
+<style>
+#viz-climate{font-family:'DM Sans',sans-serif;}
+#viz-climate .vt{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;color:#fff;margin-bottom:10px;line-height:1.2;}
+#viz-climate .vt em{color:#8fc99a;font-style:italic;}
+#viz-climate .vs{font-size:.9rem;color:rgba(255,255,255,.35);margin-bottom:56px;max-width:600px;line-height:1.7;}
+.clim-two{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:48px;}
+.clim-house{background:rgba(255,255,255,.03);padding:36px 32px;border-top:3px solid transparent;transition:border-color .5s;}
+.clim-house.bad{border-top-color:#c98f8f;}
+.clim-house.good{border-top-color:#8fc99a;}
+.clim-house-icon{font-size:3rem;margin-bottom:16px;display:block;}
+.clim-house-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;margin-bottom:10px;}
+.clim-house-desc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.65;margin-bottom:20px;}
+/* Temperature bar */
+.temp-bar-wrap{margin-top:8px;}
+.temp-bar-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px;}
+.temp-bar-track{height:14px;background:rgba(255,255,255,.06);border-radius:7px;overflow:hidden;}
+.temp-bar-fill{height:100%;border-radius:7px;width:0;transition:width 1.6s cubic-bezier(.22,1,.36,1);}
+.temp-bar-fill.hot{background:linear-gradient(90deg,#c98f8f,#c0392b);}
+.temp-bar-fill.cool{background:linear-gradient(90deg,#2d7a3e,#8fc99a);}
+.temp-val{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-top:8px;}
+.temp-val.hot{color:#c98f8f;}
+.temp-val.cool{color:#8fc99a;}
+/* Timeline */
+.clim-timeline{display:flex;justify-content:space-between;align-items:flex-end;padding:0 4px;margin-top:8px;}
+.clim-yr{text-align:center;flex:1;}
+.clim-yr-bar{width:20px;margin:0 auto 6px;border-radius:3px 3px 0 0;transition:height 1.4s cubic-bezier(.22,1,.36,1);}
+.clim-yr-label{font-size:.62rem;color:rgba(255,255,255,.28);}
+/* Key insight strip */
+.clim-insight{display:flex;gap:3px;margin-top:0;}
+.clim-ins{flex:1;background:rgba(255,255,255,.03);padding:22px 20px;text-align:center;}
+.clim-ins-num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#8fc99a;line-height:1;}
+.clim-ins-text{font-size:.72rem;color:rgba(255,255,255,.32);margin-top:6px;line-height:1.5;}
+</style>
+
+<div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(143,201,154,.45);margin-bottom:14px;">What We Found</div>
+<div class="vt">A building built today will still be standing<br>when your <em>grandchildren are old.</em></div>
+<p class="vs">But most buildings are designed for today's weather — not tomorrow's. We figured out how to design buildings that stay comfortable and efficient even as the world gets hotter.</p>
+
+<div class="clim-two">
+  <!-- OLD WAY -->
+  <div class="clim-house bad" id="hBad">
+    <span class="clim-house-icon">🥵</span>
+    <div class="clim-house-title">Old way — designed for today</div>
+    <div class="clim-house-desc">The building works fine in 2024. But by 2080, the summers are much hotter. The air conditioning runs constantly. Energy bills skyrocket. The design didn't see it coming.</div>
+    <div class="temp-bar-wrap">
+      <div class="temp-bar-label">Energy use by 2080</div>
+      <div class="temp-bar-track"><div class="temp-bar-fill hot" id="barBad" data-w="88"></div></div>
+      <div class="temp-val hot" id="valBad">+0% higher</div>
+    </div>
+    <div class="clim-timeline" id="tlBad">
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#c98f8f;width:20px;" data-h="24"></div><div class="clim-yr-label">2024</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#c98f8f;width:20px;" data-h="36"></div><div class="clim-yr-label">2040</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#c98f8f;width:20px;" data-h="54"></div><div class="clim-yr-label">2060</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#c0392b;width:20px;" data-h="76"></div><div class="clim-yr-label">2080</div></div>
+    </div>
+  </div>
+
+  <!-- SMART WAY -->
+  <div class="clim-house good" id="hGood">
+    <span class="clim-house-icon">😊</span>
+    <div class="clim-house-title">Our way — designed for tomorrow</div>
+    <div class="clim-house-desc">We use climate models to see what weather is coming. Then we pick windows, walls, and systems that will still work great in 50 years — saving energy and staying comfortable.</div>
+    <div class="temp-bar-wrap">
+      <div class="temp-bar-label">Energy use by 2080</div>
+      <div class="temp-bar-track"><div class="temp-bar-fill cool" id="barGood" data-w="22"></div></div>
+      <div class="temp-val cool" id="valGood">+0% higher</div>
+    </div>
+    <div class="clim-timeline" id="tlGood">
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#2d7a3e;width:20px;" data-h="24"></div><div class="clim-yr-label">2024</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#2d7a3e;width:20px;" data-h="26"></div><div class="clim-yr-label">2040</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#2d7a3e;width:20px;" data-h="28"></div><div class="clim-yr-label">2060</div></div>
+      <div class="clim-yr"><div class="clim-yr-bar" style="height:0;background:#8fc99a;width:20px;" data-h="30"></div><div class="clim-yr-label">2080</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="clim-insight">
+  <div class="clim-ins"><div class="clim-ins-num" id="ci1">0</div><div class="clim-ins-text">US climate zones studied to make sure our designs work everywhere</div></div>
+  <div class="clim-ins"><div class="clim-ins-num" id="ci2">0%</div><div class="clim-ins-text">Less carbon emitted by smart-designed buildings over their whole life</div></div>
+  <div class="clim-ins"><div class="clim-ins-num" id="ci3">0</div><div class="clim-ins-text">Years into the future our models can predict building performance</div></div>
+</div>
+
+<script>
+(function(){
+  var fired=false;
+  var obs=new IntersectionObserver(function(en){
+    if(en[0].isIntersecting&&!fired){
+      fired=true;
+      // Bars
+      setTimeout(function(){
+        document.getElementById('barBad').style.width='88%';
+        document.getElementById('barGood').style.width='22%';
+      },300);
+      // Count up bar labels
+      function countVal(id,target,prefix,suffix,delay){
+        setTimeout(function(){
+          var el=document.getElementById(id),s=Date.now(),d=1600;
+          function t(){var p=Math.min(1,(Date.now()-s)/d),e=1-Math.pow(1-p,3);
+            el.textContent=prefix+Math.round(target*e)+suffix;if(p<1)requestAnimationFrame(t);}
+          t();
+        },delay);
+      }
+      countVal('valBad',34,'+','% higher',400);
+      countVal('valGood',6,'+','% higher',400);
+      // Timeline bars
+      document.querySelectorAll('#tlBad .clim-yr-bar, #tlGood .clim-yr-bar').forEach(function(b,i){
+        setTimeout(function(){b.style.height=b.dataset.h+'px';},400+i*180);
+      });
+      // Stats
+      function countTo(id,to,suffix,delay){
+        setTimeout(function(){
+          var el=document.getElementById(id),s=Date.now(),d=1400;
+          function t(){var p=Math.min(1,(Date.now()-s)/d),e=1-Math.pow(1-p,3);
+            el.textContent=Math.round(to*e)+suffix;if(p<1)requestAnimationFrame(t);}
+          t();
+        },delay);
+      }
+      countTo('ci1',8,'',800);
+      countTo('ci2',18,'%',1000);
+      countTo('ci3',56,' yrs',1200);
+    }
+  },{threshold:.2});
+  obs.observe(document.getElementById('viz-climate'));
+})();
+</script>
 </section>
 
 <!-- CLIMATE SCENARIOS -->
@@ -241,56 +363,87 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 <section class="team">
   <h2 class="team-title reveal">People on this research</h2>
   <div class="team-grid">
-    <a class="t-card reveal" href="team.html">
-      <div class="t-photo">👩‍💻</div>
+    <div class="t-card reveal">
+      <div class="t-photo"><img src="Kamazani.jpg" alt="Maryam Abbasi Kamazani" onerror="this.outerHTML='👩‍💻'"></div>
       <div class="t-info">
         <div class="t-name">Maryam Abbasi Kamazani</div>
         <div class="t-role">Ph.D. Candidate</div>
         <div class="t-bio">Climate-aware LCA, multi-objective optimization, ECW nexus. Best Paper Award NZCBE. NSF-funded.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d1" href="team.html">
-      <div class="t-photo">🌿</div>
+      </div>
+    </div>
+    <div class="t-card reveal d1">
+      <div class="t-photo"><img src="Norouzi.jpg" alt="Yasaman Norouzi" onerror="this.outerHTML='🌿'"></div>
       <div class="t-info">
         <div class="t-name">Yasaman Norouzi</div>
         <div class="t-role">Ph.D. Candidate</div>
         <div class="t-bio">Hygrothermal stress on building envelopes, CMIP6 integration, long-life LCA.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d2" href="team.html">
-      <div class="t-photo">🏗️</div>
+      </div>
+    </div>
+    <div class="t-card reveal d2">
+      <div class="t-photo"><img src="Shanbhag.jpg" alt="Sejal Sanjay Shanbhag" onerror="this.outerHTML='🏗️'"></div>
       <div class="t-info">
         <div class="t-name">Sejal Sanjay Shanbhag</div>
         <div class="t-role">Ph.D. Student</div>
         <div class="t-bio">LCA and optimization for climate-responsive building design under future climate scenarios.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d3" href="team.html">
-      <div class="t-photo">👨‍🏫</div>
+      </div>
+    </div>
+    <div class="t-card reveal d3">
+      <div class="t-photo"><img src="Dixit.jpg" alt="Manish K. Dixit" onerror="this.outerHTML='👨‍🏫'"></div>
       <div class="t-info">
         <div class="t-name">Manish Dixit, Ph.D., LEED AP</div>
         <div class="t-role">Principal Investigator</div>
         <div class="t-bio">Climate-aware design optimization, life-cycle energy modeling. IEA Annex 57 & 72.</div>
-      </div><div class="t-card-link-hint">View profile →</div></a></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PUBLICATIONS -->
 <section class="pubs">
   <h2 class="pubs-title reveal">Related Publications</h2>
   <div class="pub-item reveal d1">
-    <div class="pub-year">2024</div>
+    <div class="pub-year">2025</div>
     <div>
-      <div class="pub-title">Climate-aware multi-objective optimization of building envelope energy–carbon–water nexus under future scenarios</div>
-      <div class="pub-meta">Abbasi Kamazani M., Dixit M. · Best Paper Award — NZCBE Conference · [Full citation — placeholder]</div>
-      <span class="pub-tag">Best Paper Award</span>
-    </div>
-  </div>
-  <div class="pub-item reveal d2">
-    <div class="pub-year">2024</div>
-    <div>
-      <div class="pub-title">Impact of climate change-induced extreme hygrothermal swings on building envelope performance and life cycle carbon</div>
-      <div class="pub-meta">Norouzi Y., Shanbhag S., Dixit M. · [Journal — placeholder]</div>
+      <div class="pub-title">Multi-objective genetic optimization of embodied and operational energy and carbon impacts of buildings in current and future scenarios</div>
+      <div class="pub-meta">Kamazani M.A., Dixit M.K., & Shanbhag S.S. · Energy and Buildings, 338, 115748 · 2025</div>
       <span class="pub-tag">NSF-Funded</span>
     </div>
   </div>
-  <div class="pub-ph reveal d3">
-    <p>Additional publications coming soon — please provide the full publication list</p>
+  <div class="pub-item reveal d2">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Integrating evolving energy economy scenarios in dynamic life cycle assessment of buildings</div>
+      <div class="pub-meta">Shanbhag S.S. & Dixit M.K. · Environmental Impact Assessment Review, 112, 107772 · 2025</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d3">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Optimizing interconnected embodied and operational energy of buildings: An embodied energy factor approach</div>
+      <div class="pub-meta">Kamazani M.A., Dixit M.K., & Shanbhag S.S. · Building and Environment, 276, 112902 · 2025</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-item reveal">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">A review of evolving climate and energy economy trends to enhance the dynamic life cycle assessment of buildings</div>
+      <div class="pub-meta">Shanbhag S.S. & Dixit M.K. · Sustainable Cities and Society, 111, 105560 · 2024</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d1">
+    <div class="pub-year">2023</div>
+    <div>
+      <div class="pub-title">Multi-objective optimization of embodied and operational energy and carbon emission of a building envelope</div>
+      <div class="pub-meta">Kamazani M.A. & Dixit M.K. · Journal of Cleaner Production, 428, 139510 · 2023</div>
+      <span class="pub-tag">Best Paper Award · NSF</span>
+    </div>
   </div>
 </section>
+
+
 
 <!-- RELATED -->
 <section class="related">
@@ -324,29 +477,9 @@ footer{background:#0f1e14;padding:48px 64px;border-top:1px solid rgba(255,255,25
 </section>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-col">
-      <a href="index.html" class="footer-logo">ENSURE Lab</a>
-      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
-    </div>
-    <div class="footer-col footer-nav-col">
-      <div class="footer-nav-label">Research</div>
-      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
-      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
-      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
-      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
-    </div>
-    <div class="footer-col footer-nav-col">
-      <div class="footer-nav-label">Site</div>
-      <a href="team.html" class="footer-nav-link">Our Team</a>
-      <a href="news.html" class="footer-nav-link">News & Updates</a>
-      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
-      <a href="index.html#contact" class="footer-nav-link">Contact</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
-    </div>
-  </div>
+  <a href="index.html" class="footer-logo">ENSURE Lab</a>
+  <div class="footer-copy">© ENSURE Lab · Texas A&M University · College of Architecture</div>
+  <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
 </footer>
 
 <script>
