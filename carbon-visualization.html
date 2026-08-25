@@ -9,6 +9,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;overflow-x:hidden}
+/* clip, not hidden: overflow-x:hidden makes body a scroll container and
+   silently breaks position:sticky for the scale stage. clip does not. */
+@supports (overflow-x:clip){html,body{overflow-x:clip}}
 body{background:#f9f9f7;color:#545478;font-family:'DM Sans',sans-serif}
 
 /* full-page fixed canvas, behind everything */
@@ -184,6 +187,41 @@ body{background:#f9f9f7;color:#545478;font-family:'DM Sans',sans-serif}
 @media(max-width:640px){
   .comp-row,.comp-row.right{flex-direction:column;align-items:flex-start}
 }
+
+/* ══ SCALE LADDER: sticky stage, scroll drives a continuous zoom out ══ */
+#scale-section{position:relative;z-index:2;background:#f9f9f7}
+.scale-stage{
+  position:sticky;top:0;height:100vh;height:100svh;
+  background:#f9f9f7;overflow:hidden;
+}
+#scaleCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scale-hud{
+  position:absolute;top:calc(1.2rem + 5.2rem);left:var(--pad-x);
+  padding:1rem 1.15rem;max-width:15rem;pointer-events:none;
+}
+.hud-unit{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:#c0392b;font-weight:500;margin-bottom:.5rem}
+.hud-mass{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1;color:#181822;font-variant-numeric:tabular-nums}
+.hud-mass-u{font-family:'DM Sans',sans-serif;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#a8a8c0;margin-left:.4rem}
+.hud-diam{margin-top:.6rem;font-size:.76rem;line-height:1.5;color:#545478}
+.hud-diam b{color:#181822;font-weight:500}
+.scale-ruler{position:absolute;bottom:1.6rem;left:var(--pad-x);pointer-events:none;display:flex;flex-direction:column;gap:.35rem}
+.ruler-bar{height:1px;background:#545478;position:relative}
+.ruler-bar::before,.ruler-bar::after{content:'';position:absolute;width:1px;height:7px;background:#545478;top:-3px}
+.ruler-bar::before{left:0}.ruler-bar::after{right:0}
+#ruler-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#767695}
+.scale-steps{position:relative;z-index:3;margin-top:-100vh;margin-top:-100svh;pointer-events:none}
+.scale-step{min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;justify-content:flex-end;padding:0 var(--pad-x) 4.5rem}
+.step-card{max-width:24rem;padding:1.5rem 1.7rem;pointer-events:auto;opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.step-card.vis{opacity:1;transform:none}
+.step-eyebrow{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:#c0392b;font-weight:500;margin-bottom:.55rem}
+.step-head{font-family:'Playfair Display',serif;font-size:clamp(1.25rem,2.3vw,1.75rem);line-height:1.15;color:#181822;font-weight:400;margin-bottom:.7rem}
+.step-body{font-size:.85rem;line-height:1.75;color:#545478}
+.step-body b{color:#181822;font-weight:500}
+@media (max-width:760px){
+  .scale-hud{top:calc(1rem + 4.6rem);max-width:11rem;padding:.8rem .9rem}
+  .scale-step{justify-content:center;padding-bottom:2.2rem}
+  .step-card{max-width:100%}
+}
 </style>
 <link rel="stylesheet" href="sketch.css">
 </head>
@@ -215,104 +253,65 @@ body{background:#f9f9f7;color:#545478;font-family:'DM Sans',sans-serif}
     </div>
   </div>
 
-  <!-- CARD 1, per minute / Boeing 747 -->
-  <div class="comp-row">
-    <div class="comp-text glass reveal">
-      <div class="c-eyebrow">Every minute</div>
-      <h2 class="c-head">71,160 tonnes in 60 seconds</h2>
-      <div class="c-divider"></div>
-      <p class="c-body">Every minute, humanity emits as much CO₂ as the combined weight of 500 fully-loaded Boeing 747s. The gas is invisible, but the mass is very real, and it never stops accumulating.</p>
+  <!-- SCALE LADDER, the true scale comparison -->
+<section id="scale-section">
+  <div class="scale-stage">
+    <canvas id="scaleCanvas"></canvas>
+    <div class="scale-hud glass">
+      <div class="hud-unit" id="hud-unit">Every second</div>
+      <div class="hud-mass"><span id="hud-mass">1,186</span><span class="hud-mass-u">tonnes CO&#8322;</span></div>
+      <div class="hud-diam">as a ball of gas, <b id="hud-diam">105 m</b> across</div>
     </div>
-    <div class="comp-visual glass reveal">
-      <div class="comp-img-col wide">
-        <img
-          src="https://pngimg.com/uploads/boeing/boeing_PNG35.png"
-          alt="Boeing 747"
-          onerror="this.style.display='none'">
-        <div class="comp-img-caption">Boeing 747 · ~412 t loaded</div>
-      </div>
-      <div class="comp-num-col">
-        <div class="comp-multiplier">500×</div>
-        <div class="comp-num-label">Boeing 747s by weight<br>every minute</div>
-      </div>
+    <div class="scale-ruler">
+      <div class="ruler-bar" id="ruler-bar" style="width:120px"></div>
+      <span id="ruler-label">100 m</span>
     </div>
   </div>
-
-  <!-- CARD 2, per hour / Statue of Liberty -->
-  <div class="comp-row right">
-    <div class="comp-visual glass reveal">
-      <div class="comp-img-col">
-        <img
-          src="https://pngimg.com/uploads/statue_of_liberty/statue_of_liberty_PNG37.png"
-          alt="Statue of Liberty"
-          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Statue_of_Liberty_7.jpg/300px-Statue_of_Liberty_7.jpg'">
-        <div class="comp-img-caption">Statue of Liberty<br>New York · 93 m</div>
-      </div>
-      <div class="comp-num-col">
-        <div class="comp-multiplier">46k×</div>
-        <div class="comp-num-label">heavier than the Statue<br>of Liberty, per hour</div>
-      </div>
-    </div>
-    <div class="comp-text glass reveal">
-      <div class="c-eyebrow">Every hour · 4.27 million tonnes</div>
-      <h2 class="c-head">The Statue of Liberty,<br>buried 46,000 times over</h2>
-      <div class="c-divider"></div>
-      <p class="c-body">The Statue of Liberty weighs 91 tonnes. Every hour, the world emits CO₂ equivalent to 46,000 of them stacked together. She stands 93 m tall. The carbon would tower far above her torch.</p>
+  <div class="scale-steps">
+  <div class="scale-step">
+    <div class="step-card glass reveal">
+      <div class="step-eyebrow">Every second  &middot;  1,186 tonnes</div>
+      <h2 class="step-head">A ball 105 metres wide</h2>
+      <p class="step-body">CO&#8322; is invisible, so give it a volume. At sea level pressure one tonne of it fills about 506 cubic metres: a ball ten metres across. One second of the world's fossil emissions is a ball <b>105 metres</b> wide, taller than the Statue of Liberty with her pedestal and torch.</p>
     </div>
   </div>
-
-  <!-- CARD 3, per day / Eiffel Tower -->
-  <div class="comp-row">
-    <div class="comp-text glass reveal">
-      <div class="c-eyebrow">Every day · 102 million tonnes</div>
-      <h2 class="c-head">The Eiffel Tower<br>eclipsed every 24 hours</h2>
-      <div class="c-divider"></div>
-      <p class="c-body">The Eiffel Tower weighs 7,300 tonnes and stands 330 m tall. A single day's global CO₂ output outweighs it by 14,000 times. Every 24 hours, that cycle repeats, and 2024 was a record year.</p>
-    </div>
-    <div class="comp-visual glass reveal">
-      <div class="comp-img-col">
-        <img
-          src="https://pngimg.com/uploads/eiffel_tower/eiffel_tower_PNG41.png"
-          alt="Eiffel Tower"
-          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tour_eiffel_at_sunrise_from_the_trocadero.jpg/338px-Tour_eiffel_at_sunrise_from_the_trocadero.jpg'">
-        <div class="comp-img-caption">Eiffel Tower<br>Paris · 330 m</div>
-      </div>
-      <div class="comp-num-col">
-        <div class="comp-multiplier">14k×</div>
-        <div class="comp-num-label">Eiffel Towers by mass<br>every day</div>
-      </div>
+  <div class="scale-step">
+    <div class="step-card glass reveal">
+      <div class="step-eyebrow">Every minute  &middot;  71,157 tonnes</div>
+      <h2 class="step-head">Clearing the Eiffel Tower</h2>
+      <p class="step-body">Sixty seconds makes a sphere <b>410 metres</b> across, comfortably over the Eiffel Tower at 330 metres. By weight that is about <b>180 fully loaded Boeing 747s</b>, every minute, without a pause.</p>
     </div>
   </div>
+  <div class="scale-step">
+    <div class="step-card glass reveal">
+      <div class="step-eyebrow">Every hour  &middot;  4.27 million tonnes</div>
+      <h2 class="step-head">Twice the tallest building</h2>
+      <p class="step-body">An hour's worth is <b>1.6 kilometres</b> across, nearly twice the height of the Burj Khalifa. It weighs roughly <b>19,000 Statues of Liberty</b>.</p>
+    </div>
+  </div>
+  <div class="scale-step">
+    <div class="step-card glass reveal">
+      <div class="step-eyebrow">Every day  &middot;  102.5 million tonnes</div>
+      <h2 class="step-head">Half of Everest</h2>
+      <p class="step-body">A single day makes a ball <b>4.6 kilometres</b> across, more than half the height of Everest. In mass: about <b>17 Great Pyramids of Giza</b>, or 10,000 Eiffel Towers. Then the day ends and another begins.</p>
+    </div>
+  </div>
+  <div class="scale-step">
+    <div class="step-card glass reveal">
+      <div class="step-eyebrow">Every year  &middot;  37.4 billion tonnes</div>
+      <h2 class="step-head">Three times higher than aircraft fly</h2>
+      <p class="step-body">A year of fossil CO&#8322; is a sphere <b>33 kilometres</b> across. It stands <b>3.7 times the height of Everest</b>, and its top sits deep in the stratosphere, three times higher than airliners cruise. By weight, roughly <b>75 times every human being alive</b>.</p>
+    </div>
+  </div>
+  </div>
+</section>
 
-  <!-- INTERSTITIAL -->
+<!-- INTERSTITIAL -->
   <div class="int-wrap">
     <div class="int-card glass dark reveal">
       <div class="int-num">37.4</div>
       <div class="int-unit">billion tonnes · fossil CO₂ · 2024 · a new record</div>
       <p class="int-body">The 2024 Global Carbon Budget confirmed fossil CO₂ emissions rose 0.8% above the previous year's record. In the researchers' own words, there is still "no sign" the world has reached a peak.</p>
-    </div>
-  </div>
-
-  <!-- CARD 4, per year / Burj Khalifa -->
-  <div class="comp-row right">
-    <div class="comp-visual glass reveal">
-      <div class="comp-img-col">
-        <img
-          src="https://pngimg.com/uploads/skyscraper/skyscraper_PNG29.png"
-          alt="Burj Khalifa"
-          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Burj_Khalifa.jpg/251px-Burj_Khalifa.jpg'">
-        <div class="comp-img-caption">Burj Khalifa<br>Dubai · 830 m</div>
-      </div>
-      <div class="comp-num-col">
-        <div class="comp-multiplier">45B×</div>
-        <div class="comp-num-label">times the mass of<br>all humans, per year</div>
-      </div>
-    </div>
-    <div class="comp-text glass reveal">
-      <div class="c-eyebrow">Every year · 37.4 billion tonnes</div>
-      <h2 class="c-head">No landmark is<br>large enough</h2>
-      <div class="c-divider"></div>
-      <p class="c-body">The Burj Khalifa stands 830 m, the tallest building on earth. There is no structure large enough to frame a year's CO₂. Watch the pile growing at the bottom. It accumulates for as long as you stay on this page.</p>
     </div>
   </div>
 
@@ -356,7 +355,7 @@ body{background:#f9f9f7;color:#545478;font-family:'DM Sans',sans-serif}
     IEA Global Energy Review 2025 &nbsp;·&nbsp;
     Nature Reviews Earth &amp; Environment, April 2025 &nbsp;·&nbsp;
     NOAA Global Monitoring Lab &nbsp;·&nbsp;
-    Images: pngimg.com
+    Volume basis: 1 t CO&#8322; = 506 m&#179; at 1 atm and 0 &deg;C (density 1.977 kg/m&#179;)
   </div>
 </div>
 
@@ -606,6 +605,229 @@ const ro = new IntersectionObserver(entries => {
   });
 }, {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ─────────────────────────────────────────────
+   SCALE LADDER
+   Scroll drives one continuous zoom out. The CO2 volume is drawn at true
+   scale against landmark silhouettes, so the comparison is the geometry
+   itself rather than a number in a caption.
+   Basis: 1 t CO2 = 506 m3 at 1 atm, 0 C. Sphere d = cbrt(6V/pi).
+───────────────────────────────────────────── */
+(function () {
+  const section = document.getElementById('scale-section');
+  const cv      = document.getElementById('scaleCanvas');
+  if (!section || !cv) return;
+  const c2 = cv.getContext('2d');
+
+  const M3_PER_T = 506;
+  // one anchor per step card, so the readout equals the figure the card states
+  // when that card is centred, and interpolates smoothly in between
+  const STEPS = [
+    { p: 0.10, t: 1186,        unit: 'Every second' },
+    { p: 0.30, t: 71157,       unit: 'Every minute' },
+    { p: 0.50, t: 4269406,     unit: 'Every hour'   },
+    { p: 0.70, t: 102465753,   unit: 'Every day'    },
+    { p: 0.90, t: 37.4e9,      unit: 'Every year'   }
+  ];
+  const stepEls = Array.from(document.querySelectorAll('.scale-step'));
+  // Anchor on the card crossing the viewport centre rather than on an assumed
+  // scroll fraction: the sticky stage plus negative margin makes the mapping
+  // from scrollY to step index non-obvious, and getting it wrong let the HUD
+  // read "Every year" while the reader was looking at the "Every day" card.
+  function currentState() {
+    const mid = window.innerHeight / 2, n = STEPS.length;
+    // position in step-index space: pos === i exactly when step i is centred,
+    // so the readout equals that card's stated figure at its dwell point
+    let pos = 0, found = false;
+    for (let i = 0; i < stepEls.length; i++) {
+      const r = stepEls[i].getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) {
+        pos = i + ((mid - r.top) / r.height - 0.5);
+        found = true; break;
+      }
+    }
+    if (!found) {
+      const first = stepEls[0].getBoundingClientRect();
+      pos = first.top > mid ? 0 : n - 1;
+    }
+    pos = Math.min(n - 1, Math.max(0, pos));
+    const lo = Math.floor(pos), hi = Math.min(lo + 1, n - 1), k = pos - lo;
+    const a = STEPS[lo], b = STEPS[hi];
+    if (a === b || k === 0) return { t: a.t, unit: a.unit };
+    return { t: Math.pow(10, Math.log10(a.t) + k * (Math.log10(b.t) - Math.log10(a.t))),
+             unit: k < 0.5 ? a.unit : b.unit };
+  }
+
+  // silhouettes: x and y in units of the landmark's own height, y up from ground
+  const LM = [
+    { n: 'Person',            h: 1.7,   pts: null, human: true },
+    { n: 'Statue of Liberty', h: 93,    pts: [[-.22,0],[-.22,.06],[-.19,.06],[-.19,.46],[-.16,.5],[-.13,.505],[-.115,.62],[-.10,.78],[-.075,.88],[-.045,.90],[-.04,.945],[0,.965],[.035,.945],[.035,.90],[.055,.885],[.085,.80],[.115,.86],[.135,.93],[.125,.965],[.155,.985],[.185,.965],[.175,.93],[.15,.90],[.115,.80],[.10,.70],[.105,.60],[.115,.52],[.13,.505],[.16,.5],[.19,.46],[.19,.06],[.22,.06],[.22,0]] },
+    { n: 'Eiffel Tower',      h: 330,   pts: [[-.36,0],[-.22,0],[-.145,.26],[-.155,.30],[-.085,.30],[-.075,.34],[-.055,.56],[-.065,.60],[-.035,.60],[-.028,.64],[-.018,.86],[-.022,.88],[-.012,.90],[-.008,1],[.008,1],[.012,.90],[.022,.88],[.018,.86],[.028,.64],[.035,.60],[.065,.60],[.055,.56],[.075,.34],[.085,.30],[.155,.30],[.145,.26],[.22,0],[.36,0]] },
+    { n: 'Burj Khalifa',      h: 828,   pts: [[-.10,0],[-.10,.22],[-.075,.22],[-.075,.40],[-.055,.40],[-.055,.56],[-.04,.56],[-.04,.68],[-.028,.68],[-.028,.78],[-.018,.78],[-.018,.85],[-.005,.85],[-.003,1],[.003,1],[.005,.85],[.018,.85],[.018,.78],[.028,.78],[.028,.68],[.04,.68],[.04,.56],[.055,.56],[.055,.40],[.075,.40],[.075,.22],[.10,.22],[.10,0]] },
+    { n: 'Mount Everest',     h: 8849,  pts: [[-.66,0],[-.46,.16],[-.35,.11],[-.23,.38],[-.155,.32],[-.08,.66],[-.03,.60],[0,1],[.05,.66],[.115,.74],[.20,.46],[.30,.55],[.41,.22],[.53,.13],[.66,0]] }
+  ];
+  // where each sits along the ground, as a fraction of stage width
+  const LM_X = [0.085, 0.15, 0.25, 0.37, 0.60];
+  const ALT  = [{ n: 'Airliner cruising altitude', h: 11000 }];
+
+  const hud = document.querySelector('.scale-hud');
+  function placeHud() {
+    const bar = document.getElementById('counter-bar');
+    if (bar && hud) hud.style.top = (bar.getBoundingClientRect().height + 22) + 'px';
+  }
+  let W = 0, H = 0, dpr = 1;
+  function resize() {
+    placeHud();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    c2.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function nice(v) {                       // snap to 1/2/5 x 10^n
+    const e = Math.pow(10, Math.floor(Math.log10(v))), m = v / e;
+    return (m >= 5 ? 5 : m >= 2 ? 2 : 1) * e;
+  }
+  const fmtLen = m => m >= 1000 ? (m / 1000).toLocaleString(undefined,
+      { maximumFractionDigits: m / 1000 < 10 ? 1 : 0 }) + ' km' : Math.round(m) + ' m';
+
+  function path(pts, cx, ground, s) {
+    c2.beginPath();
+    c2.moveTo(cx + pts[0][0] * s, ground - pts[0][1] * s);
+    for (let i = 1; i < pts.length; i++) c2.lineTo(cx + pts[i][0] * s, ground - pts[i][1] * s);
+    c2.closePath(); c2.fill();
+  }
+
+  function draw() {
+    if (!W || !H) return;
+    const state  = currentState();
+    const tonnes = state.t;
+    const d      = Math.cbrt(6 * tonnes * M3_PER_T / Math.PI);   // metres
+    // narrow screens: a smaller sphere set further right, and a higher ground
+    // line, or nothing is left of it for a landmark to stand in and the labels
+    // hide behind the step card
+    const narrow = W < 700;
+    const ground = H * (narrow ? 0.58 : 0.88);
+    // sphere kept to a fraction that still leaves room for a landmark ~2x its
+    // height, so the 'half of Everest' step can actually show Everest
+    const mpp    = d / (H * (narrow ? 0.26 : 0.45));             // metres per pixel
+
+    c2.clearRect(0, 0, W, H);
+
+    // ground
+    c2.strokeStyle = 'rgba(24,24,34,.28)'; c2.lineWidth = 1;
+    c2.beginPath(); c2.moveTo(0, ground + .5); c2.lineTo(W, ground + .5); c2.stroke();
+
+    // landmarks: place the most relevant one (the tallest that still fits)
+    // nearest the sphere and work leftward with smaller ones. Packing from the
+    // smallest instead would drop the Eiffel Tower on a phone at the very step
+    // whose whole point is clearing the Eiffel Tower.
+    const rpxA = d / mpp / 2, cxA = W * (narrow ? 0.70 : 0.72);
+    const room = cxA - rpxA - W * 0.02;
+    const gap  = Math.max(W * 0.03, narrow ? 9 : 14);
+    const fits = LM
+      .map(L => {
+        const px = L.h / mpp;
+        const halfW = (L.human ? 0.17 : Math.max.apply(null, L.pts.map(q => Math.abs(q[0])))) * px;
+        return { L, px, halfW };
+      })
+      // rank by how comparable the landmark is to the sphere, not by raw size:
+      // the reader should see the landmark the caption is talking about
+      .filter(o => o.px >= 2.5 && o.px <= ground * 1.05)
+      .sort((x, y) => Math.abs(Math.log10(x.L.h / d)) - Math.abs(Math.log10(y.L.h / d)));
+
+    let edge = room;
+    const placed = [];
+    const summitMin = W * (narrow ? 0.15 : 0.12);
+    fits.forEach((o, i) => {
+      let cx = edge - o.halfW;
+      if (cx < summitMin) {
+        // A 2.35:1 massif can never fit entirely beside the sphere, and letting
+        // width alone disqualify it dropped Everest from the step whose caption
+        // is about Everest. Its summit sits at local x=0, so pin that on screen
+        // and let the flanks run off frame, which is how a mountain reads anyway.
+        if (i !== 0) return;
+        cx = summitMin;
+      }
+      placed.push({ ...o, cx });
+      edge = cx - o.halfW - gap;
+    });
+
+    c2.fillStyle = '#181822';
+    let lastLabelX = -1e9;
+    placed.forEach(({ L, px, cx }) => {
+      if (L.human) {
+        const w = px * 0.34;
+        c2.fillRect(cx - w / 2, ground - px * 0.78, w, px * 0.78);
+        c2.beginPath(); c2.arc(cx, ground - px * 0.88, px * 0.16, 0, Math.PI * 2); c2.fill();
+      } else path(L.pts, cx, ground, px);
+      if (px > 26) {
+        c2.save();
+        c2.fillStyle = 'rgba(84,84,120,.85)';
+        c2.font = '500 9px "DM Sans", sans-serif';
+        c2.textAlign = 'center';
+        const tx = Math.min(W - 46, Math.max(46, cx));   // keep labels on canvas
+        if (Math.abs(tx - lastLabelX) > 74) {            // and off each other
+          c2.fillText(L.n.toUpperCase(), tx, ground + 14);
+          c2.fillText(fmtLen(L.h), tx, ground + 25);
+          lastLabelX = tx;
+        }
+        c2.restore();
+        c2.fillStyle = '#181822';
+      }
+    });
+
+    // altitude references
+    c2.save();
+    c2.setLineDash([4, 5]); c2.strokeStyle = 'rgba(84,84,120,.4)'; c2.lineWidth = 1;
+    ALT.forEach(a => {
+      const y = ground - a.h / mpp;
+      if (y < 8 || y > ground - 12) return;
+      c2.beginPath(); c2.moveTo(0, y); c2.lineTo(W, y); c2.stroke();
+      c2.setLineDash([]);
+      c2.fillStyle = 'rgba(84,84,120,.75)';
+      // left-aligned: the step card occupies the bottom right of the stage
+      c2.font = '500 9px "DM Sans", sans-serif'; c2.textAlign = 'left';
+      c2.fillText(a.n.toUpperCase() + '  ' + fmtLen(a.h), 14, y - 6);
+      c2.setLineDash([4, 5]);
+    });
+    c2.restore();
+
+    // the gas itself: translucent, because that is what CO2 is
+    const rpx = rpxA, cx = cxA, cy = ground - rpx;
+    const g = c2.createRadialGradient(cx - rpx * .3, cy - rpx * .3, rpx * .05, cx, cy, rpx);
+    g.addColorStop(0,   'rgba(192,57,43,.30)');
+    g.addColorStop(.55, 'rgba(192,57,43,.17)');
+    g.addColorStop(1,   'rgba(192,57,43,.09)');
+    c2.beginPath(); c2.arc(cx, cy, rpx, 0, Math.PI * 2);
+    c2.fillStyle = g; c2.fill();
+    c2.strokeStyle = 'rgba(192,57,43,.55)'; c2.lineWidth = 1.4; c2.stroke();
+
+    // HUD + ruler
+    const tEl = document.getElementById('hud-mass');
+    if (tEl) {
+      tEl.textContent = tonnes >= 1e9 ? (tonnes / 1e9).toFixed(1) + ' bn'
+                      : tonnes >= 1e6 ? (tonnes / 1e6).toFixed(2) + ' m'
+                      : Math.round(tonnes).toLocaleString();
+      document.getElementById('hud-diam').textContent = fmtLen(d);
+      document.getElementById('hud-unit').textContent = state.unit;
+    }
+    const rl = nice(W * 0.16 * mpp), bar = document.getElementById('ruler-bar');
+    if (bar) { bar.style.width = (rl / mpp) + 'px'; document.getElementById('ruler-label').textContent = fmtLen(rl); }
+  }
+
+  let queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; draw(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', resize);
+  resize();
+})();
+
 </script>
 </body>
 </html>
