@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Climate-Aware Design · ENSURE Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* ─── LAYOUT TOKENS ─── */
+:root{
+  --content-max: 1200px;
+  /* full-bleed background, centred ~1200px content column */
+  --pad-x: max(clamp(24px, 5vw, 64px), calc((100% - var(--content-max)) / 2));
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;color:#545478;background:#fff;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad-x);border-bottom: 1px solid transparent;
+  transition: background .35s, padding .35s, box-shadow .35s, border-color .35s;}
+nav.solid{background:rgba(24,24,34,.84);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);padding:14px var(--pad-x);border-bottom-color:rgba(255,255,255,.07);box-shadow:0 14px 34px rgba(24,24,34,.16);}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){nav.solid{background:rgba(24,24,34,.95);}}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:color .3s;}
+nav:not(.solid) .nav-logo{color:#fff;}
+nav.solid .nav-logo{color:#fff;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-size:.78rem;letter-spacing:.04em;text-decoration:none;transition:color .25s;}
+nav:not(.solid) .nav-links a{color:rgba(255,255,255,.85);}
+nav:not(.solid) .nav-links a:hover{color:#fff;}
+nav.solid .nav-links a{color:rgba(255,255,255,.82);}
+nav.solid .nav-links a:hover{color:#8fc99a;}
+.nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
+.nav-cta:hover{background:#1e5a2c!important;}
+
+footer{background:#181822;padding: 64px var(--pad-x);border-top:1px solid rgba(255,255,255,.05);}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-decoration:none;display:block;margin-bottom:12px;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.7;}
+.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:14px;}
+.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
+.footer-nav-link:hover{color:#8fc99a;}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.6);line-height:1.7;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+.pg-hero{position:relative;height:72vh;min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.pg-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.pg-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(24,24,34,.95) 0%,rgba(24,24,34,.55) 50%,rgba(24,24,34,.15) 100%);}
+.pg-hero-content{position:relative;z-index:2;padding: 0 var(--pad-x) 100px;}
+.pg-breadcrumb{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.pg-breadcrumb a{color:rgba(255,255,255,.62);text-decoration:none;transition:color .25s;}
+.pg-breadcrumb a:hover{color:#8fc99a;}
+.pg-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:14px;display:block;}
+.pg-title{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:400;line-height:1.06;color:#fff;}
+.pg-title em{font-style:italic;color:#8fc99a;}
+
+.overview{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding: 128px var(--pad-x);border-bottom:1px solid rgba(0,0,0,.07);}
+.overview.flip .ov-img{order:2;}.overview.flip .ov-text{order:1;}
+.ov-img{border-radius:3px;overflow:hidden;aspect-ratio:4/3;}
+.ov-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.ov-img:hover img{transform:scale(1.03);}
+.ov-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:16px;display:block;}
+.ov-title{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,2.8vw,2.5rem);font-weight:400;line-height:1.18;color:#545478;margin-bottom:20px;}
+.ov-title em{font-style:italic;color:#2d7a3e;}
+.ov-body{font-size:.96rem;line-height:1.86;color:#545478;}
+.ov-body p+p{margin-top:14px;}
+
+.projects{padding: 112px var(--pad-x);background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.sec-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(84,84,120,.84);font-weight:500;display:flex;align-items:center;gap:14px;margin-bottom:48px;}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.proj-card{background:#fff;padding:40px 34px;transition:background .25s;cursor:default;}
+.proj-card:hover{background:#eef5ef;}
+.proj-num{font-family:'DM Serif Display',serif;font-size:2.5rem;color:rgba(45,122,62,.09);line-height:1;margin-bottom:16px;transition:color .3s;}
+.proj-card:hover .proj-num{color:rgba(45,122,62,.18);}
+.proj-name{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;color:#545478;margin-bottom:12px;line-height:1.3;}
+.proj-desc{font-size:.84rem;line-height:1.75;color:#545478;}
+.proj-funder{display:inline-block;margin-top:16px;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:#2d7a3e;border:1px solid rgba(45,122,62,.22);padding:4px 11px;border-radius:100px;}
+
+/* CLIMATE SCENARIO VISUAL */
+.scenario-section{padding: 112px var(--pad-x);border-bottom:1px solid rgba(0,0,0,.07);}
+.scenario-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px;}
+.sc-card{background:#f2f2f2;padding:32px 28px;border-top:3px solid transparent;transition:all .3s;cursor:default;}
+.sc-card:hover{background:#eef5ef;border-top-color:#2d7a3e;}
+.sc-year{font-family:'DM Serif Display',serif;font-size:2.2rem;color:#2d7a3e;margin-bottom:8px;}
+.sc-label{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(84,84,120,.84);margin-bottom:16px;display:block;}
+.sc-desc{font-size:.84rem;line-height:1.7;color:#545478;}
+.scenario-body{font-size:.96rem;line-height:1.85;color:#545478;max-width:700px;margin-top:24px;}
+
+.team{padding: 112px var(--pad-x);border-bottom:1px solid rgba(0,0,0,.07);}
+.team-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#545478;margin-bottom:48px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.t-card{background:#f2f2f2;overflow:hidden;transition:background .25s;}
+.t-card:hover{background:#eef5ef;}
+.t-photo{height:180px;background:#181822;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+.t-info{padding:20px 18px;}
+.t-name{font-family:'DM Serif Display',serif;font-size:.96rem;font-weight:400;color:#545478;margin-bottom:3px;}
+.t-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.t-bio{font-size:.75rem;line-height:1.6;color:rgba(84,84,120,.88);}
+.t-card-link-hint{display:block;margin:10px 18px 16px;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;opacity:0;transform:translateX(-5px);transition:opacity .25s,transform .25s;}
+.t-card:hover .t-card-link-hint{opacity:1;transform:translateX(0);}
+
+.pubs{padding: 112px var(--pad-x);background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.pubs-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#545478;margin-bottom:48px;}
+.pub-item{background:#fff;padding:30px;margin-bottom:2px;display:grid;grid-template-columns:56px 1fr;gap:24px;align-items:start;transition:background .25s;}
+.pub-item:hover{background:#eef5ef;}
+.pub-year{font-family:'DM Serif Display',serif;font-size:1rem;color:rgba(45,122,62,.55);padding-top:2px;}
+.pub-title{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#545478;margin-bottom:6px;line-height:1.4;}
+.pub-meta{font-size:.76rem;color:rgba(84,84,120,.84);line-height:1.5;}
+.pub-tag{display:inline-block;margin-top:8px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;border:1px solid rgba(45,122,62,.2);padding:3px 10px;border-radius:100px;}
+.pub-ph{background:#fff;padding:60px;text-align:center;color:rgba(45,122,62,.3);}
+.pub-ph p{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.8;}
+
+.related{padding: 112px var(--pad-x);}
+.related-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:400;color:#545478;margin-bottom:48px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rel-card{text-decoration:none;color:inherit;background:#f2f2f2;transition:background .25s;overflow:hidden;display:block;}
+.rel-card:hover{background:#eef5ef;}
+.rel-img{height:190px;overflow:hidden;}
+.rel-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.rel-card:hover .rel-img img{transform:scale(1.05);}
+.rel-body{padding:26px;}
+.rel-eye{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:8px;}
+.rel-name{font-family:'DM Serif Display',serif;font-size:1rem;font-weight:400;color:#545478;line-height:1.35;transition:color .25s;}
+.rel-card:hover .rel-name{color:#2d7a3e;}
+.rel-msg{font-size:.78rem;color:rgba(84,84,120,.88);margin-top:6px;}
+</style>
+<link rel="stylesheet" href="sketch.css">
+</head>
+<body>
+<!-- NAV + LIVE CARBON TICKER -->
+<style>
+/* ─── LIVE CARBON TICKER (docked in the nav bar) ─── */
+.co2{position:relative;display:inline-flex;align-items:center;gap:9px;margin-left:20px;margin-right:auto;padding:7px 14px;border-radius:100px;background:rgba(24,24,34,.4);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);text-decoration:none;flex-shrink:0;transition:background .25s,border-color .25s;}
+.co2:hover,.co2:focus-visible{background:rgba(24,24,34,.6);border-color:rgba(143,201,154,.45);outline:none;}
+nav.solid .co2{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13);}
+nav.solid .co2:hover,nav.solid .co2:focus-visible{background:rgba(255,255,255,.1);border-color:rgba(143,201,154,.45);}
+.co2-dot{width:7px;height:7px;border-radius:50%;background:#c0392b;flex-shrink:0;animation:co2pulse 2s ease-out infinite;}
+@keyframes co2pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}70%{box-shadow:0 0 0 8px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+#co2-digits{font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;line-height:1;color:#8fc99a;font-variant-numeric:tabular-nums;letter-spacing:.01em;min-width:6.5ch;text-align:right;}
+.co2-unit{font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1;color:rgba(255,255,255,.55);white-space:nowrap;}
+/* the full sentence and a human-scale anchor, revealed on hover instead of
+   spending 64px of every viewport on a permanent strip */
+.co2-card{position:absolute;top:calc(100% + 13px);left:0;width:272px;padding:15px 17px 14px;background:#181822;border:1px solid rgba(255,255,255,.1);border-radius:9px;box-shadow:0 26px 64px rgba(24,24,34,.5);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .22s ease,transform .22s ease,visibility .22s;pointer-events:none;}
+.co2:hover .co2-card,.co2:focus-visible .co2-card{opacity:1;visibility:visible;transform:translateY(0);}
+.co2-card-t{display:block;font-size:.73rem;color:#fff;line-height:1.5;letter-spacing:.01em;}
+.co2-card-d{display:block;margin-top:9px;font-size:.66rem;color:rgba(255,255,255,.52);line-height:1.62;}
+.co2-card-d b{color:#8fc99a;font-weight:500;font-variant-numeric:tabular-nums;}
+.co2-card-more{display:block;margin-top:12px;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc99a;}
+@media (max-width:1240px){.co2-since{display:none;}}
+@media (max-width:900px){.co2{margin-left:14px;padding:6px 11px;gap:7px;}.co2-card{display:none;}#co2-digits{font-size:.8rem;}}
+@media (prefers-reduced-motion:reduce){.co2-dot{animation:none;}}
+
+/* ─── NAV DROPDOWNS ─── */
+.nav-links > li { position: relative; }
+.nav-links > li > a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+.dd-caret {
+  width: 6px; height: 6px; flex-shrink: 0;
+  border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor;
+  transform: rotate(45deg) translateY(-1.5px);
+  transition: transform .28s ease, opacity .2s;
+  opacity: .5;
+}
+.has-dd:hover > a .dd-caret,
+.has-dd.open > a .dd-caret { opacity: 1; transform: rotate(225deg) translateY(1px); }
+
+.dd {
+  position: absolute; top: calc(100% + 18px); left: 50%;
+  min-width: 298px; padding: 12px;
+  background: #181822;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 9px;
+  box-shadow: 0 26px 64px rgba(24,24,34,.45), 0 3px 10px rgba(24,24,34,.28);
+  opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(10px);
+  transition: opacity .24s ease, transform .24s ease, visibility .24s;
+}
+/* invisible bridge so the pointer can cross the gap to the panel */
+.dd::before { content: ''; position: absolute; left: 0; right: 0; top: -20px; height: 20px; }
+.has-dd:hover > .dd,
+.has-dd:focus-within > .dd,
+.has-dd.open > .dd { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+.dd-link { display: block; padding: 10px 13px; border-radius: 5px; text-decoration: none; transition: background .18s; }
+.dd-link:hover { background: rgba(255,255,255,.07); }
+.dd-link:focus-visible { background: rgba(255,255,255,.07); outline: 2px solid #8fc99a; outline-offset: -2px; }
+.dd-t { display: block; font-size: .8rem; color: #fff; letter-spacing: .01em; line-height: 1.35; }
+.dd-d { display: block; margin-top: 3px; font-size: .66rem; color: rgba(255,255,255,.5); letter-spacing: .02em; line-height: 1.45; }
+.dd-link:hover .dd-d { color: rgba(255,255,255,.72); }
+
+/* anchor targets must clear the fixed CO2 strip + nav */
+[id] { scroll-margin-top: 92px; }
+
+/* ─── MOBILE NAV ─── */
+.nav-burger { display: none; background: none; border: 0; cursor: pointer; padding: 6px; flex-direction: column; gap: 4px; }
+.nav-burger span { display: block; width: 20px; height: 1.5px; background: currentColor; transition: transform .3s, opacity .3s; }
+nav:not(.solid) .nav-burger { color: #fff; }
+nav.solid .nav-burger { color: #fff; }
+
+@media (max-width: 900px) {
+  nav, nav.solid { padding: 14px 20px; }
+  /* above the drawer, or the close affordance is unreachable */
+  .nav-burger { display: flex; position: relative; z-index: 2; }
+  .nav-links {
+    /* --nav-h is measured by script; the fallback matches the mobile nav row */
+    position: fixed; top: var(--nav-h, 61px); right: 0;
+    width: min(88vw, 344px); height: calc(100vh - var(--nav-h, 61px));
+    background: #181822;
+    flex-direction: column; align-items: stretch;
+    gap: 0; padding: 30px 20px 48px;
+    overflow-y: auto;
+    transform: translateX(102%);
+    visibility: hidden;
+    transition: transform .34s cubic-bezier(.4,0,.2,1), visibility .34s;
+    box-shadow: -22px 0 64px rgba(24,24,34,.45);
+  }
+  nav.menu-open .nav-links { transform: translateX(0); visibility: visible; }
+  .nav-links > li { border-bottom: 1px solid rgba(255,255,255,.08); }
+  .nav-links > li > a:not(.nav-cta),
+  nav.solid .nav-links > li > a:not(.nav-cta) { color: #fff; width: 100%; justify-content: space-between; padding: 15px 2px; font-size: .92rem; }
+  /* panels become inline accordions; selectors carry enough weight to
+     override the desktop hover/open transforms above */
+  .nav-links > li.has-dd > .dd,
+  .nav-links > li.has-dd.open > .dd,
+  .nav-links > li.has-dd:hover > .dd,
+  .nav-links > li.has-dd:focus-within > .dd {
+    position: static; left: auto; right: auto;
+    transform: none; opacity: 1; visibility: visible;
+    display: none;
+    min-width: 0; padding: 0 0 10px;
+    background: none; border: 0; border-radius: 0; box-shadow: none;
+  }
+  .nav-links > li.has-dd.open > .dd { display: block; }
+  .dd::before { display: none; }
+  .dd-link { padding: 9px 12px; }
+  .nav-links > li:last-child { border-bottom: 0; }
+  .nav-cta { align-self: flex-start; margin-top: 22px; }
+  nav.menu-open .nav-burger { color: #fff; }
+  nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+  nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+}
+
+/* rightmost dropdown right-aligns so it never runs off the viewport */
+.nav-links > li.has-dd:nth-last-child(2) > .dd { left: auto; right: 0; transform: translateY(10px); }
+.nav-links > li.has-dd:nth-last-child(2):hover > .dd,
+.nav-links > li.has-dd:nth-last-child(2):focus-within > .dd,
+.nav-links > li.has-dd:nth-last-child(2).open > .dd { transform: translateY(0); }
+@media (max-width: 900px) {
+  .nav-links > li.has-dd:nth-last-child(2) > .dd { transform: none; }
+}
+</style>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">ENSURE Lab</a>
+  <a href="carbon-visualization.html" class="co2" aria-label="CO2 released worldwide since you opened this page. Explore the data">
+    <span class="co2-dot" aria-hidden="true"></span>
+    <span id="co2-digits">0</span>
+    <span class="co2-unit">t CO&#8322;<span class="co2-since"> since you arrived</span></span>
+    <span class="co2-card">
+      <span class="co2-card-t">CO&#8322; released worldwide since you opened this page.</span>
+      <span class="co2-card-d">About what <b id="co2-cars">0</b> average cars put out in a whole year. Rate based on global fossil CO&#8322; emissions of 37.4&nbsp;Gt a year.</span>
+      <span class="co2-card-more">Explore the data &rarr;</span>
+    </span>
+  </a>
+  <button class="nav-burger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li class="has-dd">
+      <a href="science.html" aria-expanded="false">Explore our science<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="lca.html"><span class="dd-t">Life Cycle Assessment</span><span class="dd-d">Embodied carbon &amp; material impacts</span></a>
+        <a class="dd-link" href="living-labs.html"><span class="dd-t">Sustainability-Resilience Nexus</span><span class="dd-d">Living Labs &amp; community co-design</span></a>
+        <a class="dd-link" href="climate.html"><span class="dd-t">Climate-Aware Design</span><span class="dd-d">Optimising for future climates</span></a>
+        <a class="dd-link" href="vr-training.html"><span class="dd-t">Immersive Training</span><span class="dd-d">VR for construction education</span></a>
+        <a class="dd-link" href="carbon-visualization.html"><span class="dd-t">Carbon Visualization</span><span class="dd-d">Interactive emissions data story</span></a>
+        <a class="dd-link" href="science.html"><span class="dd-t">All four themes &rarr;</span><span class="dd-d">The whole research programme</span></a>
+      </div>
+    </li>
+    <li class="has-dd">
+      <a href="pi.html" aria-expanded="false">Our lab<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP · Director</span></a>
+        <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Current researchers</span></a>
+        <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab &amp; SPACE Lab</span></a>
+        <a class="dd-link" href="team.html#partners"><span class="dd-t">Partner Organizations</span><span class="dd-d">Who we build the work with</span></a>
+        <a class="dd-link" href="team.html#sponsors"><span class="dd-t">Research Sponsors</span><span class="dd-d">Agencies funding the lab</span></a>
+      </div>
+    </li>
+    <li class="has-dd">
+      <a href="news.html" aria-expanded="false">News<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="news.html#featured"><span class="dd-t">Featured Story</span><span class="dd-d">Best Paper Award 2024</span></a>
+        <a class="dd-link" href="news.html#recent"><span class="dd-t">All Updates</span><span class="dd-d">Everything, newest first</span></a>
+        <a class="dd-link" href="news.html#recent?f=Award"><span class="dd-t">Awards</span><span class="dd-d">Honours and recognition</span></a>
+        <a class="dd-link" href="news.html#recent?f=Funding"><span class="dd-t">Funding</span><span class="dd-d">Active grants</span></a>
+        <a class="dd-link" href="news.html#recent?f=Collaboration"><span class="dd-t">Collaboration</span><span class="dd-d">Partners and networks</span></a>
+      </div>
+    </li>
+    <li class="has-dd">
+      <a href="gallery.html" aria-expanded="false">Galleries<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="gallery.html#lab"><span class="dd-t">Lab &amp; Facilities</span><span class="dd-d">Francis Hall and the instrumentation</span></a>
+        <a class="dd-link" href="gallery.html#field"><span class="dd-t">Fieldwork &amp; Living Labs</span><span class="dd-d">Port Arthur, Medell&iacute;n, Indramayu</span></a>
+        <a class="dd-link" href="gallery.html#vr"><span class="dd-t">VR &amp; Immersive Training</span><span class="dd-d">Inside the virtual buildings</span></a>
+        <a class="dd-link" href="gallery.html#events"><span class="dd-t">Conferences &amp; Awards</span><span class="dd-d">Presentations and recognition</span></a>
+      </div>
+    </li>
+    <li><a href="index.html#contact" class="nav-cta">Join us / Connect</a></li>
+  </ul>
+</nav>
+<script>
+// ── Live carbon ticker: 37.4 Gt global fossil CO2 a year ≈ 1186 t/s
+(function(){
+  var digits = document.getElementById('co2-digits');
+  var cars   = document.getElementById('co2-cars');
+  var RATE = 1186, CAR_TONNES_PER_YEAR = 4.6, t0 = Date.now();
+  function tick(){
+    var t = RATE * (Date.now() - t0) / 1000;
+    digits.textContent = Math.round(t).toLocaleString();
+    if (cars) cars.textContent = Math.round(t / CAR_TONNES_PER_YEAR).toLocaleString();
+  }
+  tick();
+  setInterval(tick, 80);
+})();
+</script>
+
+<div class="pg-hero">
+  <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1600&q=85&fit=crop" alt="Climate-Aware Design">
+  <div class="pg-hero-overlay"></div>
+  <div class="pg-hero-content">
+    <div class="pg-breadcrumb"><a href="index.html">Home</a> › <a href="index.html#projects">Research</a> › Climate-Aware Design</div>
+    <span class="pg-eyebrow">Climate-Aware Design & Optimization</span>
+    <h1 class="pg-title">Buildings outlive<br>their <em>blueprints.</em></h1>
+  </div>
+</div>
+
+<section class="overview reveal">
+  <div class="ov-img">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop" alt="Climate Optimization">
+  </div>
+  <div>
+    <span class="ov-eyebrow">The Research</span>
+    <h2 class="ov-title">We optimize for the world buildings will <em>age through.</em></h2>
+    <div class="ov-body">
+      <p>A building constructed today will stand for 50, 80, perhaps 100 years. But its insulation levels, window ratios, and mechanical systems were almost certainly designed for the climate of the day it was built, not the climate it will actually inhabit.</p>
+      <p>We study how design choices perform under changing climate and energy systems. Using metaheuristic optimization on envelope decision variables with morphed future weather data and evolving grid projections, we jointly optimize embodied energy, operational energy, life-cycle carbon, and embodied water, the energy-carbon-water nexus, across all U.S. sub-climate zones.</p>
+      <p>This prognostic stance, anticipating rather than reacting to climate change, is what separates our work from conventional energy modeling. Funded by the National Science Foundation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIMATE SCENARIOS -->
+<section class="scenario-section">
+  <div class="sec-label reveal">The Climate Challenge</div>
+  <div class="scenario-grid">
+    <div class="sc-card reveal">
+      <div class="sc-year">2030</div>
+      <span class="sc-label">Near-term projection</span>
+      <div class="sc-desc">Modest warming. Buildings designed today may still perform near specification. Energy grid decarbonization begins to shift embodied carbon calculus.</div>
+    </div>
+    <div class="sc-card reveal d1">
+      <div class="sc-year">2050</div>
+      <span class="sc-label">Mid-century</span>
+      <div class="sc-desc">Significant heat stress. Cooling loads diverge substantially from design assumptions. Envelope thermal performance degrades faster under prolonged heat exposure.</div>
+    </div>
+    <div class="sc-card reveal d2">
+      <div class="sc-year">2075</div>
+      <span class="sc-label">Late-century</span>
+      <div class="sc-desc">Extreme events become more frequent. Buildings near coasts, flood plains, and wildfire zones face compound risks their designs never anticipated.</div>
+    </div>
+    <div class="sc-card reveal d3">
+      <div class="sc-year">2100</div>
+      <span class="sc-label">End-of-century</span>
+      <div class="sc-desc">A building designed today is still standing. The climate it was built for no longer exists. Our research ensures the gap between design and reality is as small as possible.</div>
+    </div>
+  </div>
+  <p class="scenario-body reveal d4">We integrate CMIP6 projections and CORDEX downscaled climate data, alongside evolving grid mix and energy use intensities, to ensure that the buildings we optimize today remain resilient across the full range of futures they might inhabit.</p>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+  <div class="sec-label reveal">Research Projects</div>
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-name">Nexus-Centered Prognostic Multi-Objective Optimization</div>
+      <div class="proj-desc">We jointly optimize embodied energy, operational energy, life-cycle carbon, and embodied water using NSGA-II metaheuristics on envelope decision variables, evaluated against current and projected future weather and energy grid conditions across all U.S. sub-climate zones.</div>
+      <span class="proj-funder">NSF-Funded</span>
+    </div>
+    <div class="proj-card reveal d1">
+      <div class="proj-num">02</div>
+      <div class="proj-name">Forward & Inverse Predictive Analytics</div>
+      <div class="proj-desc">Forward neural network emulators predict building performance in milliseconds. Inverse goal-conditioned models flip the workflow: specify target carbon or comfort levels, receive feasible design configurations back, with full explainability of the driving trade-offs.</div>
+      <span class="proj-funder">NSF · TAMU RLF</span>
+    </div>
+    <div class="proj-card reveal d2">
+      <div class="proj-num">03</div>
+      <div class="proj-name">Hygrothermal Climate Stress & Envelope Performance</div>
+      <div class="proj-desc">In collaboration with Penn State, we examine how climate-induced temperature and humidity swings degrade building envelopes over 100+ year life cycles, translating accelerated weathering test data into dynamic LCA estimates under CMIP6 scenarios.</div>
+      <span class="proj-funder">NSF · Penn State Collaboration</span>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <h2 class="team-title reveal">People on this research</h2>
+  <div class="team-grid">
+    <a class="t-card reveal" href="team.html">
+      <div class="t-photo">👩‍💻</div>
+      <div class="t-info">
+        <div class="t-name">Maryam Abbasi Kamazani</div>
+        <div class="t-role">Ph.D. Candidate</div>
+        <div class="t-bio">Climate-aware LCA, multi-objective optimization, ECW nexus. Best Paper Award NZCBE. NSF-funded.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d1" href="team.html">
+      <div class="t-photo">🌿</div>
+      <div class="t-info">
+        <div class="t-name">Yasaman Norouzi</div>
+        <div class="t-role">Ph.D. Candidate</div>
+        <div class="t-bio">Hygrothermal stress on building envelopes, CMIP6 integration, long-life LCA.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d2" href="team.html">
+      <div class="t-photo">🏗️</div>
+      <div class="t-info">
+        <div class="t-name">Sejal Sanjay Shanbhag</div>
+        <div class="t-role">Ph.D. Student</div>
+        <div class="t-bio">LCA and optimization for climate-responsive building design under future climate scenarios.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a><a class="t-card reveal d3" href="team.html">
+      <div class="t-photo">👨‍🏫</div>
+      <div class="t-info">
+        <div class="t-name">Manish Dixit, Ph.D., LEED AP</div>
+        <div class="t-role">Principal Investigator</div>
+        <div class="t-bio">Climate-aware design optimization, life-cycle energy modeling. IEA Annex 57 & 72.</div>
+      </div><div class="t-card-link-hint">View profile →</div></a></div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="pubs">
+  <h2 class="pubs-title reveal">Related Publications</h2>
+  <div class="pub-item reveal d1">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Climate-aware multi-objective optimization of building envelope energy-carbon-water nexus under future scenarios</div>
+      <div class="pub-meta">Abbasi Kamazani M., Dixit M. · Best Paper Award, NZCBE Conference · [Full citation placeholder]</div>
+      <span class="pub-tag">Best Paper Award</span>
+    </div>
+  </div>
+  <div class="pub-item reveal d2">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Impact of climate change-induced extreme hygrothermal swings on building envelope performance and life cycle carbon</div>
+      <div class="pub-meta">Norouzi Y., Shanbhag S., Dixit M. · [Journal placeholder]</div>
+      <span class="pub-tag">NSF-Funded</span>
+    </div>
+  </div>
+  <div class="pub-ph reveal d3">
+    <p>Additional publications coming soon. Please provide the full publication list</p>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="related">
+  <h2 class="related-title reveal">Related Research</h2>
+  <div class="related-grid">
+    <a class="rel-card reveal" href="lca.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="LCA"></div>
+      <div class="rel-body">
+        <div class="rel-eye">Life Cycle Assessment</div>
+        <div class="rel-name">Matter matters.</div>
+        <div class="rel-msg">Measuring the full carbon cost of what buildings are made of.</div>
+      </div>
+    </a>
+    <a class="rel-card reveal d1" href="living-labs.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80&fit=crop" alt="Living Labs"></div>
+      <div class="rel-body">
+        <div class="rel-eye">Resilience Nexus</div>
+        <div class="rel-name">Resilience is personal.</div>
+        <div class="rel-msg">Co-designing solutions with communities already facing climate change.</div>
+      </div>
+    </a>
+    <a class="rel-card reveal d2" href="vr-training.html">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=600&q=80&fit=crop" alt="VR Training"></div>
+      <div class="rel-body">
+        <div class="rel-eye">Immersive Training</div>
+        <div class="rel-name">See it to build it.</div>
+        <div class="rel-msg">Teaching sustainability through virtual reality and simulation.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="footer-logo">ENSURE Lab</a>
+      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
+      <div class="sk-social">
+        <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2 9h6v13H2zM9 9h5.7v1.8h.1c.8-1.3 2.4-2.2 4.3-2.2 3.5 0 4.9 2.2 4.9 5.9V22h-6v-6.5c0-1.6-.6-2.7-2-2.7-1.2 0-1.9.8-2.2 1.6-.1.3-.1.7-.1 1V22H9z"/></svg></a>
+        <a href="#" aria-label="Google Scholar" title="Google Scholar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 8.5l11 5.5 11-5.5zM4 12.6V17c0 1.9 3.6 3.4 8 3.4s8-1.5 8-3.4v-4.4l-8 4z"/></svg></a>
+        <a href="#" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7 8 7.5 12h-6l-4.7-7.6L6.3 22H3l7.4-8.4L3.2 2h6.1l4.4 7.1z"/></svg></a>
+        <a href="index.html#contact" aria-label="Email the lab" title="Email the lab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5v14h20V5zm2.3 2h15.4L12 12.3zM4 8.9l8 5.6 8-5.6V17H4z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Research</div>
+      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
+      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
+      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
+      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Site</div>
+      <a href="team.html" class="footer-nav-link">Our Team</a>
+      <a href="news.html" class="footer-nav-link">News & Updates</a>
+      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
+      <a href="gallery.html" class="footer-nav-link">Galleries</a>
+      <a href="index.html#contact" class="footer-nav-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>60));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+<script>
+// ── Nav dropdowns: hover on pointer devices, tap-to-expand on touch or narrow screens
+(function () {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const burger = nav.querySelector('.nav-burger');
+  const items  = [...nav.querySelectorAll('.has-dd')];
+  // tap mode whenever the drawer is in play OR the device cannot hover
+  const tapMode = () => window.matchMedia('(max-width: 900px), (hover: none)').matches;
+
+  // publish the nav row's real height so the mobile drawer can sit below it
+  // instead of painting over the logo and the close button
+  const setNavH = () => nav.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+  setNavH();
+  window.addEventListener('resize', setNavH);
+
+  function setExp(li, v) {
+    const a = li.querySelector(':scope > a');
+    if (a) a.setAttribute('aria-expanded', v ? 'true' : 'false');
+  }
+  function closeAll() { items.forEach(li => { li.classList.remove('open'); setExp(li, false); }); }
+  function closeMenu() {
+    nav.classList.remove('menu-open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+    closeAll();
+  }
+
+  if (burger) burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!open) closeAll();
+  });
+
+  items.forEach(li => {
+    const link = li.querySelector(':scope > a');
+    // CSS opens the panel on hover/focus; mirror that state for assistive tech
+    li.addEventListener('pointerenter', () => { if (!tapMode()) setExp(li, true); });
+    li.addEventListener('pointerleave', () => { if (!tapMode()) setExp(li, false); });
+    li.addEventListener('focusin',      () => { if (!tapMode()) setExp(li, true); });
+    li.addEventListener('focusout',     () => {
+      if (!tapMode() && !li.contains(document.activeElement)) setExp(li, false);
+    });
+    link.addEventListener('click', e => {
+      if (!tapMode()) return;               // pointer devices: let the tab navigate
+      e.preventDefault();
+      const wasOpen = li.classList.contains('open');
+      closeAll();
+      if (!wasOpen) { li.classList.add('open'); setExp(li, true); }
+    });
+  });
+
+  // choosing a destination closes the drawer
+  nav.querySelectorAll('.dd-link, .nav-cta').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeMenu();
+    // also dismiss a focus-opened desktop panel
+    if (nav.contains(document.activeElement) && document.activeElement.blur) document.activeElement.blur();
+  });
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) closeMenu(); });
+
+  // crossing the breakpoint must not leave a half-open drawer behind
+  const mq = window.matchMedia('(max-width: 900px)');
+  if (mq.addEventListener) mq.addEventListener('change', closeMenu);
+  else if (mq.addListener) mq.addListener(closeMenu);
+})();
+</script>
+</body>
+</html>

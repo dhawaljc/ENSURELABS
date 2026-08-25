@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+
+# local safety copies made while editing — git is the history now
+.backup/
+.backup2/
+.backup3/
+.backup4/
+.backup5/
+
+# Oversized video masters stay on disk, untracked. GitHub hard-rejects any
+# single file over 100 MB, and these are decorative hero footage. The
+# committed hero video is a short web-encoded loop.
+*.original.mp4
+*.master.mp4
