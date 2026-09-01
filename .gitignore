@@ -8,9 +8,16 @@
 .backup3/
 .backup4/
 .backup5/
+.backup6/
+.backup7/
 
 # Oversized video masters stay on disk, untracked. GitHub hard-rejects any
 # single file over 100 MB, and these are decorative hero footage. The
 # committed hero video is a short web-encoded loop.
 *.original.mp4
 *.master.mp4
+
+# The lab's internal source document. Its content is published on the site in
+# rendered form, but this repo is public, so the working doc itself stays out.
+# Remove this line if you want it tracked.
+ENSURE_website_details.docx

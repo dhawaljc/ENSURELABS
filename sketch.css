@@ -417,7 +417,7 @@ nav.solid .co2{ opacity: 1; visibility: visible; transition: opacity .35s, visib
 
 /* X2 / X3 / X4, the stacked full-width blocks */
 .sk-block{
-  padding: clamp(40px, 5vw, 72px) var(--pad-x);
+  padding: var(--sec-pad) var(--pad-x);
   border-top: 1px solid var(--rule); background: #fff;
 }
 .sk-block:nth-of-type(even){ background: #fafafa; }
@@ -494,7 +494,7 @@ nav #co2-digits{ font-family: 'Inter', system-ui, sans-serif; font-weight: 600; 
 
 /* ── sheet 3/2 page intro band (sits under the existing .pg-hero) ── */
 .sk-lede-band{
-  padding: clamp(48px, 6vw, 84px) var(--pad-x);
+  padding: var(--sec-pad) var(--pad-x);
   background: #fff; border-bottom: 1px solid var(--rule);
 }
 .sk-lede-band .sk-lede{ margin-top: 4px; }
@@ -513,7 +513,7 @@ nav #co2-digits{ font-family: 'Inter', system-ui, sans-serif; font-weight: 600; 
 .phd-bio, .phd-research-text{ color: var(--pale-black-soft); }
 
 /* ── sheet 4: partners + sponsors bands ── */
-.sk-band{ padding: clamp(56px, 7vw, 104px) var(--pad-x); background: #fff; border-bottom: 1px solid var(--rule); }
+.sk-band{ padding: var(--sec-pad) var(--pad-x); background: #fff; border-bottom: 1px solid var(--rule); }
 .sk-band:nth-of-type(even){ background: #fafafa; }
 .sk-band-label{
   display: flex; align-items: center; gap: 14px; margin-bottom: 34px;
@@ -532,7 +532,7 @@ nav #co2-digits{ font-family: 'Inter', system-ui, sans-serif; font-weight: 600; 
    ══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1000px){
   /* B, statement beside slideshow */
-  #vision{ grid-template-columns: 1fr !important; gap: 44px !important; padding: 76px var(--pad-x) !important; }
+  #vision{ grid-template-columns: 1fr !important; gap: 44px !important; }
 
   /* C/D/E/F, theme rows */
   .project, .project.flip{ grid-template-columns: 1fr !important; }
@@ -619,3 +619,717 @@ nav #co2-digits{ font-family: 'Inter', system-ui, sans-serif; font-weight: 600; 
 }
 .gal-ph-l{ font-size: .78rem; font-weight: 600; line-height: 1.45; color: var(--pale-black); }
 .gal-ph-n{ font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(38,38,47,.42); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   UNIFIED SYSTEM PASS
+   One nav scale, one square size for every image box, one justified body
+   treatment, one palette. Everything below is deliberately global so the
+   pages cannot drift apart again.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --sq: 15rem;          /* THE square. every image box on the site uses it */
+  --sec-pad: clamp(64px, 8vw, 112px);  /* THE section rhythm, matches the home page */
+  --nav-fs: .95rem;     /* top tabs, up from .78rem */
+}
+
+/* ── 1. top tabs ── */
+.nav-links a{ font-size: var(--nav-fs) !important; letter-spacing: .015em; }
+.nav-logo{ font-size: 1.02rem; }
+.nav-cta{ font-size: var(--nav-fs) !important; padding: 11px 22px; }
+.dd{ min-width: 20rem; }
+.dd-t{ font-size: .9rem; }
+.dd-d{ font-size: .76rem; }
+.dd-caret{ width: 7px; height: 7px; }
+@media (max-width: 1180px){ :root{ --nav-fs: .86rem; } .nav-links{ gap: 20px; } }
+
+/* ── 2. every image box is the same square ── */
+.proj-img,
+.sci-fig,
+.rp-fig,
+.slide,
+.slide-inner,
+.pi-photo,
+.sk-figure,
+.gal-item,
+.gal-ph,
+.sk-person-img,
+.phd-photo,
+.news-feat-img,
+.nf-img,
+.nc-img,
+.t-card-photo,
+.t-card-photo,
+.pub-img{
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+.gal-item.wide{ grid-column: span 1 !important; aspect-ratio: 1 / 1 !important; }
+.sk-portrait{ width: var(--sq) !important; height: var(--sq) !important; }
+.slide-inner img, .pi-photo img, .sci-fig img, .sk-figure img, .proj-img img, .gal-item img, .sk-person-img img,
+.phd-photo img, .news-feat-img img{ width: 100%; height: 100%; object-fit: cover; }
+
+/* grids that hold squares all use the same track size */
+.sk-people, .gal-grid, .phd-grid{
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--sq), 100%), 1fr)) !important;
+  gap: 28px !important;
+}
+
+/* ── 3. justified body copy, hyphenated so it does not open rivers ── */
+.proj-body, .sci-p, .sci-cat-lede, .rp-p, .sk-p, .vision-body, .step-body, .sk-item-d, .sk-bio p,
+.gal-lede, .sk-lede, .contact-body, .pg-lede, .ov-body p, .prong-body,
+.sk-person-d, .alumni-brief{
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+/* headings and short labels must never justify */
+h1, h2, h3, .sk-h, .sk-title, .proj-statement, .step-head,
+.sk-person-n, .sk-key, .sk-eyebrow, .sk-band-label{ text-align: left; hyphens: manual; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   EXPLORE OUR SCIENCE: five docx categories, projects as a square list
+   ══════════════════════════════════════════════════════════════════════ */
+.sci-cat{ padding: var(--sec-pad) var(--pad-x); background:#fff; border-top:1px solid var(--rule); }
+.sci-cat:nth-of-type(even){ background:#fafafa; }
+.sci-cat-head{ max-width: 60rem; margin-bottom: 34px; }
+.sci-cat-name{
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent); margin-bottom: 12px;
+}
+.sci-cat-q{
+  font-family:'Inter',system-ui,sans-serif; font-weight:700; letter-spacing:-.025em;
+  font-size: clamp(1.6rem,3vw,2.5rem); line-height:1.12; color:var(--pale-black); margin-bottom:14px;
+}
+.sci-cat-lede{ font-size:.95rem; line-height:1.75; color:var(--pale-black-soft); max-width:62ch; }
+
+.sci-grid{ display:grid; gap:22px; }
+.sci-card{
+  display:grid; grid-template-columns: var(--sq) 1fr; gap: 30px; align-items:start;
+  text-decoration:none; color:inherit; background:#fff;
+  border:1px solid var(--rule); padding:22px; transition:border-color .25s, box-shadow .25s, transform .25s;
+}
+.sci-card:hover{ border-color:var(--accent); box-shadow:0 16px 34px rgba(38,38,47,.08); transform:translateY(-2px); }
+.sci-fig{ position:relative; background:#12161d; overflow:hidden; }
+.sci-fig img{ transition: transform .7s ease, filter .5s ease; }
+.sci-card:hover .sci-fig img{ transform:scale(1.06); }
+.sci-card:hover .sk-anim{ opacity:1; }
+.sci-key{
+  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; font-weight:700;
+  color:var(--accent); margin-bottom:10px;
+}
+.sci-h{
+  font-family:'Inter',system-ui,sans-serif; font-weight:700; letter-spacing:-.02em;
+  font-size:clamp(1.15rem,1.9vw,1.6rem); line-height:1.18; color:var(--pale-black); margin-bottom:8px;
+}
+.sci-lead{ font-size:.92rem; font-weight:600; color:var(--accent); margin-bottom:12px; line-height:1.5; }
+.sci-p{ font-size:.88rem; line-height:1.78; color:var(--pale-black-soft); margin-bottom:16px; }
+.sci-more{
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--pale-black);
+  opacity:.55; transition:opacity .25s, transform .25s; display:inline-block;
+}
+.sci-card:hover .sci-more{ opacity:1; transform:translateX(4px); }
+@media (max-width:820px){
+  .sci-card{ grid-template-columns:1fr; gap:18px; }
+  .sci-fig{ width:100%; max-width:var(--sq); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESOURCES / PUBLICATIONS
+   ══════════════════════════════════════════════════════════════════════ */
+.res-list{ display:grid; gap:2px; }
+.res-row{
+  display:grid; grid-template-columns:auto 1fr auto; gap:22px; align-items:baseline;
+  padding:20px 0; border-top:1px solid var(--rule); text-decoration:none; color:inherit;
+}
+.res-row:last-child{ border-bottom:1px solid var(--rule); }
+.res-yr{ font-size:.76rem; font-weight:700; color:var(--accent); letter-spacing:.06em; min-width:4rem; }
+.res-t{ font-size:.98rem; font-weight:600; color:var(--pale-black); line-height:1.5; margin-bottom:5px; }
+.res-m{ font-size:.82rem; color:var(--pale-black-soft); line-height:1.6; }
+.res-tag{
+  font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+  color:var(--accent); border:1px solid var(--rule); padding:5px 10px; white-space:nowrap;
+}
+@media (max-width:760px){ .res-row{ grid-template-columns:1fr; gap:6px; } }
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOMEPAGE: news as a list, then a square image grid
+   ══════════════════════════════════════════════════════════════════════ */
+.news-list{ display:grid; gap:0; }
+.news-item{
+  display:grid; grid-template-columns: 12rem 1fr 2rem; gap:26px; align-items:baseline;
+  padding:24px 0; border-top:1px solid var(--rule);
+  text-decoration:none; color:inherit; transition:background .25s, padding .25s;
+}
+.news-item:last-child{ border-bottom:1px solid var(--rule); }
+.news-item:hover{ background:#fafafa; }
+.ni-meta{ display:flex; flex-direction:column; gap:5px; }
+.ni-type{ font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:var(--accent); }
+.ni-date{ font-size:.74rem; color:rgba(38,38,47,.5); }
+.ni-head{ font-size:1.02rem; line-height:1.62; color:var(--pale-black); font-weight:500; text-align:left; }
+.ni-arrow{ font-size:1rem; color:var(--accent); opacity:0; transform:translateX(-6px); transition:opacity .25s, transform .25s; justify-self:end; }
+.news-item:hover .ni-arrow{ opacity:1; transform:none; }
+@media (max-width:760px){
+  .news-item{ grid-template-columns:1fr; gap:8px; }
+  .ni-meta{ flex-direction:row; gap:12px; align-items:baseline; }
+  .ni-arrow{ display:none; }
+}
+
+#home-gallery{ padding: var(--sec-pad) var(--pad-x); background:#fff; border-top:1px solid var(--rule); }
+.hg-grid{
+  display:grid; gap:14px;
+  grid-template-columns:repeat(auto-fill, minmax(min(var(--sq), 100%), 1fr));
+}
+.hg-item{ position:relative; aspect-ratio:1/1; overflow:hidden; background:#dfe4de; display:block; }
+.hg-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease, filter .5s ease; }
+.hg-item:hover img{ transform:scale(1.06); }
+.hg-cap{
+  position:absolute; inset:auto 0 0 0; padding:24px 13px 11px;
+  font-size:.68rem; line-height:1.4; font-weight:500; color:#fff;
+  background:linear-gradient(transparent, rgba(24,24,34,.85));
+  opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s;
+}
+.hg-item:hover .hg-cap{ opacity:1; transform:none; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PEOPLE IN RESEARCH: equal squares, name only, info on hover.
+   Photos are greyscale until hovered.
+   ══════════════════════════════════════════════════════════════════════ */
+.pp-hint{ font-size:.78rem; color:rgba(38,38,47,.5); margin:-14px 0 26px; }
+.pp-grid{
+  display:grid; gap:22px;
+  grid-template-columns:repeat(auto-fill, minmax(min(var(--sq),100%), 1fr));
+}
+.pp-item{ position:relative; display:block; text-decoration:none; color:inherit; }
+.pp-photo{
+  position:relative; aspect-ratio:1/1; overflow:hidden;
+  background:#dfe4de; border:1px solid var(--rule);
+}
+.pp-photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(1) contrast(1.02); transition:filter .5s ease, transform .6s ease;
+}
+.pp-item:hover .pp-photo img,
+.pp-item:focus-visible .pp-photo img{ filter:grayscale(0); transform:scale(1.05); }
+/* the emoji the page used before is kept as a stand-in marker over the photo */
+.pp-ph-emoji{
+  position:absolute; right:8px; bottom:8px; font-size:1.15rem; line-height:1;
+  filter:grayscale(1); transition:filter .5s ease; pointer-events:none;
+}
+.pp-item:hover .pp-ph-emoji{ filter:grayscale(0); }
+.pp-name{
+  margin-top:12px; font-size:.98rem; font-weight:700; letter-spacing:-.01em;
+  color:var(--pale-black); line-height:1.35;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ALUMNI grid. This rule was lost when the old in-square overlay rules were
+   sliced out by brace position and the cut ran one brace too far, which took
+   display:grid with it and stacked every alumnus full width.
+   ══════════════════════════════════════════════════════════════════════ */
+.al-grid{
+  display:grid; gap:22px; margin-top:20px;
+  grid-template-columns:repeat(auto-fill, minmax(min(var(--sq),100%), 1fr));
+}
+.al-photo{ aspect-ratio:1/1; overflow:hidden; background:#dfe4de; border:1px solid var(--rule); }
+.al-photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(1); transition:filter .5s ease, transform .6s ease;
+}
+.al-item:hover .al-photo img{ filter:grayscale(0); transform:scale(1.04); }
+.al-name{ margin-top:11px; font-size:.9rem; font-weight:700; color:var(--pale-black); line-height:1.3; }
+.al-deg{ font-size:.7rem; letter-spacing:.06em; color:var(--accent); font-weight:600; margin-top:3px; }
+.al-brief{
+  margin-top:7px; font-size:.76rem; line-height:1.5; color:var(--pale-black-soft);
+  text-align:justify; hyphens:auto;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PARTNERS / SPONSORS: one font size, and they do not link out
+   ══════════════════════════════════════════════════════════════════════ */
+.sk-logo{
+  cursor:default; font-size:.82rem !important; font-weight:600;
+  aspect-ratio:auto !important; min-height:6.5rem;
+}
+.sk-logo:hover{ transform:none; box-shadow:none; border-color:var(--rule); }
+.sk-logo small{ font-size:.66rem !important; font-weight:500; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PROJECTS ON EACH RESEARCH PAGE: one square each, hover animation
+   ══════════════════════════════════════════════════════════════════════ */
+.proj-card, .prong, .platform{
+  border:1px solid var(--rule); background:#fff; padding:0 0 20px;
+  transition:border-color .25s, box-shadow .25s, transform .25s; overflow:hidden;
+}
+.proj-card:hover, .prong:hover, .platform:hover{
+  border-color:var(--accent); box-shadow:0 16px 32px rgba(38,38,47,.08); transform:translateY(-3px);
+}
+.pj-fig{
+  aspect-ratio:1/1; overflow:hidden; background:#dfe4de;
+  border-bottom:1px solid var(--rule); margin-bottom:18px;
+}
+.pj-fig img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(1); transition:filter .5s ease, transform .7s ease;
+}
+.proj-card:hover .pj-fig img, .prong:hover .pj-fig img, .platform:hover .pj-fig img{
+  filter:grayscale(0); transform:scale(1.06);
+}
+.proj-num, .proj-name, .proj-desc, .prong-num, .prong-title, .prong-body{ padding-inline:20px; }
+.proj-funder{ margin-inline:20px; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   CARBON PAGE: larger type throughout
+   ══════════════════════════════════════════════════════════════════════ */
+.hero-body{ font-size:1.1rem !important; line-height:1.75 !important; }
+.eyebrow, .c-eyebrow{ font-size:.72rem !important; }
+.c-head{ font-size:clamp(1.55rem,3vw,2.4rem) !important; }
+.c-body{ font-size:1rem !important; line-height:1.8 !important; }
+.int-body{ font-size:1rem !important; line-height:1.8 !important; }
+.int-unit{ font-size:.74rem !important; }
+.bar-sub{ font-size:.86rem !important; }
+.bar-top{ font-size:.9rem !important; }
+.final-body{ font-size:1.05rem !important; line-height:1.8 !important; }
+.sl, .sl2{ font-size:.74rem !important; }
+.source{ font-size:.74rem !important; line-height:1.8 !important; }
+.c-back{ font-size:.72rem !important; }
+.c-label{ font-size:.7rem !important; }
+.c-unit{ font-size:.78rem !important; }
+.hud-unit, .step-eyebrow{ font-size:.68rem !important; }
+.hud-mass-u{ font-size:.72rem !important; }
+.hud-diam{ font-size:.88rem !important; }
+.step-head{ font-size:clamp(1.45rem,2.6vw,2.05rem) !important; }
+.step-body{ font-size:.98rem !important; line-height:1.8 !important; }
+.scale-hud{ max-width:18rem !important; }
+.gal-lede{ font-size:1rem; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   ONE SQUARE, EVERYWHERE
+   auto-fill with 1fr tracks stretches tiles to fill the row, so the same
+   component came out 240px on one page and 300px on another. Fixed tracks
+   plus a width cap make every tile identical across the whole site.
+   ══════════════════════════════════════════════════════════════════════ */
+.sk-people, .gal-grid, .phd-grid, .pp-grid, .al-grid, .hg-grid{
+  grid-template-columns: repeat(auto-fill, var(--sq)) !important;
+  justify-content: start;
+}
+.proj-img, .pj-fig, .sci-fig, .rp-fig, .gal-item, .gal-ph,
+.pp-photo, .al-photo, .hg-item, .sk-figure,
+.nf-img, .nc-img, .news-feat-img, .t-card-photo{
+  width: var(--sq) !important;
+  max-width: 100%;
+}
+/* the row layouts must stop stretching their image column past the square */
+@media (min-width: 1000px){
+  .project{ grid-template-columns: var(--sq) 1fr !important; }
+  .project.flip{ grid-template-columns: 1fr var(--sq) !important; }
+}
+.sci-card{ grid-template-columns: var(--sq) 1fr !important; }
+.proj-card, .prong, .platform{ max-width: none; }
+@media (max-width: 620px){
+  /* minmax(0,1fr) with auto-fill gave one track per item, so eight tiles
+     ended up side by side on a phone. A real minimum keeps it to two. */
+  .sk-people, .gal-grid, .phd-grid, .pp-grid, .al-grid, .hg-grid{
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr)) !important;
+    justify-content: stretch;
+  }
+  .proj-img, .pj-fig, .sci-fig, .gal-item, .gal-ph,
+  .pp-photo, .al-photo, .hg-item, .sk-figure,
+  .nf-img, .nc-img, .news-feat-img, .t-card-photo{ width: 100% !important; }
+}
+
+/* the vision carousel and the team PI photo were the last two boxes still
+   sizing themselves from their column rather than from --sq */
+@media (min-width: 1000px){
+  #vision{ grid-template-columns: var(--sq) 1fr !important; gap: 56px !important; align-items: start !important; }
+}
+.slideshow{ width: var(--sq); max-width: 100%; }
+.slide, .slide-inner{ width: var(--sq) !important; max-width: 100%; }
+.pi-photo{ width: var(--sq) !important; max-width: 100% !important; }
+.sk-portrait{ width: var(--sq) !important; height: var(--sq) !important; }
+.slide-label{ font-size: .62rem; }
+/* news.html: the featured item and cards are row layouts, so their image
+   column must be the square rather than a stretched track */
+.news-featured, .nf{ grid-template-columns: var(--sq) 1fr !important; }
+.nc{ display:grid; grid-template-rows:auto 1fr; }
+.nf-img img, .nc-img img, .news-feat-img img, .t-card-photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+@media (max-width:620px){ .news-featured, .nf{ grid-template-columns:1fr !important; } }
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOMEPAGE SQUARES ARE BIGGER
+   Still square, still one size as each other, just a larger token scoped
+   to the home page. 24rem = 384px, which lets the "From the lab" grid sit
+   3 across inside the 1200px column (3x384 + 2x14 gap = 1180).
+   ══════════════════════════════════════════════════════════════════════ */
+body.home{ --sq: 24rem; }
+@media (max-width: 1100px){ body.home{ --sq: 20rem; } }
+@media (max-width: 820px){  body.home{ --sq: 17rem; } }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TEAM: researchers on ONE line, details in a popup on hover
+   grid-auto-flow:column keeps them on a single row whatever the count,
+   so adding a sixth person does not wrap the row.
+   ══════════════════════════════════════════════════════════════════════ */
+.pp-grid{
+  grid-template-columns: none !important;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 16px !important;
+  align-items: start;
+}
+.pp-grid .pp-photo, .al-grid .al-photo{ width: 100% !important; }
+.pp-item{ position: relative; }
+.pp-name{ font-size: .88rem; }
+
+/* the popup itself, shared shape for people and alumni */
+.pp-pop, .al-pop{
+  position: absolute; z-index: 80;
+  top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px);
+  width: min(30rem, 88vw);
+  display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px;
+  padding: 16px; background: #fff;
+  border: 1px solid var(--rule);
+  box-shadow: 0 26px 60px rgba(24,24,34,.22);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease, visibility .22s;
+  text-align: left;
+}
+.pp-item:hover .pp-pop, .pp-item:focus-visible .pp-pop,
+.al-item:hover .al-pop, .al-item:focus .al-pop, .al-item:focus-within .al-pop{
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+/* keep the end tiles' popups inside the page instead of off the edge */
+.pp-item:first-child .pp-pop, .al-item:first-child .al-pop{ left: 0; transform: translateX(0) translateY(6px); }
+.pp-item:first-child:hover .pp-pop, .al-item:first-child:hover .al-pop,
+.al-item:first-child:focus .al-pop{ transform: translateX(0) translateY(0); }
+.pp-item:last-child .pp-pop, .al-item:last-child .al-pop{ left: auto; right: 0; transform: translateX(0) translateY(6px); }
+.pp-item:last-child:hover .pp-pop, .al-item:last-child:hover .al-pop,
+.al-item:last-child:focus .al-pop{ transform: translateX(0) translateY(0); }
+
+.pp-pop-img, .al-pop-img{ aspect-ratio:1/1; overflow:hidden; background:#dfe4de; }
+.pp-pop-img img, .al-pop-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+.pp-pop-name, .al-pop-name{
+  font-size:1rem; font-weight:700; color:var(--pale-black); line-height:1.3; margin-bottom:4px;
+}
+.pp-pop .pp-role{ color:var(--accent); margin-bottom:8px; }
+.pp-pop .pp-bio, .al-pop .al-brief{
+  font-size:.78rem; line-height:1.62; color:var(--pale-black-soft);
+  -webkit-line-clamp:none; display:block; overflow:visible; margin:0 0 8px;
+}
+.pp-pop .pp-focus{ font-size:.7rem; color:var(--pale-black-soft); margin:0; }
+.pp-pop .pp-focus span{ color:var(--accent); }
+.al-pop .al-deg{ margin-bottom:6px; }
+
+/* alumni: photo only in the grid, everything else lives in the popup */
+.al-item{ position: relative; cursor: help; }
+.al-item:focus{ outline:2px solid var(--accent); outline-offset:3px; }
+
+@media (max-width: 1010px){
+  /* one line stops being readable on a tablet, fall back to a wrapping grid */
+  .pp-grid{
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)) !important;
+  }
+}
+@media (max-width: 700px){
+  .pp-pop, .al-pop{ grid-template-columns: 1fr; width: min(20rem, 86vw); }
+  .pp-pop-img, .al-pop-img{ display:none; }
+}
+/* the label was losing its line break when the in-square overlay rules went */
+.pp-pop .pp-focus span{
+  display:block; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600; margin-bottom:3px;
+}
+/* the carousel frame itself, not just the inner wrapper, has to be the square:
+   .slide carries aspect-ratio 4/3 + overflow:hidden, so a square .slide-inner
+   inside it was simply being cropped back to 4:3 */
+.slide{ aspect-ratio: 1 / 1 !important; min-width: 100% !important; }
+.slide-inner{ height: 100% !important; aspect-ratio: auto !important; }
+.slide-inner img{ width: 100%; height: 100%; object-fit: cover; }
+/* the docx gives each theme a bold lead line before the body copy */
+.proj-lead{
+  /* the summary line must outrank the body it introduces, not sit under it */
+  font-size: clamp(1.12rem, 1.65vw, 1.55rem); font-weight: 600; line-height: 1.45;
+  color: var(--accent); margin-bottom: 14px; text-align: left;
+}
+.proj-body b{ color: var(--pale-black); font-weight: 600; }
+/* decorative hover captions: visible on hover, but they should not end up in
+   selected/copied text (they were showing up in pasted page content) */
+.sk-anim-cap{ -webkit-user-select: none; user-select: none; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   THEME CATEGORY WORDS (Assess / Optimize / Predict / Transform) larger.
+   Tracking is pulled back from .22em to .1em: letter-spacing tuned for a
+   10px label sprawls badly at 30px.
+   ══════════════════════════════════════════════════════════════════════ */
+.proj-label{
+  font-size: clamp(1.35rem, 2.3vw, 2.1rem) !important;
+  letter-spacing: .1em !important;
+  font-weight: 800 !important;
+  line-height: 1.1;
+  color: var(--accent) !important;
+  margin-bottom: 16px !important;
+  gap: 14px !important;
+}
+/* the dash before the label is gone, the number leads instead */
+.proj-label::before{ content: none !important; }
+
+/* the same words as section headings on the science page */
+.sci-cat-name{
+  font-size: clamp(1.15rem, 1.9vw, 1.7rem);
+  letter-spacing: .12em;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOVER POPUPS MUST PAINT ABOVE EVERYTHING
+   .reveal.visible animated to transform:translateY(0). A transform of
+   anything other than `none` creates a stacking context, which trapped the
+   popup's z-index inside its own tile, so the next image (and the whole
+   alumni section) painted over it. The identity transform serves no purpose
+   once the element has been revealed, so drop it to none and the trap goes.
+   ══════════════════════════════════════════════════════════════════════ */
+.reveal.visible, .reveal.vis{ transform: none; }
+
+/* and lift the hovered tile above its later siblings regardless */
+.pp-item:hover, .pp-item:focus-within,
+.al-item:hover, .al-item:focus, .al-item:focus-within{ z-index: 90; }
+/* a popup near the foot of one alumni group must clear the group below it */
+.alumni-subsection{ position: relative; }
+.alumni-subsection:has(.al-item:hover),
+.alumni-subsection:has(.al-item:focus-within),
+.phd-section:has(.pp-item:hover){ z-index: 90; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   NUMBERED THEME LABELS: 1. Assess  2. Optimize  3. Predict  4. Transform
+   Darker and heavier than the accent-green version, sized just under the
+   question it introduces so the order reads number > question > lead > body,
+   and tucked closer to that question than to the block above it.
+   ══════════════════════════════════════════════════════════════════════ */
+.proj-label{
+  display: block !important;
+  font-size: clamp(1.25rem, 2vw, 1.85rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em !important;
+  text-transform: none !important;
+  color: var(--pale-black) !important;
+  line-height: 1.15;
+  margin: 0 0 6px !important;          /* sits tight to its own question */
+}
+.proj-num-i{
+  color: var(--accent);
+  font-weight: 800;
+  margin-right: .12em;
+  font-variant-numeric: tabular-nums;
+}
+/* the question is the largest thing in the block, the label leads into it */
+.project .proj-statement{ margin-bottom: 18px; }
+.project .proj-text{ padding-block: 64px; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESEARCH DOMAIN PAGES (assess / optimize / predict / transform / educate)
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+
+
+
+.rp-list{ padding:var(--sec-pad) var(--pad-x); background:#fff; display:grid; gap:34px; }
+.rp-card{
+  display:grid; grid-template-columns:var(--sq) 1fr; gap:32px; align-items:start;
+  border:1px solid var(--rule); padding:24px; background:#fff;
+  transition:border-color .25s, box-shadow .25s;
+}
+.rp-card:hover{ border-color:var(--accent); box-shadow:0 16px 34px rgba(38,38,47,.07); }
+.rp-fig{ overflow:hidden; background:#dfe4de; }
+.rp-fig img{ width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(1); transition:filter .5s ease, transform .7s ease; }
+.rp-card:hover .rp-fig img{ filter:grayscale(0); transform:scale(1.05); }
+.rp-num{ font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; font-weight:700; color:var(--accent); margin-bottom:10px; }
+.rp-h{
+  font-family:'Inter',system-ui,sans-serif; font-weight:700; letter-spacing:-.02em;
+  font-size:clamp(1.15rem,1.9vw,1.6rem); line-height:1.22; color:var(--pale-black); margin-bottom:14px;
+}
+.rp-p{ font-size:.88rem; line-height:1.8; color:var(--pale-black-soft); margin-bottom:12px; }
+.rp-meta{ display:grid; gap:8px; margin-top:18px; padding-top:16px; border-top:1px solid var(--rule); }
+.rp-meta > div{ display:grid; grid-template-columns:6.5rem 1fr; gap:12px; align-items:baseline; }
+.rp-meta dt{ font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--accent); }
+.rp-meta dd{ font-size:.82rem; line-height:1.6; color:var(--pale-black-soft); margin:0; }
+@media (max-width:820px){
+  .rp-card{ grid-template-columns:1fr; }
+  .rp-fig{ width:100%; max-width:var(--sq); }
+  .rp-meta > div{ grid-template-columns:1fr; gap:2px; }
+}
+/* the site styles a bare `nav {}` as the fixed header, so the domain strip,
+   which is semantically a <nav>, was pinning itself over the real header and
+   inheriting its space-between. Put it back in normal flow. */
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   PARTNER WORLD MAP (equirectangular, Natural Earth 110m)
+   ══════════════════════════════════════════════════════════════════════ */
+.wm-lede{ font-size:.95rem; line-height:1.75; color:var(--pale-black-soft); max-width:62ch; margin:-18px 0 26px; }
+.wm-wrap{ background:#f4f5f4; border:1px solid var(--rule); padding:clamp(10px,2vw,24px); }
+.wm{ display:block; width:100%; height:auto; }
+.wm-land{ fill:#d8dbd7; stroke:#fff; stroke-width:.4; }
+.wm-hi{ fill:var(--accent); stroke:#fff; stroke-width:.4; transition:fill .25s; }
+.wm-hi:hover{ fill:#1f5c2d; }
+.wm-halo{ fill:rgba(192,57,43,.18); }
+.wm-dot{ fill:#c0392b; stroke:#fff; stroke-width:1.2; }
+.wm-txt{
+  fill:var(--pale-black); font-family:'Inter',system-ui,sans-serif;
+  font-size:11px; font-weight:700; text-anchor:middle; paint-order:stroke;
+  stroke:#f4f5f4; stroke-width:3px;
+}
+.wm-legend{ display:flex; flex-wrap:wrap; gap:10px 44px; margin-top:22px; }
+.wm-countries, .wm-labs{ list-style:none; display:flex; flex-wrap:wrap; gap:8px 20px; margin:0; padding:0; }
+.wm-legend li{ display:flex; align-items:center; gap:8px; font-size:.8rem; color:var(--pale-black-soft); }
+.wm-key{ width:12px; height:12px; flex-shrink:0; border-radius:2px; }
+.wm-key-c{ background:var(--accent); }
+.wm-key-l{ background:#c0392b; border-radius:50%; }
+@media (max-width:700px){ .wm-txt{ font-size:16px; } }
+/* sponsor tiles that carry a real logo image */
+.sk-logo-img{ gap:12px; padding:20px 18px; }
+.sk-logo-img img{
+  max-width:100%; max-height:64px; width:auto; height:auto;
+  object-fit:contain; display:block;
+  filter:grayscale(1); opacity:.78; transition:filter .3s, opacity .3s;
+}
+.sk-logo-img:hover img{ filter:grayscale(0); opacity:1; }
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESEARCH DIAGRAMS, ANIMATED
+   Each figure holds until it scrolls into view, then plays its sequence
+   once. The motion is the explanation: parts arrive in the order the idea
+   is built, so nothing moves purely for decoration.
+   ══════════════════════════════════════════════════════════════════════ */
+.viz-band{ padding:var(--sec-pad) var(--pad-x); background:#fafafa; border-top:1px solid var(--rule); }
+
+/* the figure is one padded card: diagram, rule, then caption and control.
+   Previously the caption and button sat outside the framed box with no
+   horizontal padding, so they hung off its left edge. */
+.viz{
+  margin:0; background:#fff; border:1px solid var(--rule);
+  padding:24px;                       /* the same inset .rp-card uses */
+}
+.viz-frame{ margin:0; }
+.viz-svg{ display:block; width:100%; height:auto; background:transparent; border:0; padding:0; }
+.viz-svg text{ font-family:'Inter',system-ui,sans-serif; }
+.viz-foot{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:28px;
+  margin-top:clamp(18px, 2vw, 26px); padding-top:clamp(16px, 1.8vw, 22px);
+  border-top:1px solid var(--rule);
+}
+.viz-cap{ font-size:.88rem; line-height:1.75; color:var(--pale-black-soft); max-width:74ch; text-align:justify; hyphens:auto; }
+.viz-replay{
+  flex:0 0 auto; align-self:flex-start;
+  font:inherit; font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--pale-black-soft); background:#fff; border:1px solid var(--rule);
+  padding:9px 16px; border-radius:100px; cursor:pointer;
+  transition:border-color .2s, color .2s, background .2s;
+}
+.viz-replay:hover{ border-color:var(--accent); color:var(--accent); }
+.viz-replay:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ── resting state: hidden until the figure plays ── */
+.viz-svg .v-title, .viz-svg .v-axlab, .viz-svg .v-legend, .viz-svg .v-note,
+.viz-svg .v-stage, .viz-svg .v-b6, .viz-svg .v-span, .viz-svg .v-cloud,
+.viz-svg .v-fdot, .viz-svg .v-pick, .viz-svg .v-row, .viz-svg .v-dot,
+.viz-svg .v-quadlab, .viz-svg .v-quad, .viz-svg .v-grid,
+.viz-svg .v-panel, .viz-svg .v-arrow, .viz-svg .v-cell{ opacity:0; }
+.viz-svg .v-draw{ stroke-dasharray:1400; stroke-dashoffset:1400; }
+.viz-svg .v-front{ stroke-dasharray:1400; stroke-dashoffset:1400; }
+
+@keyframes v-in     { from{ opacity:0; transform:translateY(9px); } to{ opacity:1; transform:none; } }
+@keyframes v-pop    { from{ opacity:0; transform:scale(.55); }      to{ opacity:1; transform:scale(1); } }
+@keyframes v-fade   { to{ opacity:1; } }
+@keyframes v-drawin { to{ stroke-dashoffset:0; } }
+@keyframes v-ring   { 0%{ opacity:.95; transform:scale(.7); } 70%{ opacity:0; transform:scale(1.9); } 100%{ opacity:0; transform:scale(1.9); } }
+
+/* every animated group scales/moves about its own centre */
+.viz-svg .v-stage, .viz-svg .v-cloud, .viz-svg .v-fdot, .viz-svg .v-dot,
+.viz-svg .v-panel, .viz-svg .v-cell, .viz-svg .v-pick, .viz-svg .v-ring{
+  transform-box:fill-box; transform-origin:center;
+}
+
+.viz.play .v-title  { animation:v-in .5s ease-out forwards; }
+.viz.play .v-axlab,
+.viz.play .v-legend { animation:v-fade .5s ease-out .15s forwards; }
+.viz.play .v-axis   { animation:v-drawin .9s ease-out .1s forwards; }
+.viz.play .v-grid   { animation:v-fade .5s ease-out .5s forwards; }
+
+/* assess: stages, then the usual boundary, then the full span */
+.viz.play .v-stage  { animation:v-in .45s ease-out forwards; animation-delay:calc(.25s + var(--i) * .16s); }
+.viz.play .v-b6     { animation:v-fade .5s ease-out 1.15s forwards; }
+.viz.play .v-b6 .v-draw  { animation:v-drawin .6s ease-out 1.3s forwards; }
+.viz.play .v-span   { animation:v-fade .5s ease-out 1.85s forwards; }
+.viz.play .v-span .v-draw{ animation:v-drawin .9s ease-out 1.9s forwards; }
+
+/* optimize: candidates scatter, the front draws, one is chosen */
+.viz.play .v-cloud  { animation:v-pop .35s ease-out forwards; animation-delay:calc(.5s + var(--i) * .022s); }
+.viz.play .v-front  { animation:v-drawin 1.5s ease-out 1.6s forwards; }
+.viz.play .v-fdot   { animation:v-pop .3s ease-out forwards; animation-delay:calc(1.7s + var(--i) * .1s); }
+.viz.play .v-pick   { animation:v-fade .45s ease-out 2.8s forwards; }
+.viz.play .v-ring   { animation:v-ring 1.8s ease-out 3.1s infinite; }
+.viz.play .v-note   { animation:v-fade .5s ease-out 2.2s forwards; }
+
+/* predict: forward chain, then inverse chain */
+.viz.play .v-row    { animation:v-in .42s ease-out forwards; animation-delay:calc(.2s + var(--i) * .17s); }
+.viz.play .v-row .v-draw{ animation:v-drawin .5s ease-out forwards; animation-delay:calc(.3s + var(--i) * .17s); }
+
+/* transform: quadrants label, then each material lands */
+.viz.play .v-quad     { animation:v-fade .6s ease-out 1.5s forwards; }
+.viz.play .v-quadlab  { animation:v-fade .5s ease-out forwards; animation-delay:calc(.7s + var(--i) * .14s); }
+.viz.play .v-dot      { animation:v-pop .4s ease-out forwards; animation-delay:calc(1.7s + var(--i) * .22s); }
+
+/* educate: each level of development builds up */
+.viz.play .v-panel  { animation:v-in .45s ease-out forwards; animation-delay:calc(.3s + var(--i) * .38s); }
+.viz.play .v-cell   { animation:v-pop .3s ease-out forwards; animation-delay:calc(.5s + var(--i) * .38s + var(--j) * .035s); }
+.viz.play .v-arrow  { animation:v-fade .35s ease-out forwards; animation-delay:calc(.62s + var(--i) * .38s); }
+.viz.play .v-arrow .v-draw{ animation:v-drawin .3s ease-out forwards; animation-delay:calc(.62s + var(--i) * .38s); }
+
+/* reduced motion: show the finished diagram, no sequence, and no replay */
+@media (prefers-reduced-motion: reduce){
+  .viz-svg .v-title, .viz-svg .v-axlab, .viz-svg .v-legend, .viz-svg .v-note,
+  .viz-svg .v-stage, .viz-svg .v-b6, .viz-svg .v-span, .viz-svg .v-cloud,
+  .viz-svg .v-fdot, .viz-svg .v-pick, .viz-svg .v-row, .viz-svg .v-dot,
+  .viz-svg .v-quadlab, .viz-svg .v-quad, .viz-svg .v-grid,
+  .viz-svg .v-panel, .viz-svg .v-arrow, .viz-svg .v-cell{ opacity:1 !important; }
+  .viz-svg .v-draw, .viz-svg .v-front{ stroke-dashoffset:0 !important; }
+  .viz.play *{ animation:none !important; }
+  .viz-replay{ display:none; }
+}
+@media (max-width:700px){
+  /* only the diagram scrolls; the caption and control stay put */
+  .viz-frame{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .viz-svg{ min-width:640px; }
+  .viz-foot{ flex-direction:column; gap:14px; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   ONE SECTION RHYTHM
+   Six different clamp() paddings had drifted apart across the pages. Every
+   band now uses --sec-pad, which resolves to the home page's 112px on
+   desktop and eases down on smaller screens.
+   ══════════════════════════════════════════════════════════════════════ */
+#vision, #news, #contact,
+.viz-band, .sk-band, .sci-cat, .rp-list, .sk-lede-band, .sk-block,
+.phd-section, .alumni-section, #home-gallery{
+  padding-top: var(--sec-pad) !important;
+  padding-bottom: var(--sec-pad) !important;
+}
+.sci-cat + .sci-cat{ padding-top: var(--sec-pad) !important; }
+/* news.html deliberately joins the featured item to the grid with no gap
+   between them, so only the outer edges of that pair take the rhythm.
+   .join-cta was a flat 112px that never eased down on a phone. */
+.featured{ padding-top: var(--sec-pad) !important; }
+.news-section{ padding-bottom: var(--sec-pad) !important; }
+.join-cta{ padding-top: var(--sec-pad) !important; padding-bottom: var(--sec-pad) !important; }

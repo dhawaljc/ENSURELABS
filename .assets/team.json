@@ -1,0 +1,112 @@
+{
+ "people": [
+  {
+   "name": "Faezeh Salehi",
+   "role": "Ph.D. Candidate \u00b7 Construction Science",
+   "bio": "Faezeh joined the Ph.D. program in January 2022. She uses eye-tracking, EEG, and data analysis to study how visual and spatial conditions affect perception and task performance in extreme environments. Her work contributes to NASA- and NSF-funded projects on astronaut training and immersive simulation.",
+   "focus": "Spatial cognition \u00b7 VR/AR \u00b7 Eye-tracking \u00b7 EEG \u00b7 NASA Astronaut Training",
+   "emoji": "\ud83d\udc69\u200d\ud83d\udd2c",
+   "link": "#"
+  },
+  {
+   "name": "Maryam Abbasi Kamazani",
+   "role": "Ph.D. Candidate \u00b7 Construction Science",
+   "bio": "Maryam joined in January 2022 with a background in Mechanical Engineering and multi-objective optimization of hybrid geothermal-PV systems. Her current research focuses on LCA, advanced optimization, and predictive methods for sustainable, low-carbon building design. Winner of the Best Paper Award at the International Conference on Net Zero Carbon Built Environment.",
+   "focus": "LCA \u00b7 Multi-objective optimization \u00b7 ECW nexus \u00b7 Climate-aware modeling \u00b7 NSF",
+   "emoji": "\ud83d\udc69\u200d\ud83d\udcbb",
+   "link": "#"
+  },
+  {
+   "name": "Sejal Sanjay Shanbhag",
+   "role": "Ph.D. Student \u00b7 Construction Science",
+   "bio": "Sejal has a background in architecture and earned her MTech in Building Energy Performance from CEPT University, where she worked on CFD-based airflow studies. Her current work examines how design choices affect energy use, carbon impacts, and indoor comfort under future climate conditions.",
+   "focus": "LCA \u00b7 Optimization \u00b7 Low-carbon building design \u00b7 Future climate scenarios",
+   "emoji": "\ud83c\udfd7\ufe0f",
+   "link": "#"
+  },
+  {
+   "name": "Yasaman Norouzi",
+   "role": "Ph.D. Candidate \u00b7 Construction Science",
+   "bio": "Yasaman joined in Fall 2022. As part of a DOE-funded project, she conducted life cycle assessments of buildings with 3D-printed hempcrete walls and developed optimization models to reduce energy use and carbon impacts. Her work combines environmental analysis, computational modeling, and predictive methods for building envelope performance.",
+   "focus": "LCA \u00b7 Hempcrete \u00b7 3D printing \u00b7 Envelope optimization \u00b7 DOE ARPA-E",
+   "emoji": "\ud83c\udf3f",
+   "link": "#"
+  },
+  {
+   "name": "Mana Nemati Aghdam",
+   "role": "Ph.D. Student \u00b7 Construction Science",
+   "bio": "Mana's research focuses on connecting carbon reduction and climate resilience in building design. She studies material performance, life cycle assessment, and hazard-related impacts on buildings, with a focus on vulnerable communities. Her work aims to develop methods that support both environmental performance and long-term building durability.",
+   "focus": "Carbon-resilience nexus \u00b7 Material LCA \u00b7 Vulnerable communities \u00b7 Hazard-prone regions",
+   "emoji": "\ud83c\udfd8\ufe0f",
+   "link": "#"
+  }
+ ],
+ "alumni": [
+  {
+   "group": "ENSURE Lab",
+   "name": "Hassan Anifowose",
+   "deg": "Ph.D. 2022",
+   "brief": "VR and gamified learning environments; developed the Virtual Construction Lab for immersive construction assembly training. Now pursuing research at [institution placeholder]."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Varusha Venkatraj",
+   "deg": "Ph.D. 2022",
+   "brief": "Embodied-operational energy trade-offs; developed machine learning models to predict embodied and operational impacts of commercial buildings from simulated energy data."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Lena Baker M. Abu-Ennab",
+   "deg": "Ph.D. 2022 \u00b7 Civil Eng.",
+   "brief": "LCA of 3D-printed cement-based materials; cradle-to-gate assessment of kaolin-enhanced calcium sulfoaluminate cement mixes, showing significant reductions in embodied energy and GWP."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Fatemeh Pariafsai",
+   "deg": "Ph.D. 2023",
+   "brief": "Competency development in construction project management; proposed a conceptual competency model addressing gaps in management education and training programs."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Farnaz Nazari",
+   "deg": "Ph.D. 2024",
+   "brief": "Optimization methods for building energy efficiency at early design stages; evaluated performance and limitations of commonly used algorithms in energy simulation workflows."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Omid Haghighi",
+   "deg": "M.S. 2020 \ud83c\udfc6 Outstanding Award",
+   "brief": "BIM-based multi-objective optimization of embodied energy, operational energy, and embodied water. Also contributed to I-O hybrid model development for estimating embodied water impacts."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Jason Bullen",
+   "deg": "M.S. 2020 \ud83c\udfc6 Best Thesis",
+   "brief": "Embodied impacts of construction site logistics: material handling, equipment movement, and site planning. Used Delphi method for expert input. Best Research/Thesis Award."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Farshid Moosavi Tabatabaei",
+   "deg": "M.S. 2019",
+   "brief": "BIM-based tool linking Autodesk Revit with an input-output hybrid database for embodied impact calculations. Also worked on visualization methods for maintenance-priority identification."
+  },
+  {
+   "group": "ENSURE Lab",
+   "name": "Shashank Singh",
+   "deg": "M.S. 2017",
+   "brief": "Input-output hybrid models for embodied energy and carbon of construction materials. Examined facility manager preferences for flooring materials in hospital buildings."
+  },
+  {
+   "group": "SPACE Lab (Spatial Processing in Altered and Challenging Environments)",
+   "name": "Hannah Park",
+   "deg": "Ph.D. 2022",
+   "brief": "Spatial navigation, spatial representation, and cognitive styles. Established SPACE Lab research protocols. Work addressed navigation challenges during disasters where spatial cues are limited."
+  },
+  {
+   "group": "SPACE Lab (Spatial Processing in Altered and Challenging Environments)",
+   "name": "Vahideh Karimimansoob",
+   "deg": "M.S. 2023",
+   "brief": "Spatial ability and perception in challenging environments, with a focus on differences between heavy equipment operators and construction workers, and implications for safety and performance."
+  }
+ ]
+}

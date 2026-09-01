@@ -456,7 +456,7 @@ footer{background:#181822;padding: 64px var(--pad-x);border-top:1px solid rgba(2
 </style>
 <link rel="stylesheet" href="sketch.css">
 </head>
-<body>
+<body class="home">
 <!-- NAV + LIVE CARBON TICKER -->
 <style>
 /* ─── LIVE CARBON TICKER (docked in the nav bar) ─── */
@@ -477,7 +477,7 @@ nav.solid .co2:hover,nav.solid .co2:focus-visible{background:rgba(255,255,255,.1
 .co2-card-d b{color:#8fc99a;font-weight:500;font-variant-numeric:tabular-nums;}
 .co2-card-more{display:block;margin-top:12px;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc99a;}
 @media (max-width:1240px){.co2-since{display:none;}}
-@media (max-width:900px){.co2{margin-left:14px;padding:6px 11px;gap:7px;}.co2-card{display:none;}#co2-digits{font-size:.8rem;}}
+@media (max-width:1010px){.co2{margin-left:14px;padding:6px 11px;gap:7px;}.co2-card{display:none;}#co2-digits{font-size:.8rem;}}
 @media (prefers-reduced-motion:reduce){.co2-dot{animation:none;}}
 
 /* ─── NAV DROPDOWNS ─── */
@@ -528,7 +528,7 @@ nav.solid .co2:hover,nav.solid .co2:focus-visible{background:rgba(255,255,255,.1
 nav:not(.solid) .nav-burger { color: #fff; }
 nav.solid .nav-burger { color: #fff; }
 
-@media (max-width: 900px) {
+@media (max-width: 1010px) {
   nav, nav.solid { padding: 14px 20px; }
   /* above the drawer, or the close affordance is unreachable */
   .nav-burger { display: flex; position: relative; z-index: 2; }
@@ -577,7 +577,7 @@ nav.solid .nav-burger { color: #fff; }
 .nav-links > li.has-dd:nth-last-child(2):hover > .dd,
 .nav-links > li.has-dd:nth-last-child(2):focus-within > .dd,
 .nav-links > li.has-dd:nth-last-child(2).open > .dd { transform: translateY(0); }
-@media (max-width: 900px) {
+@media (max-width: 1010px) {
   .nav-links > li.has-dd:nth-last-child(2) > .dd { transform: none; }
 }
 </style>
@@ -600,41 +600,35 @@ nav.solid .nav-burger { color: #fff; }
     <li class="has-dd">
       <a href="science.html" aria-expanded="false">Explore our science<i class="dd-caret"></i></a>
       <div class="dd">
-        <a class="dd-link" href="lca.html"><span class="dd-t">Life Cycle Assessment</span><span class="dd-d">Embodied carbon &amp; material impacts</span></a>
-        <a class="dd-link" href="living-labs.html"><span class="dd-t">Sustainability-Resilience Nexus</span><span class="dd-d">Living Labs &amp; community co-design</span></a>
-        <a class="dd-link" href="climate.html"><span class="dd-t">Climate-Aware Design</span><span class="dd-d">Optimising for future climates</span></a>
-        <a class="dd-link" href="vr-training.html"><span class="dd-t">Immersive Training</span><span class="dd-d">VR for construction education</span></a>
-        <a class="dd-link" href="carbon-visualization.html"><span class="dd-t">Carbon Visualization</span><span class="dd-d">Interactive emissions data story</span></a>
-        <a class="dd-link" href="science.html"><span class="dd-t">All four themes &rarr;</span><span class="dd-d">The whole research programme</span></a>
+        <a class="dd-link" href="assess.html"><span class="dd-t">Assess</span><span class="dd-d">What are the environmental consequences?</span></a>
+        <a class="dd-link" href="optimize.html"><span class="dd-t">Optimize</span><span class="dd-d">What is the best solution?</span></a>
+        <a class="dd-link" href="predict.html"><span class="dd-t">Predict</span><span class="dd-d">What will happen next?</span></a>
+        <a class="dd-link" href="transform.html"><span class="dd-t">Transform</span><span class="dd-d">How do buildings endure?</span></a>
+        <a class="dd-link" href="educate.html"><span class="dd-t">Educate</span><span class="dd-d">Experiencing the invisible</span></a>
       </div>
     </li>
     <li class="has-dd">
       <a href="pi.html" aria-expanded="false">Our lab<i class="dd-caret"></i></a>
       <div class="dd">
-        <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP · Director</span></a>
-        <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Current researchers</span></a>
-        <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab &amp; SPACE Lab</span></a>
+        <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP</span></a>
+        <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Researchers in the lab</span></a>
+        <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab and SPACE Lab</span></a>
         <a class="dd-link" href="team.html#partners"><span class="dd-t">Partner Organizations</span><span class="dd-d">Who we build the work with</span></a>
-        <a class="dd-link" href="team.html#sponsors"><span class="dd-t">Research Sponsors</span><span class="dd-d">Agencies funding the lab</span></a>
       </div>
     </li>
     <li class="has-dd">
       <a href="news.html" aria-expanded="false">News<i class="dd-caret"></i></a>
       <div class="dd">
-        <a class="dd-link" href="news.html#featured"><span class="dd-t">Featured Story</span><span class="dd-d">Best Paper Award 2024</span></a>
-        <a class="dd-link" href="news.html#recent"><span class="dd-t">All Updates</span><span class="dd-d">Everything, newest first</span></a>
-        <a class="dd-link" href="news.html#recent?f=Award"><span class="dd-t">Awards</span><span class="dd-d">Honours and recognition</span></a>
-        <a class="dd-link" href="news.html#recent?f=Funding"><span class="dd-t">Funding</span><span class="dd-d">Active grants</span></a>
-        <a class="dd-link" href="news.html#recent?f=Collaboration"><span class="dd-t">Collaboration</span><span class="dd-d">Partners and networks</span></a>
+        <a class="dd-link" href="news.html#featured"><span class="dd-t">Featured story</span><span class="dd-d">What we are highlighting now</span></a>
+        <a class="dd-link" href="news.html#recent"><span class="dd-t">Updates</span><span class="dd-d">Everything, newest first</span></a>
       </div>
     </li>
+    <li><a href="gallery.html">Galleries</a></li>
     <li class="has-dd">
-      <a href="gallery.html" aria-expanded="false">Galleries<i class="dd-caret"></i></a>
+      <a href="resources.html" aria-expanded="false">Resources<i class="dd-caret"></i></a>
       <div class="dd">
-        <a class="dd-link" href="gallery.html#lab"><span class="dd-t">Lab &amp; Facilities</span><span class="dd-d">Francis Hall and the instrumentation</span></a>
-        <a class="dd-link" href="gallery.html#field"><span class="dd-t">Fieldwork &amp; Living Labs</span><span class="dd-d">Port Arthur, Medell&iacute;n, Indramayu</span></a>
-        <a class="dd-link" href="gallery.html#vr"><span class="dd-t">VR &amp; Immersive Training</span><span class="dd-d">Inside the virtual buildings</span></a>
-        <a class="dd-link" href="gallery.html#events"><span class="dd-t">Conferences &amp; Awards</span><span class="dd-d">Presentations and recognition</span></a>
+        <a class="dd-link" href="publications.html"><span class="dd-t">Publications</span><span class="dd-d">Papers, reports and theses</span></a>
+        <a class="dd-link" href="resources.html"><span class="dd-t">Resources</span><span class="dd-d">Tools, data and teaching material</span></a>
       </div>
     </li>
     <li><a href="index.html#contact" class="nav-cta">Join us / Connect</a></li>
@@ -669,7 +663,7 @@ nav.solid .nav-burger { color: #fff; }
   <canvas id="hero-canvas"></canvas>
 
   <video id="hero-video" autoplay muted loop playsinline
-    src="websitevideo-4k.mp4">
+    src="websitevideo-1.mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-text">
@@ -700,31 +694,31 @@ nav.solid .nav-burger { color: #fff; }
     <div class="slides" id="slides">
       <div class="slide">
         <div class="slide-inner">
-          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80&fit=crop" alt="Sustainable Architecture">
+          <img src="images/photo-1486325212027-8081e485255e.jpg" alt="Sustainable Architecture" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Sustainable Building Design · Texas A&M College of Architecture</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80&fit=crop" alt="Climate Research">
+          <img src="images/photo-1504711434969-e33886168f5c.jpg" alt="Climate Research" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Life Cycle Assessment & Climate Modeling</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=900&q=80&fit=crop" alt="VR Training Lab">
+          <img src="images/photo-1593508512255-86ab42a8e620.jpg" alt="VR Training Lab" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Virtual Reality Training Lab</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&fit=crop" alt="Community Living Lab">
+          <img src="images/photo-1529156069898-49953e39b3ac.jpg" alt="Community Living Lab" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Port Arthur Living Lab · Community Co-Design</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80&fit=crop" alt="Data & Modeling">
+          <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Data & Modeling" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Predictive Analytics & Data-Driven Design</div>
       </div>
@@ -753,13 +747,13 @@ nav.solid .nav-burger { color: #fff; }
     <div class="section-label">What We Believe</div>
   </div>
 
-  <!-- 1, MATTER MATTERS -->
-  <a class="project" href="lca.html">
+  <!-- 1, ASSESS -->
+  <a class="project" href="assess.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=85&fit=crop" alt="Materials and embodied carbon">
+        <img src="images/photo-1558618666-fcd25c85cd64.jpg" alt="Materials and embodied carbon" onerror="this.style.visibility='hidden'">
       </div>
-      <div class="sk-anim sk-bricks" aria-hidden="true">
+<div class="sk-anim sk-bricks" aria-hidden="true">
         <div class="wall">
           <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
           <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
@@ -773,24 +767,21 @@ nav.solid .nav-burger { color: #fff; }
       </div>
     </div>
     <div class="proj-text">
-      <div class="proj-label">Life Cycle Assessment & Environmental Impacts</div>
-      <h3 class="proj-statement">
-        Matter matters.
-      </h3>
-      <p class="proj-body">
-        Every material in a building carries a hidden carbon cost: in the mines, the factories, the trucks, and the landfills. Most of the world counts only the energy a building uses while occupied. We count everything. Across the full life cycle, from raw extraction to end-of-life demolition, we measure what buildings are actually made of and what that costs the planet. Because you can't reduce what you don't measure.
-      </p>
-      <span class="proj-more">Explore this research →</span>
+      <div class="proj-label"><span class="proj-num-i">1.</span> Assess</div>
+      <h3 class="proj-statement">What are the environmental consequences?</h3>
+      <p class="proj-lead">Quantifying whole-life environmental performance across materials, processes, buildings, and infrastructure.</p>
+      <p class="proj-body">We develop holistic assessment frameworks that quantify environmental impacts from raw material extraction through end-of-life recovery. By integrating embodied and operational impacts within an <b>energy-carbon-water nexus</b>, we provide science-based evidence that informs sustainable decisions spanning construction materials, building systems, whole buildings, and communities.</p>
+      <span class="proj-more">Explore this research &rarr;</span>
     </div>
   </a>
 
-  <!-- 2, BUILDINGS OUTLIVE THEIR BLUEPRINTS, flipped -->
-  <a class="project flip" href="climate.html">
+  <!-- 2, OPTIMIZE -->
+  <a class="project flip" href="optimize.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1000&q=85&fit=crop" alt="Climate change and building performance">
+        <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Multi-objective optimization" onerror="this.style.visibility='hidden'">
       </div>
-      <div class="sk-anim sk-pareto" aria-hidden="true">
+<div class="sk-anim sk-pareto" aria-hidden="true">
         <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
           <line class="axis" x1="26" y1="10" x2="26" y2="84"/>
           <line class="axis" x1="26" y1="84" x2="150" y2="84"/>
@@ -834,55 +825,21 @@ nav.solid .nav-burger { color: #fff; }
       </div>
     </div>
     <div class="proj-text">
-      <div class="proj-label">Climate-Aware Design & Optimization</div>
-      <h3 class="proj-statement">
-        Buildings outlive their blueprints.
-      </h3>
-      <p class="proj-body">
-        A building designed for today's climate will live through tomorrow's. By 2080, the city it stands in may be hotter, drier, and more volatile than anything its engineers imagined. We optimize buildings not for the world they're born into, but for the world they'll age through, jointly minimizing energy, carbon, and water across every future climate scenario we can model.
-      </p>
-      <span class="proj-more">Explore this research →</span>
+      <div class="proj-label"><span class="proj-num-i">2.</span> Optimize</div>
+      <h3 class="proj-statement">What is the best solution?</h3>
+      <p class="proj-lead">Identifying optimal design and retrofit strategies for evolving environmental and technological futures.</p>
+      <p class="proj-body">Decisions made today determine environmental performance for decades. ENSURE Lab develops forward and inverse multi-objective optimization frameworks that balance environmental impacts, cost, durability, occupant performance, and resilience while accounting for future climate scenarios, evolving electricity grids, technology transitions, and resource availability.</p>
+      <span class="proj-more">Explore this research &rarr;</span>
     </div>
   </a>
 
-  <!-- 3, RESILIENCE IS PERSONAL -->
-  <a class="project" href="living-labs.html">
+  <!-- 3, PREDICT -->
+  <a class="project" href="predict.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1000&q=85&fit=crop" alt="Community resilience and living labs">
+        <img src="images/photo-1497366412874-3415097a27e7.jpg" alt="Physics-informed AI and digital twins" onerror="this.style.visibility='hidden'">
       </div>
-      <div class="sk-anim sk-city" aria-hidden="true">
-        <div class="sky"></div>
-        <div class="blds"><div class="bld" style="height:46%"></div><div class="bld" style="height:68%"></div><div class="bld" style="height:54%"></div><div class="bld" style="height:82%"></div><div class="bld" style="height:60%"></div><div class="bld" style="height:74%"></div><div class="bld" style="height:50%"></div><div class="bld" style="height:88%"></div><div class="bld" style="height:58%"></div><div class="bld" style="height:70%"></div></div>
-        <div class="trees"><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i></div>
-        <span class="puff co2" style="left:11%;bottom:64%;animation-delay:0s"></span>
-        <span class="puff co2" style="left:26%;bottom:64%;animation-delay:0.7s"></span>
-        <span class="puff co2" style="left:41%;bottom:64%;animation-delay:1.4s"></span>
-        <span class="puff co2" style="left:56%;bottom:64%;animation-delay:0.35s"></span>
-        <span class="puff co2" style="left:71%;bottom:64%;animation-delay:1.05s"></span>
-        <span class="puff co2" style="left:86%;bottom:64%;animation-delay:1.75s"></span>
-        <span class="sk-anim-cap">A city exhaling CO&#8322;</span>
-      </div>
-    </div>
-    <div class="proj-text">
-      <div class="proj-label">Sustainability-Resilience Nexus & Living Labs</div>
-      <h3 class="proj-statement">
-        Resilience is personal.
-      </h3>
-      <p class="proj-body">
-        Port Arthur, Texas has flooded repeatedly. Medellín has faced decades of instability. Indramayu watches the sea rise. Climate resilience isn't an abstract policy goal for these communities: it's survival. We don't design solutions for them. We design with them. Our Living Lab approach puts affected residents, local businesses, and community organizations at the center of every decision, ensuring that what we build together is something they can actually use.
-      </p>
-      <span class="proj-more">Explore this research →</span>
-    </div>
-  </a>
-
-  <!-- 4, SEE IT TO BUILD IT, flipped -->
-  <a class="project flip" href="vr-training.html">
-    <div class="proj-img">
-      <div class="proj-img-inner">
-        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=1000&q=85&fit=crop" alt="Virtual reality and immersive training">
-      </div>
-      <div class="sk-anim sk-ball" aria-hidden="true">
+<div class="sk-anim sk-ball" aria-hidden="true">
         <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
           <circle class="globe" cx="80" cy="42" r="29"/>
           <ellipse class="lat" cx="80" cy="42" rx="29" ry="9.5"/>
@@ -906,61 +863,117 @@ nav.solid .nav-burger { color: #fff; }
       </div>
     </div>
     <div class="proj-text">
-      <div class="proj-label">Human-Centered Immersive Training & Simulation</div>
-      <h3 class="proj-statement">
-        See it to build it.
-      </h3>
-      <p class="proj-body">
-        Understanding how a building performs, or how to construct one safely, is hard to teach from a textbook. We put people inside virtual buildings, virtual construction sites, and virtual extreme environments instead. Students adjust insulation and window ratios and watch energy use change in real time. Workers assemble walls block by block in a simulation before they ever touch a real one. Astronauts train for environments they've never been in. The technology is new. The idea is ancient: the best way to learn something is to do it.
-      </p>
-      <span class="proj-more">Explore this research →</span>
+      <div class="proj-label"><span class="proj-num-i">3.</span> Predict</div>
+      <h3 class="proj-statement">What will happen next?</h3>
+      <p class="proj-lead">Transforming complex simulations into real-time engineering design intelligence.</p>
+      <p class="proj-body">We develop trustworthy, physics-informed, and economics-informed artificial intelligence that learns from high-fidelity simulations to predict environmental performance, optimize designs, and enable real-time decision-making. Our research combines machine learning, digital twins, optimization, and uncertainty quantification to accelerate sustainable design while maintaining scientific rigor.</p>
+      <span class="proj-more">Explore this research &rarr;</span>
+    </div>
+  </a>
+
+  <!-- 4, TRANSFORM -->
+  <a class="project flip" href="transform.html">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="images/photo-1559027615-cd4628902d4a.jpg" alt="Climate-resilient and regenerative built environments" onerror="this.style.visibility='hidden'">
+      </div>
+<div class="sk-anim sk-city" aria-hidden="true">
+        <div class="sky"></div>
+        <div class="blds"><div class="bld" style="height:46%"></div><div class="bld" style="height:68%"></div><div class="bld" style="height:54%"></div><div class="bld" style="height:82%"></div><div class="bld" style="height:60%"></div><div class="bld" style="height:74%"></div><div class="bld" style="height:50%"></div><div class="bld" style="height:88%"></div><div class="bld" style="height:58%"></div><div class="bld" style="height:70%"></div></div>
+        <div class="trees"><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i></div>
+        <span class="puff co2" style="left:11%;bottom:64%;animation-delay:0s"></span>
+        <span class="puff co2" style="left:26%;bottom:64%;animation-delay:0.7s"></span>
+        <span class="puff co2" style="left:41%;bottom:64%;animation-delay:1.4s"></span>
+        <span class="puff co2" style="left:56%;bottom:64%;animation-delay:0.35s"></span>
+        <span class="puff co2" style="left:71%;bottom:64%;animation-delay:1.05s"></span>
+        <span class="puff co2" style="left:86%;bottom:64%;animation-delay:1.75s"></span>
+        <span class="sk-anim-cap">Toward a carbon-negative city</span>
+      </div>
+    </div>
+    <div class="proj-text">
+      <div class="proj-label"><span class="proj-num-i">4.</span> Transform</div>
+      <h3 class="proj-statement">How do buildings endure?</h3>
+      <p class="proj-lead">Creating climate-resilient and regenerative built environments.</p>
+      <p class="proj-body">Environmental sustainability alone is no longer sufficient. We develop bio-based and bio-inspired materials, climate-responsive building systems, and integrated resilience assessment methods that enable buildings to withstand future hazards while reducing life cycle environmental impacts. Through community-engaged research and immersive technologies, we translate science into resilient, carbon-negative built environments.</p>
+      <span class="proj-more">Explore this research &rarr;</span>
     </div>
   </a>
 
 </div><!-- /projects -->
 
-<!-- ─── NEWS ─── -->
+<!-- ─── NEWS, as a list ─── -->
 <section id="news">
   <div class="news-top reveal">
-    <h2 class="news-title">News & Updates</h2>
-    <a href="news.html" class="news-all">See all →</a>
+    <h2 class="news-title">News &amp; Updates</h2>
+    <a href="news.html" class="news-all">See all &rarr;</a>
   </div>
+  <div class="news-list reveal d1">
+    <a class="news-item" href="news.html#featured">
+      <span class="ni-meta"><span class="ni-type">Award</span><span class="ni-date">2024</span></span>
+      <span class="ni-head">Maryam Abbasi Kamazani wins Best Paper Award at the International Conference on Net Zero Carbon Built Environment for climate-aware LCA optimization research.</span>
+      <span class="ni-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="news-item" href="news.html#recent">
+      <span class="ni-meta"><span class="ni-type">Funding</span><span class="ni-date">Active grant</span></span>
+      <span class="ni-head">NSF funds prognostic multi-objective optimization of the building energy-carbon-water nexus across all U.S. climate zones.</span>
+      <span class="ni-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="news-item" href="news.html#recent">
+      <span class="ni-meta"><span class="ni-type">Funding</span><span class="ni-date">Active grant</span></span>
+      <span class="ni-head">Life cycle assessment of 3D-printed hempcrete walls for large-scale additive construction receives DOE ARPA-E funding.</span>
+      <span class="ni-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="news-item" href="news.html#recent">
+      <span class="ni-meta"><span class="ni-type">Collaboration</span><span class="ni-date">Ongoing</span></span>
+      <span class="ni-head">Seven-country Living Lab collaboration spans Port Arthur TX, Medellin Colombia and Indramayu Indonesia on climate resilience.</span>
+      <span class="ni-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="news-item" href="news.html#recent">
+      <span class="ni-meta"><span class="ni-type">Research</span><span class="ni-date">2024</span></span>
+      <span class="ni-head">New NSF-funded collaboration with Penn State examines how hygrothermal climate stress degrades building envelope performance over 100+ years.</span>
+      <span class="ni-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</section>
 
-  <!-- Featured news item, image left, text right -->
-  <a class="news-featured reveal d1" href="#" >
-    <div class="news-feat-img">
-      <img src="https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?w=700&q=80&fit=crop" alt="Best Paper Award">
-    </div>
-    <div class="news-feat-text">
-      <div class="news-type">Award</div>
-      <span class="news-date">2024</span>
-      <div class="news-headline">
-        Maryam Abbasi Kamazani wins Best Paper Award at the International Conference on Net Zero Carbon Built Environment for climate-aware LCA optimization research.
-      </div>
-    </div>
-  </a>
-
-  <!-- 3-column news grid -->
-  <div class="news-grid reveal d2">
-    <a class="news-card" href="#" >
-      <div class="news-type">Funding</div>
-      <span class="news-date">Active Grant</span>
-      <div class="news-headline">NSF funds prognostic multi-objective optimization of building energy-carbon-water nexus across all U.S. climate zones</div>
+<!-- ─── IMAGE GRID, below news ─── -->
+<section id="home-gallery">
+  <div class="news-top reveal">
+    <h2 class="news-title">From the lab</h2>
+    <a href="gallery.html" class="news-all">All galleries &rarr;</a>
+  </div>
+  <div class="hg-grid reveal d1">
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1486325212027-8081e485255e.jpg" alt="Sustainable building design" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Sustainable building design</span>
     </a>
-    <a class="news-card" href="#" >
-      <div class="news-type">Funding</div>
-      <span class="news-date">Active Grant · DOE ARPA-E</span>
-      <div class="news-headline">Life cycle assessment of 3D-printed hempcrete walls for large-scale additive construction receives DOE ARPA-E funding</div>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1504711434969-e33886168f5c.jpg" alt="Life cycle assessment and climate modelling" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Life cycle assessment and climate modelling</span>
     </a>
-    <a class="news-card" href="#" >
-      <div class="news-type">Collaboration</div>
-      <span class="news-date">Ongoing</span>
-      <div class="news-headline">7-country Living Lab collaboration spans Port Arthur TX, Medellín Colombia and Indramayu Indonesia on climate resilience</div>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1593508512255-86ab42a8e620.jpg" alt="Virtual reality training lab" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Virtual reality training lab</span>
     </a>
-    <a class="news-card" href="#" >
-      <div class="news-type">Research</div>
-      <span class="news-date">2024</span>
-      <div class="news-headline">New NSF-funded collaboration with Penn State examines how hygrothermal climate stress degrades building envelope performance over 100+ years</div>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1529156069898-49953e39b3ac.jpg" alt="Port Arthur Living Lab" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Port Arthur Living Lab</span>
+    </a>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1558618666-fcd25c85cd64.jpg" alt="Materials and embodied carbon" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Materials and embodied carbon</span>
+    </a>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Predictive analytics" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Predictive analytics</span>
+    </a>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1617802690992-15d93263d3a9.jpg" alt="Immersive training" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Immersive training</span>
+    </a>
+    <a class="hg-item" href="gallery.html">
+      <img src="images/photo-1559027615-cd4628902d4a.jpg" alt="Community resilience" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span class="hg-cap">Community resilience</span>
     </a>
   </div>
 </section>
@@ -1029,10 +1042,11 @@ nav.solid .nav-burger { color: #fff; }
     </div>
     <div class="footer-col footer-nav-col">
       <div class="footer-nav-label">Research</div>
-      <a href="lca.html" class="footer-nav-link">Life Cycle Assessment</a>
-      <a href="climate.html" class="footer-nav-link">Climate-Aware Design</a>
-      <a href="living-labs.html" class="footer-nav-link">Living Labs</a>
-      <a href="vr-training.html" class="footer-nav-link">Immersive Training</a>
+      <a href="assess.html" class="footer-nav-link">Assess</a>
+      <a href="optimize.html" class="footer-nav-link">Optimize</a>
+      <a href="predict.html" class="footer-nav-link">Predict</a>
+      <a href="transform.html" class="footer-nav-link">Transform</a>
+      <a href="educate.html" class="footer-nav-link">Educate</a>
     </div>
     <div class="footer-col footer-nav-col">
       <div class="footer-nav-label">Site</div>
