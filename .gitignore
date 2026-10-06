@@ -21,3 +21,8 @@
 # rendered form, but this repo is public, so the working doc itself stays out.
 # Remove this line if you want it tracked.
 ENSURE_website_details.docx
+
+# Raw 4K drone footage, 519 MB. GitHub hard-rejects anything over 100 MB, and
+# this is the master for the hero loop. The committed hero-drone.mp4 is the
+# 1600x900 web encode made from it.
+250456142-drone-enigmatic-voyage-through*.mp4

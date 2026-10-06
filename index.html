@@ -145,7 +145,7 @@ nav.solid .nav-links a:hover{color:#8fc99a;}
 }
 .slide {
   min-width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   background: #181822;
   overflow: hidden;
   flex-shrink: 0;
@@ -662,8 +662,9 @@ nav.solid .nav-burger { color: #fff; }
   <!-- Animated canvas background, always shows. Video fades in on top when available. -->
   <canvas id="hero-canvas"></canvas>
 
-  <video id="hero-video" autoplay muted loop playsinline
-    src="websitevideo-1.mp4">
+  <video id="hero-video" autoplay muted loop playsinline preload="auto"
+    poster="images/hero-poster.jpg"
+    src="hero-drone.mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-text">
@@ -694,31 +695,31 @@ nav.solid .nav-burger { color: #fff; }
     <div class="slides" id="slides">
       <div class="slide">
         <div class="slide-inner">
-          <img src="images/photo-1486325212027-8081e485255e.jpg" alt="Sustainable Architecture" onerror="this.style.visibility='hidden'">
+          <img src="images/lab/campus-live-oak.jpg" alt="Sustainable Architecture" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Sustainable Building Design · Texas A&M College of Architecture</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="images/photo-1504711434969-e33886168f5c.jpg" alt="Climate Research" onerror="this.style.visibility='hidden'">
+          <img src="images/lab/hourglass-climate.jpg" alt="Climate Research" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Life Cycle Assessment & Climate Modeling</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="images/photo-1593508512255-86ab42a8e620.jpg" alt="VR Training Lab" onerror="this.style.visibility='hidden'">
+          <img src="images/lab/e3-outreach-session.jpg" alt="VR Training Lab" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Virtual Reality Training Lab</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="images/photo-1529156069898-49953e39b3ac.jpg" alt="Community Living Lab" onerror="this.style.visibility='hidden'">
+          <img src="images/lab/hands-globe.jpg" alt="Community Living Lab" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Port Arthur Living Lab · Community Co-Design</div>
       </div>
       <div class="slide">
         <div class="slide-inner">
-          <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Data & Modeling" onerror="this.style.visibility='hidden'">
+          <img src="images/lab/digital-modelling.jpg" alt="Data & Modeling" onerror="this.style.visibility='hidden'">
         </div>
         <div class="slide-label">Predictive Analytics & Data-Driven Design</div>
       </div>
@@ -751,7 +752,7 @@ nav.solid .nav-burger { color: #fff; }
   <a class="project" href="assess.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="images/photo-1558618666-fcd25c85cd64.jpg" alt="Materials and embodied carbon" onerror="this.style.visibility='hidden'">
+        <img src="images/lab/seedlings.jpg" alt="Materials and embodied carbon" onerror="this.style.visibility='hidden'">
       </div>
 <div class="sk-anim sk-bricks" aria-hidden="true">
         <div class="wall">
@@ -779,7 +780,7 @@ nav.solid .nav-burger { color: #fff; }
   <a class="project flip" href="optimize.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Multi-objective optimization" onerror="this.style.visibility='hidden'">
+        <img src="images/lab/digital-modelling.jpg" alt="Multi-objective optimization" onerror="this.style.visibility='hidden'">
       </div>
 <div class="sk-anim sk-pareto" aria-hidden="true">
         <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
@@ -837,7 +838,7 @@ nav.solid .nav-burger { color: #fff; }
   <a class="project" href="predict.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="images/photo-1497366412874-3415097a27e7.jpg" alt="Physics-informed AI and digital twins" onerror="this.style.visibility='hidden'">
+        <img src="images/lab/globe-water.jpg" alt="Physics-informed AI and digital twins" onerror="this.style.visibility='hidden'">
       </div>
 <div class="sk-anim sk-ball" aria-hidden="true">
         <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
@@ -875,7 +876,7 @@ nav.solid .nav-burger { color: #fff; }
   <a class="project flip" href="transform.html">
     <div class="proj-img">
       <div class="proj-img-inner">
-        <img src="images/photo-1559027615-cd4628902d4a.jpg" alt="Climate-resilient and regenerative built environments" onerror="this.style.visibility='hidden'">
+        <img src="images/lab/wind-coast.jpg" alt="Climate-resilient and regenerative built environments" onerror="this.style.visibility='hidden'">
       </div>
 <div class="sk-anim sk-city" aria-hidden="true">
         <div class="sky"></div>
@@ -944,35 +945,35 @@ nav.solid .nav-burger { color: #fff; }
   </div>
   <div class="hg-grid reveal d1">
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1486325212027-8081e485255e.jpg" alt="Sustainable building design" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/campus-live-oak.jpg" alt="Sustainable building design" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Sustainable building design</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1504711434969-e33886168f5c.jpg" alt="Life cycle assessment and climate modelling" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/hourglass-climate.jpg" alt="Life cycle assessment and climate modelling" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Life cycle assessment and climate modelling</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1593508512255-86ab42a8e620.jpg" alt="Virtual reality training lab" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/e3-outreach-session.jpg" alt="Virtual reality training lab" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Virtual reality training lab</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1529156069898-49953e39b3ac.jpg" alt="Port Arthur Living Lab" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/hands-globe.jpg" alt="Port Arthur Living Lab" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Port Arthur Living Lab</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1558618666-fcd25c85cd64.jpg" alt="Materials and embodied carbon" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/seedlings.jpg" alt="Materials and embodied carbon" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Materials and embodied carbon</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1451187580459-43490279c0fa.jpg" alt="Predictive analytics" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/digital-modelling.jpg" alt="Predictive analytics" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Predictive analytics</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1617802690992-15d93263d3a9.jpg" alt="Immersive training" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/e3-outreach-poster.jpg" alt="Immersive training" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Immersive training</span>
     </a>
     <a class="hg-item" href="gallery.html">
-      <img src="images/photo-1559027615-cd4628902d4a.jpg" alt="Community resilience" loading="lazy" onerror="this.style.visibility='hidden'">
+      <img src="images/lab/wind-coast.jpg" alt="Community resilience" loading="lazy" onerror="this.style.visibility='hidden'">
       <span class="hg-cap">Community resilience</span>
     </a>
   </div>
