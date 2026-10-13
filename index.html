@@ -211,92 +211,6 @@ nav.solid .nav-links a:hover{color:#8fc99a;}
 }
 
 /* ─── PROJECT SECTIONS ─── */
-/* Each project: full-width, image left ~44%, text right ~56% */
-/* On hover: image zooms, "Learn more" appears */
-.project { padding-inline: var(--pad-x);
-  display: grid;
-  grid-template-columns: 44% 56%;
-  min-height: 420px;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  transition: background .3s;
-  background: #fff;
-}
-.project:hover { background: #f7faf7; }
-
-/* Alternate: even projects flip image right */
-.project.flip { grid-template-columns: 56% 44%; }
-.project.flip .proj-img { order: 2; }
-.project.flip .proj-text { order: 1; }
-
-.proj-img {
-  overflow: hidden; position: relative;
-  background: #c8d8c2;
-  min-height: 460px;
-}
-.proj-img-inner {
-  width: 100%; height: 100%;
-  transition: transform .7s ease;
-  position: absolute; inset: 0;
-}
-.proj-img-inner img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  display: block;
-}
-.project:hover .proj-img-inner { transform: scale(1.05); }
-
-.proj-text {
-  padding: 80px 80px 80px 72px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.project.flip .proj-text {
-  padding: 80px 72px 80px 80px;
-}
-.proj-label {
-  font-size: .66rem; letter-spacing: .22em; text-transform: uppercase;
-  color: #2d7a3e; font-weight: 600; margin-bottom: 22px;
-  display: flex; align-items: center; gap: 10px;
-}
-.proj-label::before { content: ''; width: 20px; height: 1px; background: #2d7a3e; }
-.proj-statement {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 400; line-height: 1.15;
-  color: #545478; margin-bottom: 24px;
-  transition: color .3s;
-}
-.project:hover .proj-statement { color: #2d7a3e; }
-.proj-body {
-  font-size: .96rem; line-height: 1.84;
-  color: #545478; margin-bottom: 32px;
-}
-.proj-more {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: .85rem; font-weight: 500; letter-spacing: .06em;
-  color: #2d7a3e;
-  opacity: 0; transform: translateX(-8px);
-  transition: opacity .3s, transform .3s;
-}
-.project:hover .proj-more { opacity: 1; transform: translateX(0); }
-
-/* Projects section header */
-.projects-header {
-  padding: 100px var(--pad-x) 0;
-  border-top: 1px solid rgba(0,0,0,.07);
-}
-.projects-header .section-label {
-  font-size: .66rem; letter-spacing: .24em; text-transform: uppercase;
-  color: rgba(84,84,120,.84); font-weight: 500;
-  display: flex; align-items: center; gap: 14px; margin-bottom: 0;
-}
-.projects-header .section-label::after {
-  content: ''; flex: 1; height: 1px; background: rgba(0,0,0,.08);
-}
-
 /* ─── NEWS SECTION ─── */
 #news {
   background: #f2f2f2;
@@ -612,6 +526,7 @@ nav.solid .nav-burger { color: #fff; }
       <div class="dd">
         <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP</span></a>
         <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Researchers in the lab</span></a>
+        <a class="dd-link" href="people.html"><span class="dd-t">Team at a Glance</span><span class="dd-d">Everyone and their research, in one place</span></a>
         <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab and SPACE Lab</span></a>
         <a class="dd-link" href="team.html#partners"><span class="dd-t">Partner Organizations</span><span class="dd-d">Who we build the work with</span></a>
       </div>
@@ -669,8 +584,7 @@ nav.solid .nav-burger { color: #fff; }
   <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>
-      <span>Inspired by sustainability.</span>
-      <span>Driven by science.</span>
+      <span>Nature&#8209;Informed. Science&#8209;Driven.</span>
     </h1>
   </div>
   <!-- sheet 1, "Emissions since you visited this site" + "Track emissions" -->
@@ -688,219 +602,31 @@ nav.solid .nav-burger { color: #fff; }
   </div>
 </section>
 
-<!-- ─── VISION, photo slideshow + mission statement ─── -->
+<!-- ─── VISION, mission statement ─── -->
 <section id="vision">
-  <!-- LEFT: photo carousel, replace emoji with real <img> tags when ready -->
-  <div class="slideshow reveal">
-    <div class="slides" id="slides">
-      <div class="slide">
-        <div class="slide-inner">
-          <img src="images/lab/campus-live-oak.jpg" alt="Sustainable Architecture" onerror="this.style.visibility='hidden'">
-        </div>
-        <div class="slide-label">Sustainable Building Design · Texas A&M College of Architecture</div>
-      </div>
-      <div class="slide">
-        <div class="slide-inner">
-          <img src="images/lab/hourglass-climate.jpg" alt="Climate Research" onerror="this.style.visibility='hidden'">
-        </div>
-        <div class="slide-label">Life Cycle Assessment & Climate Modeling</div>
-      </div>
-      <div class="slide">
-        <div class="slide-inner">
-          <img src="images/lab/e3-outreach-session.jpg" alt="VR Training Lab" onerror="this.style.visibility='hidden'">
-        </div>
-        <div class="slide-label">Virtual Reality Training Lab</div>
-      </div>
-      <div class="slide">
-        <div class="slide-inner">
-          <img src="images/lab/hands-globe.jpg" alt="Community Living Lab" onerror="this.style.visibility='hidden'">
-        </div>
-        <div class="slide-label">Port Arthur Living Lab · Community Co-Design</div>
-      </div>
-      <div class="slide">
-        <div class="slide-inner">
-          <img src="images/lab/digital-modelling.jpg" alt="Data & Modeling" onerror="this.style.visibility='hidden'">
-        </div>
-        <div class="slide-label">Predictive Analytics & Data-Driven Design</div>
-      </div>
-    </div>
-    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
-    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
-    <div class="slide-dots" id="dots"></div>
-  </div>
-
-  <!-- RIGHT: big mission statement -->
+  <!-- mission statement -->
   <div class="vision-text reveal d1">
-    <h2 class="sk-title">Buildings, measured across lifetimes.</h2>
-    <h3 class="vision-headline">
-      ENSURE Lab studies buildings across lifetimes, generating knowledge to reduce carbon emissions and strengthen climate resilience.
-    </h3>
-    <p class="vision-body">
-      We are an interdisciplinary team of researchers at Texas A&M University's College of Architecture studying how buildings, materials, and communities perform under changing environmental conditions. Our work combines life cycle assessment, climate-aware modeling, data-driven decision support, materials research, community engagement, and immersive training tools, creating the scientific foundation for a lower-carbon, more resilient built environment.
+    <h2 class="sk-title">Creating science for buildings that endure</h2>
+    <p class="vision-headline">
+      ENSURE Lab pioneers science-informed methods that enable buildings to perform sustainably, adapt resiliently, and evolve intelligently throughout their life cycles. By integrating life cycle assessment, artificial intelligence, optimization, resilience science, and community-engaged research, we transform complex environmental challenges into practical solutions that improve decision-making from design through long-term operation. Our vision is to create built environments that not only reduce environmental impacts today but also remain resilient, regenerative, and responsive to tomorrow&rsquo;s changing climate.
     </p>
+    <ul class="sk-list sk-domains">
+      <li><div><a class="sk-dom-q" href="assess.html"><b>Assess:</b> What are the environmental consequences?</a>
+        <b class="sk-dom-lead">Quantifying whole-life environmental performance across materials, processes, buildings, and infrastructure.</b>
+        We develop holistic assessment frameworks that quantify environmental impacts from raw material extraction through end-of-life recovery. By integrating embodied and operational impacts within an <b>energy-carbon-water nexus</b>, we provide science-based evidence that informs sustainable decisions spanning construction materials, building systems, whole buildings, and communities.</div></li>
+      <li><div><a class="sk-dom-q" href="optimize.html"><b>Optimize:</b> What is the best solution?</a>
+        <b class="sk-dom-lead">Identifying optimal design and retrofit strategies for evolving environmental and technological futures.</b>
+        Decisions made today determine environmental performance for decades. ENSURE Lab develops forward and inverse multi-objective optimization frameworks that balance environmental impacts, cost, durability, occupant performance, and resilience while accounting for future climate scenarios, evolving electricity grids, technology transitions, and resource availability.</div></li>
+      <li><div><a class="sk-dom-q" href="predict.html"><b>Predict:</b> What will happen next?</a>
+        <b class="sk-dom-lead">Transforming complex simulations into real-time engineering design intelligence.</b>
+        We develop trustworthy, physics-informed, and economics-informed artificial intelligence that learns from high-fidelity simulations to predict environmental performance, optimize designs, and enable real-time decision-making. Our research combines machine learning, digital twins, optimization, and uncertainty quantification to accelerate sustainable design while maintaining scientific rigor.</div></li>
+      <li><div><a class="sk-dom-q" href="transform.html"><b>Transform:</b> How do buildings endure?</a>
+        <b class="sk-dom-lead">Creating climate-resilient and regenerative built environments.</b>
+        Environmental sustainability alone is no longer sufficient. We develop bio-based and bio-inspired materials, climate-responsive building systems, and integrated resilience assessment methods that enable buildings to withstand future hazards while reducing life cycle environmental impacts. Through community-engaged research and immersive technologies, we translate science into resilient, carbon-negative built environments.</div></li>
+    </ul>
     <a class="sk-lm" href="science.html">Learn more <i>&rarr;</i></a>
   </div>
 </section>
-
-<!-- ─── PROJECTS ─── -->
-<div id="projects">
-  <div class="projects-header">
-    <div class="section-label">What We Believe</div>
-  </div>
-
-  <!-- 1, ASSESS -->
-  <a class="project" href="assess.html">
-    <div class="proj-img">
-      <div class="proj-img-inner">
-        <img src="images/lab/seedlings.jpg" alt="Materials and embodied carbon" onerror="this.style.visibility='hidden'">
-      </div>
-<div class="sk-anim sk-bricks" aria-hidden="true">
-        <div class="wall">
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-          <div class="row"><i class="b" style="--i:0"></i><i class="b" style="--i:1"></i><i class="b" style="--i:2"></i><i class="b" style="--i:3"></i><i class="b" style="--i:4"></i><i class="b" style="--i:5"></i></div>
-        </div>
-        <div class="heat"></div>
-        <span class="sk-anim-cap">Every brick spends energy</span>
-      </div>
-    </div>
-    <div class="proj-text">
-      <div class="proj-label"><span class="proj-num-i">1.</span> Assess</div>
-      <h3 class="proj-statement">What are the environmental consequences?</h3>
-      <p class="proj-lead">Quantifying whole-life environmental performance across materials, processes, buildings, and infrastructure.</p>
-      <p class="proj-body">We develop holistic assessment frameworks that quantify environmental impacts from raw material extraction through end-of-life recovery. By integrating embodied and operational impacts within an <b>energy-carbon-water nexus</b>, we provide science-based evidence that informs sustainable decisions spanning construction materials, building systems, whole buildings, and communities.</p>
-      <span class="proj-more">Explore this research &rarr;</span>
-    </div>
-  </a>
-
-  <!-- 2, OPTIMIZE -->
-  <a class="project flip" href="optimize.html">
-    <div class="proj-img">
-      <div class="proj-img-inner">
-        <img src="images/lab/digital-modelling.jpg" alt="Multi-objective optimization" onerror="this.style.visibility='hidden'">
-      </div>
-<div class="sk-anim sk-pareto" aria-hidden="true">
-        <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
-          <line class="axis" x1="26" y1="10" x2="26" y2="84"/>
-          <line class="axis" x1="26" y1="84" x2="150" y2="84"/>
-          <g class="cloud">
-            <circle cx="44" cy="62" r="1.7" style="--i:0"/>
-            <circle cx="58" cy="54" r="1.7" style="--i:1"/>
-            <circle cx="70" cy="64" r="1.7" style="--i:2"/>
-            <circle cx="84" cy="50" r="1.7" style="--i:3"/>
-            <circle cx="96" cy="58" r="1.7" style="--i:4"/>
-            <circle cx="108" cy="46" r="1.7" style="--i:5"/>
-            <circle cx="120" cy="54" r="1.7" style="--i:6"/>
-            <circle cx="132" cy="44" r="1.7" style="--i:7"/>
-            <circle cx="52" cy="70" r="1.7" style="--i:8"/>
-            <circle cx="66" cy="46" r="1.7" style="--i:9"/>
-            <circle cx="78" cy="56" r="1.7" style="--i:10"/>
-            <circle cx="90" cy="66" r="1.7" style="--i:11"/>
-            <circle cx="102" cy="50" r="1.7" style="--i:12"/>
-            <circle cx="114" cy="60" r="1.7" style="--i:13"/>
-            <circle cx="126" cy="38" r="1.7" style="--i:14"/>
-            <circle cx="138" cy="48" r="1.7" style="--i:15"/>
-            <circle cx="60" cy="62" r="1.7" style="--i:16"/>
-            <circle cx="74" cy="70" r="1.7" style="--i:17"/>
-            <circle cx="88" cy="42" r="1.7" style="--i:18"/>
-            <circle cx="104" cy="64" r="1.7" style="--i:19"/>
-          </g>
-          <g class="front">
-            <path d="M34,74 C48,60 62,48 78,40 C98,31 118,29 132,29"/>
-            <circle cx="34" cy="74" r="2.1" style="--i:0"/>
-            <circle cx="42" cy="64" r="2.1" style="--i:1"/>
-            <circle cx="52" cy="55" r="2.1" style="--i:2"/>
-            <circle cx="64" cy="47" r="2.1" style="--i:3"/>
-            <circle cx="78" cy="40" r="2.1" style="--i:4"/>
-            <circle cx="96" cy="35" r="2.1" style="--i:5"/>
-            <circle cx="114" cy="31" r="2.1" style="--i:6"/>
-            <circle cx="132" cy="29" r="2.1" style="--i:7"/>
-          </g>
-          <circle class="pick" cx="78" cy="40" r="3"/>
-          <circle class="pick-ring" cx="78" cy="40" r="3.4"/>
-        </svg>
-        <span class="sk-anim-cap">The Pareto front &middot; one design chosen</span>
-      </div>
-    </div>
-    <div class="proj-text">
-      <div class="proj-label"><span class="proj-num-i">2.</span> Optimize</div>
-      <h3 class="proj-statement">What is the best solution?</h3>
-      <p class="proj-lead">Identifying optimal design and retrofit strategies for evolving environmental and technological futures.</p>
-      <p class="proj-body">Decisions made today determine environmental performance for decades. ENSURE Lab develops forward and inverse multi-objective optimization frameworks that balance environmental impacts, cost, durability, occupant performance, and resilience while accounting for future climate scenarios, evolving electricity grids, technology transitions, and resource availability.</p>
-      <span class="proj-more">Explore this research &rarr;</span>
-    </div>
-  </a>
-
-  <!-- 3, PREDICT -->
-  <a class="project" href="predict.html">
-    <div class="proj-img">
-      <div class="proj-img-inner">
-        <img src="images/lab/globe-water.jpg" alt="Physics-informed AI and digital twins" onerror="this.style.visibility='hidden'">
-      </div>
-<div class="sk-anim sk-ball" aria-hidden="true">
-        <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
-          <circle class="globe" cx="80" cy="42" r="29"/>
-          <ellipse class="lat" cx="80" cy="42" rx="29" ry="9.5"/>
-          <ellipse class="lat" cx="80" cy="42" rx="10" ry="29"/>
-          <g stroke-linejoin="round">
-            <path class="model" style="--i:0" d="M66,56 h11 v-15 h-11 z"/>
-            <path class="model" style="--i:1" d="M79,56 h13 v-23 h-13 z"/>
-            <path class="model" style="--i:2" d="M66,41 l5.5,-6 l5.5,6"/>
-            <path class="model" style="--i:3" d="M79,33 l6.5,-7 l6.5,7"/>
-            <path class="model" style="--i:4" d="M61,56 h37"/>
-          </g>
-          <path class="sweep" d="M53,42 h54"/>
-          <g class="hands">
-            <path d="M50,76 c5,-9 13,-13 22,-13"/>
-            <path d="M110,76 c-5,-9 -13,-13 -22,-13"/>
-            <path d="M44,83 c7,-11 17,-15 26,-15"/>
-            <path d="M116,83 c-7,-11 -17,-15 -26,-15"/>
-          </g>
-        </svg>
-        <span class="sk-anim-cap">Holding the building&rsquo;s future</span>
-      </div>
-    </div>
-    <div class="proj-text">
-      <div class="proj-label"><span class="proj-num-i">3.</span> Predict</div>
-      <h3 class="proj-statement">What will happen next?</h3>
-      <p class="proj-lead">Transforming complex simulations into real-time engineering design intelligence.</p>
-      <p class="proj-body">We develop trustworthy, physics-informed, and economics-informed artificial intelligence that learns from high-fidelity simulations to predict environmental performance, optimize designs, and enable real-time decision-making. Our research combines machine learning, digital twins, optimization, and uncertainty quantification to accelerate sustainable design while maintaining scientific rigor.</p>
-      <span class="proj-more">Explore this research &rarr;</span>
-    </div>
-  </a>
-
-  <!-- 4, TRANSFORM -->
-  <a class="project flip" href="transform.html">
-    <div class="proj-img">
-      <div class="proj-img-inner">
-        <img src="images/lab/wind-coast.jpg" alt="Climate-resilient and regenerative built environments" onerror="this.style.visibility='hidden'">
-      </div>
-<div class="sk-anim sk-city" aria-hidden="true">
-        <div class="sky"></div>
-        <div class="blds"><div class="bld" style="height:46%"></div><div class="bld" style="height:68%"></div><div class="bld" style="height:54%"></div><div class="bld" style="height:82%"></div><div class="bld" style="height:60%"></div><div class="bld" style="height:74%"></div><div class="bld" style="height:50%"></div><div class="bld" style="height:88%"></div><div class="bld" style="height:58%"></div><div class="bld" style="height:70%"></div></div>
-        <div class="trees"><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i><i class="tree"></i></div>
-        <span class="puff co2" style="left:11%;bottom:64%;animation-delay:0s"></span>
-        <span class="puff co2" style="left:26%;bottom:64%;animation-delay:0.7s"></span>
-        <span class="puff co2" style="left:41%;bottom:64%;animation-delay:1.4s"></span>
-        <span class="puff co2" style="left:56%;bottom:64%;animation-delay:0.35s"></span>
-        <span class="puff co2" style="left:71%;bottom:64%;animation-delay:1.05s"></span>
-        <span class="puff co2" style="left:86%;bottom:64%;animation-delay:1.75s"></span>
-        <span class="sk-anim-cap">Toward a carbon-negative city</span>
-      </div>
-    </div>
-    <div class="proj-text">
-      <div class="proj-label"><span class="proj-num-i">4.</span> Transform</div>
-      <h3 class="proj-statement">How do buildings endure?</h3>
-      <p class="proj-lead">Creating climate-resilient and regenerative built environments.</p>
-      <p class="proj-body">Environmental sustainability alone is no longer sufficient. We develop bio-based and bio-inspired materials, climate-responsive building systems, and integrated resilience assessment methods that enable buildings to withstand future hazards while reducing life cycle environmental impacts. Through community-engaged research and immersive technologies, we translate science into resilient, carbon-negative built environments.</p>
-      <span class="proj-more">Explore this research &rarr;</span>
-    </div>
-  </a>
-
-</div><!-- /projects -->
 
 <!-- ─── NEWS, as a list ─── -->
 <section id="news">
@@ -1214,29 +940,6 @@ vid.addEventListener('canplay', () => { vid.play().catch(() => {}); });
 // Also try playing on user interaction as fallback
 document.addEventListener('click', () => { if (vid.paused) vid.play().catch(() => {}); }, { once: true });
 
-// ── Slideshow
-let current = 0;
-const slides = document.getElementById('slides');
-const allSlides = slides.querySelectorAll('.slide');
-const dotsEl = document.getElementById('dots');
-const total = allSlides.length;
-
-allSlides.forEach((_, i) => {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i === 0 ? ' active' : '');
-  d.onclick = () => goTo(i);
-  dotsEl.appendChild(d);
-});
-
-function goTo(n) {
-  current = (n + total) % total;
-  slides.style.transform = `translateX(-${current * 100}%)`;
-  document.querySelectorAll('.dot').forEach((d, i) =>
-    d.classList.toggle('active', i === current)
-  );
-}
-function moveSlide(dir) { goTo(current + dir); }
-setInterval(() => moveSlide(1), 4500);
 
 // ── Scroll reveal
 const obs = new IntersectionObserver(

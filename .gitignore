@@ -26,3 +26,8 @@ ENSURE_website_details.docx
 # this is the master for the hero loop. The committed hero-drone.mp4 is the
 # 1600x900 web encode made from it.
 250456142-drone-enigmatic-voyage-through*.mp4
+
+# Source material from the lab (details/publication docs, original headshots,
+# diagram slides). The site uses processed copies under images/; the
+# originals stay local because this repo is public.
+new materials/

@@ -254,6 +254,7 @@ nav.solid .nav-burger { color: #fff; }
       <div class="dd">
         <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP</span></a>
         <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Researchers in the lab</span></a>
+        <a class="dd-link" href="people.html"><span class="dd-t">Team at a Glance</span><span class="dd-d">Everyone and their research, in one place</span></a>
         <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab and SPACE Lab</span></a>
         <a class="dd-link" href="team.html#partners"><span class="dd-t">Partner Organizations</span><span class="dd-d">Who we build the work with</span></a>
       </div>
@@ -307,32 +308,120 @@ nav.solid .nav-burger { color: #fff; }
   <p class="sk-lede">Transforming complex simulations into real-time engineering design intelligence, so that high-fidelity analysis can inform decisions at the speed design actually moves.</p>
 </section>
 
+<section class="dom-cards" id="themes">
+  <div class="project dom-card reveal">
+    <div class="proj-img">
+      <div class="proj-img-inner">
+        <img src="images/lab/globe-water.jpg" alt="Physics-informed AI and digital twins" loading="lazy" onerror="this.style.visibility='hidden'">
+      </div>
+      <div class="sk-anim sk-ball" aria-hidden="true">
+        <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">
+          <circle class="globe" cx="80" cy="42" r="29"/>
+          <ellipse class="lat" cx="80" cy="42" rx="29" ry="9.5"/>
+          <ellipse class="lat" cx="80" cy="42" rx="10" ry="29"/>
+          <g stroke-linejoin="round">
+            <path class="model" style="--i:0" d="M66,56 h11 v-15 h-11 z"/>
+            <path class="model" style="--i:1" d="M79,56 h13 v-23 h-13 z"/>
+            <path class="model" style="--i:2" d="M66,41 l5.5,-6 l5.5,6"/>
+            <path class="model" style="--i:3" d="M79,33 l6.5,-7 l6.5,7"/>
+            <path class="model" style="--i:4" d="M61,56 h37"/>
+          </g>
+          <path class="sweep" d="M53,42 h54"/>
+          <g class="hands">
+            <path d="M50,76 c5,-9 13,-13 22,-13"/>
+            <path d="M110,76 c-5,-9 -13,-13 -22,-13"/>
+            <path d="M44,83 c7,-11 17,-15 26,-15"/>
+            <path d="M116,83 c-7,-11 -17,-15 -26,-15"/>
+          </g>
+        </svg>
+        <span class="sk-anim-cap">Holding the building&rsquo;s future</span>
+      </div>
+    </div>
+    <div class="proj-text">
+      <h2 class="proj-statement">Learn, Predict, and Optimize</h2>
+      <p class="proj-lead">Artificial intelligence transforms data into knowledge, prediction into insight, and computation into action.</p>
+      <p class="proj-body">High-fidelity environmental and resilience analyses often require computational resources that exceed the practical constraints of design and construction. ENSURE Lab develops trustworthy, physics-informed, and economics-informed AI that learns from detailed simulations to predict life cycle performance in real time. By combining machine learning with life cycle assessment, optimization, digital twins, and immersive visualization, we develop intelligent surrogate models that accelerate prediction, optimization, and decision support while preserving scientific credibility. The result is AI that augments engineering expertise and enables faster, smarter, and more sustainable building decisions.</p>
+      <a class="proj-more" href="#projects">Learn more about projects <i aria-hidden="true">&rarr;</i></a>
+    </div>
+  </div>
+</section>
+
 <section class="viz-band" id="viz">
-  <figure class="viz reveal d1" data-steps="the forward chain runs, then the inverse chain">
-    <div class="viz-frame">
-      <svg viewBox="0 0 900 340" role="img" aria-labelledby="vt vd" class="viz-svg">
-        <title id="vt">Forward and inverse prediction</title><desc id="vd">A forward chain runs from design variables through a surrogate model to predicted performance. An inverse chain then runs from performance targets back to designs that meet them.</desc>
-      <text x="60" y="34" font-size="17" font-weight="800" fill="#26262f" class="v-title">Two directions, one surrogate</text>
-      <text x="60" y="80" font-size="13" font-weight="800" fill="#2d7a3e" class="v-row" style="--i:0">FORWARD</text>
-      <g class="v-row" style="--i:1"><rect x="60" y="96" width="190" height="66" rx="3" fill="#fff" stroke="#26262f" stroke-width="1.8"/><text x="155.0" y="125.0" text-anchor="middle" font-size="14" font-weight="700" fill="#26262f">Design variables</text><text x="155.0" y="145.0" text-anchor="middle" font-size="12" fill="#55555f">envelope, glazing, mass</text></g>
-      <g class="v-row" style="--i:2"><path class="v-draw" d="M250,129 L350,129" fill="none" stroke="#2d7a3e" stroke-width="2.5"/><path d="M350,123 L360,129 L350,135Z" fill="#2d7a3e"/><text x="305.0" y="117" text-anchor="middle" font-size="12" font-weight="700" fill="#2d7a3e">surrogate</text></g>
-      <g class="v-row" style="--i:3"><rect x="360" y="96" width="190" height="66" rx="3" fill="#fff" stroke="#26262f" stroke-width="1.8"/><text x="455.0" y="125.0" text-anchor="middle" font-size="14" font-weight="700" fill="#26262f">Predicted performance</text><text x="455.0" y="145.0" text-anchor="middle" font-size="12" fill="#55555f">carbon, energy, comfort</text></g>
-      <g class="v-row" style="--i:4"><path class="v-draw" d="M550,129 L650,129" fill="none" stroke="#2d7a3e" stroke-width="2.5"/><path d="M650,123 L660,129 L650,135Z" fill="#2d7a3e"/><text x="605.0" y="117" text-anchor="middle" font-size="12" font-weight="700" fill="#2d7a3e">in seconds</text></g>
-      <g class="v-row" style="--i:5"><rect x="660" y="96" width="180" height="66" rx="3" fill="#f2f7f3" stroke="#2d7a3e" stroke-width="1.8"/><text x="750.0" y="125.0" text-anchor="middle" font-size="14" font-weight="700" fill="#2d7a3e">Decide now</text><text x="750.0" y="145.0" text-anchor="middle" font-size="12" fill="#55555f">inside a design session</text></g>
-      <text x="60" y="212" font-size="13" font-weight="800" fill="#c0392b" class="v-row" style="--i:6">INVERSE</text>
-      <g class="v-row" style="--i:7"><rect x="60" y="228" width="190" height="66" rx="3" fill="#fff" stroke="#c0392b" stroke-width="1.8"/><text x="155.0" y="257.0" text-anchor="middle" font-size="14" font-weight="700" fill="#c0392b">Performance targets</text><text x="155.0" y="277.0" text-anchor="middle" font-size="12" fill="#55555f">a carbon or comfort goal</text></g>
-      <g class="v-row" style="--i:8"><path class="v-draw" d="M250,261 L350,261" fill="none" stroke="#c0392b" stroke-width="2.5"/><path d="M350,255 L360,261 L350,267Z" fill="#c0392b"/><text x="305.0" y="249" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">inverse model</text></g>
-      <g class="v-row" style="--i:9"><rect x="360" y="196" width="190" height="44" rx="3" fill="#fff" stroke="#26262f" stroke-width="1.8"/><text x="455.0" y="214.0" text-anchor="middle" font-size="14" font-weight="700" fill="#26262f">Design A</text><text x="455.0" y="234.0" text-anchor="middle" font-size="12" fill="#55555f">meets the target</text></g>
-      <g class="v-row" style="--i:10"><rect x="360" y="252" width="190" height="44" rx="3" fill="#fff" stroke="#26262f" stroke-width="1.8"/><text x="455.0" y="270.0" text-anchor="middle" font-size="14" font-weight="700" fill="#26262f">Design B</text><text x="455.0" y="290.0" text-anchor="middle" font-size="12" fill="#55555f">meets it differently</text></g>
-      <g class="v-row" style="--i:11"><path class="v-draw" d="M550,261 L650,261" fill="none" stroke="#c0392b" stroke-width="2.5"/><path d="M650,255 L660,261 L650,267Z" fill="#c0392b"/><text x="605.0" y="249" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">explainable</text></g>
-      <g class="v-row" style="--i:12"><rect x="660" y="228" width="180" height="66" rx="3" fill="#fdf3f2" stroke="#c0392b" stroke-width="1.8"/><text x="750.0" y="257.0" text-anchor="middle" font-size="14" font-weight="700" fill="#c0392b">Understand why</text><text x="750.0" y="277.0" text-anchor="middle" font-size="12" fill="#55555f">which variable drove it</text></g>
-      <text x="60" y="322" font-size="12.5" fill="#55555f" class="v-row" style="--i:13">High-fidelity simulation can take hours per design. A surrogate learns from those runs and answers in real time.</text>
+  <figure class="viz vp reveal d1">
+  <div class="vp-tabs" role="tablist" aria-label="Diagram">
+    <button type="button" class="vp-tab on" role="tab" aria-selected="true" data-i="0"><span>1</span>Forward prediction</button>
+    <button type="button" class="vp-tab" role="tab" aria-selected="false" data-i="1"><span>2</span>Inverse prediction</button>
+  </div>
+  <div class="viz-frame vp-stage">
+    <div class="vp-scene vp-forward on" data-cap="A neural network trained on simulation results takes building geometry, climate and internal gains, works within site constraints and design intent, and returns the optimal solution in real time instead of after hours of simulation.">
+      <svg class="viz-svg vp-svg" viewBox="100 110 1220 600" role="img" aria-label="A neural network turns design inputs into an optimal solution">
+<g class="vp-in-l" style="--d:0.00s"><rect x="120" y="135" width="235" height="174" rx="48" fill="#b5cc7f"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="214.2">Building</tspan><tspan x="237.5" y="251.4">geometry</tspan></text></g>
+<g class="vp-in-l" style="--d:0.15s"><rect x="120" y="322" width="235" height="174" rx="48" fill="#f7b072"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="419.9">Climate</tspan></text></g>
+<g class="vp-in-l" style="--d:0.30s"><rect x="120" y="510" width="235" height="174" rx="48" fill="#95b3d7"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="589.2">Internal</tspan><tspan x="237.5" y="626.5">gains</tspan></text></g>
+<circle class="vp-pop" style="--d:0.55s" cx="618" cy="408" r="193" fill="#d9d9d9"/>
+<path class="vp-draw" style="--d:0.70s" pathLength="1" d="M355,218 H398 L478,276" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<path class="vp-draw" style="--d:0.82s" pathLength="1" d="M355,408 H425" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<path class="vp-draw" style="--d:0.94s" pathLength="1" d="M355,595 H398 L478,537" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<circle class="vp-pop" style="--d:0.65s" cx="355" cy="218" r="9" fill="#4a7ebb"/>
+<circle class="vp-pop" style="--d:0.77s" cx="355" cy="408" r="9" fill="#4a7ebb"/>
+<circle class="vp-pop" style="--d:0.89s" cx="355" cy="595" r="9" fill="#4a7ebb"/>
+<path class="vp-draw" style="--d:1.00s" pathLength="1" d="M428,218 V200 Q428,148 480,148 H756 Q808,148 808,200 V218" stroke="#d07572" stroke-width="30" fill="none"/>
+<text class="vp-fade" style="--d:1.30s" text-anchor="middle" font-size="23" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="618" y="207.0">SITE CONSTRAINTS</tspan></text>
+<path class="vp-draw" style="--d:1.15s" pathLength="1" d="M428,598 V616 Q428,668 480,668 H756 Q808,668 808,616 V598" stroke="#75bed5" stroke-width="30" fill="none"/>
+<text class="vp-fade" style="--d:1.45s" text-anchor="middle" font-size="23" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="618" y="640.0">DESIGN INTENT</tspan></text>
+<g class="vp-pop" style="--d:0.85s"><g class="vp-spin"><path d="M589.6,293.5 L594.5,266.9 L641.5,266.9 L646.4,293.5 L663.2,299.0 L678.9,306.9 L701.1,291.7 L734.3,324.9 L719.1,347.1 L727.0,362.8 L732.5,379.6 L759.1,384.5 L759.1,431.5 L732.5,436.4 L727.0,453.2 L719.1,468.9 L734.3,491.1 L701.1,524.3 L678.9,509.1 L663.2,517.0 L646.4,522.5 L641.5,549.1 L594.5,549.1 L589.6,522.5 L572.8,517.0 L557.1,509.1 L534.9,524.3 L501.7,491.1 L516.9,468.9 L509.0,453.2 L503.5,436.4 L476.9,431.5 L476.9,384.5 L503.5,379.6 L509.0,362.8 L516.9,347.1 L501.7,324.9 L534.9,291.7 L557.1,306.9 L572.8,299.0Z" fill="none" stroke="#4bacc6" stroke-width="6" stroke-linejoin="round"/></g></g>
+<g class="vp-pop" style="--d:0.95s"><g class="vp-spin vp-rev"><path d="M598.7,330.4 L600.9,305.4 L635.1,305.4 L637.3,330.4 L648.6,334.1 L659.3,339.5 L678.5,323.4 L702.6,347.5 L686.5,366.7 L691.9,377.4 L695.6,388.7 L720.6,390.9 L720.6,425.1 L695.6,427.3 L691.9,438.6 L686.5,449.3 L702.6,468.5 L678.5,492.6 L659.3,476.5 L648.6,481.9 L637.3,485.6 L635.1,510.6 L600.9,510.6 L598.7,485.6 L587.4,481.9 L576.7,476.5 L557.5,492.6 L533.4,468.5 L549.5,449.3 L544.1,438.6 L540.4,427.3 L515.4,425.1 L515.4,390.9 L540.4,388.7 L544.1,377.4 L549.5,366.7 L533.4,347.5 L557.5,323.4 L576.7,339.5 L587.4,334.1Z" fill="#376d9b"/><circle cx="618" cy="408" r="38" fill="#d9d9d9" stroke="#4bacc6" stroke-width="8"/><circle cx="618" cy="408" r="31" fill="#d9d9d9" stroke="#376d9b" stroke-width="2"/></g></g>
+<path id="nn-arc-f" d="M470,368 A152,152 0 0 1 766,368" fill="none"/>
+<text class="vp-fade" style="--d:1.10s" font-size="27" font-weight="500" letter-spacing=".06em" fill="#1f497d"><textPath href="#nn-arc-f" startOffset="50%" text-anchor="middle">NEURAL NETWORKS</textPath></text>
+<g class="vp-fade" style="--d:1.70s"><g class="vp-nudge"><path d="M810,318 H878" stroke="#376d9b" stroke-width="3" fill="none"/><path d="M862,303 L878,318 L862,333" stroke="#376d9b" stroke-width="3" fill="none"/></g></g>
+<g class="vp-fade" style="--d:1.85s"><g class="vp-nudge"><path d="M810,397 H878" stroke="#376d9b" stroke-width="3" fill="none"/><path d="M862,382 L878,397 L862,412" stroke="#376d9b" stroke-width="3" fill="none"/></g></g>
+<g class="vp-fade" style="--d:2.00s"><g class="vp-nudge"><path d="M810,480 H878" stroke="#376d9b" stroke-width="3" fill="none"/><path d="M862,465 L878,480 L862,495" stroke="#376d9b" stroke-width="3" fill="none"/></g></g>
+<g class="vp-in-r" style="--d:2.25s"><g class="vp-scan"><circle cx="1043" cy="392" r="100" fill="#fff" stroke="#b5cc7f" stroke-width="26"/><path d="M961.6,473.4 L883.6,551.4" stroke="#b5cc7f" stroke-width="38" stroke-linecap="round"/><g class="vp-pop" style="--d:2.70s"><path d="M975.0,403.0 L1043.0,335.0 L1111.0,403.0" stroke="#c0504d" stroke-width="9.0" fill="none"/><path d="M993.0,405.0 L1043.0,355.0 L1093.0,405.0 L1093.0,450.0 L1060.0,450.0 L1060.0,410.0 L1032.0,410.0 L1032.0,450.0 L993.0,450.0 Z" fill="#c0504d"/></g></g></g>
+<text class="vp-fade" style="--d:2.90s" text-anchor="middle" font-size="27" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="1043" y="222.0">OPTIMAL</tspan><tspan x="1043" y="255.8">SOLUTION</tspan></text>
       </svg>
     </div>
-    <div class="viz-foot">
-      <figcaption class="viz-cap">Forward prediction replaces slow physics simulation with a learned model, so performance can be estimated while a decision is still open. Inverse prediction runs the other way: state the target, get designs that reach it, plus the reason they work.</figcaption>
-      <button class="viz-replay" type="button">Replay</button>
+    <div class="vp-scene vp-inverse" data-cap="Inverse prediction runs the other way. Set the performance target and the cost constraints first, and the network works backwards to a family of target-centered designs that meet them, each one explainable and buildable." hidden>
+      <svg class="viz-svg vp-svg" viewBox="100 110 1220 600" role="img" aria-label="A target and cost constraints lead to a family of designs">
+<g class="vp-in-l" style="--d:0.00s"><rect x="120" y="135" width="235" height="174" rx="48" fill="#b5cc7f"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="214.2">Building</tspan><tspan x="237.5" y="251.4">geometry</tspan></text></g>
+<g class="vp-in-l" style="--d:0.15s"><rect x="120" y="322" width="235" height="174" rx="48" fill="#f7b072"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="419.9">Climate</tspan></text></g>
+<g class="vp-in-l" style="--d:0.30s"><rect x="120" y="510" width="235" height="174" rx="48" fill="#95b3d7"/><text text-anchor="middle" font-size="31" font-weight="500" fill="#fff"><tspan x="237.5" y="589.2">Internal</tspan><tspan x="237.5" y="626.5">gains</tspan></text></g>
+<circle class="vp-pop" style="--d:0.55s" cx="618" cy="408" r="193" fill="#d9d9d9"/>
+<path class="vp-draw" style="--d:0.70s" pathLength="1" d="M355,218 H398 L478,276" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<path class="vp-draw" style="--d:0.82s" pathLength="1" d="M355,408 H425" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<path class="vp-draw" style="--d:0.94s" pathLength="1" d="M355,595 H398 L478,537" stroke="#4a7ebb" stroke-width="3" fill="none"/>
+<circle class="vp-pop" style="--d:0.65s" cx="355" cy="218" r="9" fill="#4a7ebb"/>
+<circle class="vp-pop" style="--d:0.77s" cx="355" cy="408" r="9" fill="#4a7ebb"/>
+<circle class="vp-pop" style="--d:0.89s" cx="355" cy="595" r="9" fill="#4a7ebb"/>
+<path class="vp-draw" style="--d:1.00s" pathLength="1" d="M428,218 V200 Q428,148 480,148 H756 Q808,148 808,200 V218" stroke="#d07572" stroke-width="30" fill="none"/>
+<text class="vp-fade" style="--d:1.30s" text-anchor="middle" font-size="23" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="618" y="207.0">SITE CONSTRAINTS</tspan></text>
+<path class="vp-draw" style="--d:1.15s" pathLength="1" d="M428,598 V616 Q428,668 480,668 H756 Q808,668 808,616 V598" stroke="#75bed5" stroke-width="30" fill="none"/>
+<text class="vp-fade" style="--d:1.45s" text-anchor="middle" font-size="23" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="618" y="640.0">DESIGN INTENT</tspan></text>
+<g class="vp-pop" style="--d:0.85s"><g class="vp-spin"><path d="M589.6,293.5 L594.5,266.9 L641.5,266.9 L646.4,293.5 L663.2,299.0 L678.9,306.9 L701.1,291.7 L734.3,324.9 L719.1,347.1 L727.0,362.8 L732.5,379.6 L759.1,384.5 L759.1,431.5 L732.5,436.4 L727.0,453.2 L719.1,468.9 L734.3,491.1 L701.1,524.3 L678.9,509.1 L663.2,517.0 L646.4,522.5 L641.5,549.1 L594.5,549.1 L589.6,522.5 L572.8,517.0 L557.1,509.1 L534.9,524.3 L501.7,491.1 L516.9,468.9 L509.0,453.2 L503.5,436.4 L476.9,431.5 L476.9,384.5 L503.5,379.6 L509.0,362.8 L516.9,347.1 L501.7,324.9 L534.9,291.7 L557.1,306.9 L572.8,299.0Z" fill="none" stroke="#4bacc6" stroke-width="6" stroke-linejoin="round"/></g></g>
+<g class="vp-pop" style="--d:0.95s"><g class="vp-spin vp-rev"><path d="M598.7,330.4 L600.9,305.4 L635.1,305.4 L637.3,330.4 L648.6,334.1 L659.3,339.5 L678.5,323.4 L702.6,347.5 L686.5,366.7 L691.9,377.4 L695.6,388.7 L720.6,390.9 L720.6,425.1 L695.6,427.3 L691.9,438.6 L686.5,449.3 L702.6,468.5 L678.5,492.6 L659.3,476.5 L648.6,481.9 L637.3,485.6 L635.1,510.6 L600.9,510.6 L598.7,485.6 L587.4,481.9 L576.7,476.5 L557.5,492.6 L533.4,468.5 L549.5,449.3 L544.1,438.6 L540.4,427.3 L515.4,425.1 L515.4,390.9 L540.4,388.7 L544.1,377.4 L549.5,366.7 L533.4,347.5 L557.5,323.4 L576.7,339.5 L587.4,334.1Z" fill="#376d9b"/><circle cx="618" cy="408" r="38" fill="#d9d9d9" stroke="#4bacc6" stroke-width="8"/><circle cx="618" cy="408" r="31" fill="#d9d9d9" stroke="#376d9b" stroke-width="2"/></g></g>
+<path id="nn-arc-i" d="M470,368 A152,152 0 0 1 766,368" fill="none"/>
+<text class="vp-fade" style="--d:1.10s" font-size="27" font-weight="500" letter-spacing=".06em" fill="#1f497d"><textPath href="#nn-arc-i" startOffset="50%" text-anchor="middle">NEURAL NETWORKS</textPath></text>
+<path class="vp-draw" style="--d:1.60s" pathLength="1" d="M806,222 H822 Q874,222 874,274 V546 Q874,598 822,598 H806" stroke="#d7e4bd" stroke-width="30" fill="none"/>
+<text class="vp-fade" style="--d:1.85s" transform="rotate(-90 838 410)" x="838" y="418" text-anchor="middle" font-size="23" font-weight="500" letter-spacing=".04em" fill="#26262f">COST CONSTRAINTS</text>
+<g class="vp-fade" style="--d:2.00s"><g class="vp-nudge"><path d="M760,400 H818" stroke="#376d9b" stroke-width="3" fill="none"/><path d="M802,385 L818,400 L802,415" stroke="#376d9b" stroke-width="3" fill="none"/></g></g>
+<g class="vp-pop" style="--d:2.30s"><g class="vp-pulse"><circle cx="995" cy="398" r="74" fill="none" stroke="#376d9b" stroke-width="15"/><circle cx="995" cy="398" r="40" fill="none" stroke="#376d9b" stroke-width="13"/><circle cx="995" cy="398" r="12" fill="none" stroke="#376d9b" stroke-width="9"/><path d="M995,338 L995,294" stroke="#376d9b" stroke-width="13"/><path d="M995,458 L995,502" stroke="#376d9b" stroke-width="13"/><path d="M935,398 L891,398" stroke="#376d9b" stroke-width="13"/><path d="M1055,398 L1099,398" stroke="#376d9b" stroke-width="13"/></g></g>
+<text class="vp-fade" style="--d:2.50s" text-anchor="middle" font-size="27" font-weight="500" letter-spacing=".04em" fill="#26262f"><tspan x="1010" y="168.0">TARGET-</tspan><tspan x="1010" y="201.8">CENTERED</tspan><tspan x="1010" y="235.5">SOLUTIONS</tspan></text>
+<path class="vp-draw" style="--d:2.75s" pathLength="1" d="M1100,398 C1150,398 1120,138 1172,138" stroke="#9bbb59" stroke-width="3" fill="none"/>
+<image class="vp-pop" style="--d:2.95s" href="images/viz/building-blue.png" x="1168" y="98" width="118"/>
+<path class="vp-draw" style="--d:2.93s" pathLength="1" d="M1100,398 C1150,398 1120,277 1172,277" stroke="#f79646" stroke-width="3" fill="none"/>
+<image class="vp-pop" style="--d:3.13s" href="images/viz/building-red.png" x="1172" y="232" width="92"/>
+<path class="vp-draw" style="--d:3.11s" pathLength="1" d="M1100,398 C1150,398 1120,398 1172,398" stroke="#c0504d" stroke-width="3" fill="none"/>
+<image class="vp-pop" style="--d:3.31s" href="images/viz/building-purple.png" x="1170" y="352" width="92"/>
+<path class="vp-draw" style="--d:3.29s" pathLength="1" d="M1100,398 C1150,398 1120,530 1172,530" stroke="#4f81bd" stroke-width="3" fill="none"/>
+<image class="vp-pop" style="--d:3.49s" href="images/viz/building-green.png" x="1172" y="480" width="104"/>
+<path class="vp-draw" style="--d:3.47s" pathLength="1" d="M1100,398 C1150,398 1120,638 1172,638" stroke="#31849b" stroke-width="3" fill="none"/>
+<image class="vp-pop" style="--d:3.67s" href="images/viz/building-orange.png" x="1172" y="608" width="116"/>
+      </svg>
     </div>
+  </div>
+  <div class="viz-foot">
+    <figcaption class="viz-cap" aria-live="polite">A neural network trained on simulation results takes building geometry, climate and internal gains, works within site constraints and design intent, and returns the optimal solution in real time instead of after hours of simulation.</figcaption>
+    <button class="viz-replay" type="button">Replay</button>
+  </div>
   </figure>
 </section>
 
@@ -503,6 +592,40 @@ document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
       var f = b.closest('.viz');
       if (f) play(f);
     });
+  });
+})();
+</script>
+<script>
+// PDF diagram cards: one card, one or more scenes. A scene animates when the
+// card first plays (or on Replay); multi-scene cards then step through their
+// scenes on a timer until the visitor picks one with the tabs.
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  [].slice.call(document.querySelectorAll('.viz.vp')).forEach(function (fig) {
+    var scenes = [].slice.call(fig.querySelectorAll('.vp-scene'));
+    var tabs = [].slice.call(fig.querySelectorAll('.vp-tab'));
+    var cap = fig.querySelector('.viz-cap');
+    var cur = 0, timer = null, auto = scenes.length > 1;
+    function show(i) {
+      clearTimeout(timer);
+      cur = i;
+      scenes.forEach(function (s, k) {
+        s.classList.remove('run');
+        s.hidden = k !== i;
+        s.classList.toggle('on', k === i);
+      });
+      tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', k === i); });
+      if (cap) cap.innerHTML = scenes[i].getAttribute('data-cap');
+      void fig.offsetWidth;
+      scenes[i].classList.add('run');
+      if (auto && !reduce) timer = setTimeout(function () { show((cur + 1) % scenes.length); }, 11000);
+    }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { auto = false; show(k); }); });
+    // the shared viz script adds .play when the card scrolls in and on Replay
+    new MutationObserver(function () {
+      if (fig.classList.contains('play')) { auto = scenes.length > 1; show(0); }
+    }).observe(fig, { attributes: true, attributeFilter: ['class'] });
+    if (reduce) show(0);
   });
 })();
 </script>

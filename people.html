@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team at a Glance · ENSURE Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* ─── LAYOUT TOKENS ─── */
+:root{
+  --content-max: 1200px;
+  /* full-bleed background, centred ~1200px content column */
+  --pad-x: max(clamp(24px, 5vw, 64px), calc((100% - var(--content-max)) / 2));
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;font-weight:300;color:#545478;background:#fff;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad-x);border-bottom: 1px solid transparent;
+  transition: background .35s, padding .35s, box-shadow .35s, border-color .35s;}
+nav.solid{background:rgba(24,24,34,.84);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);padding:14px var(--pad-x);border-bottom-color:rgba(255,255,255,.07);box-shadow:0 14px 34px rgba(24,24,34,.16);}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){nav.solid{background:rgba(24,24,34,.95);}}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:color .3s;}
+nav:not(.solid) .nav-logo{color:#fff;}
+nav.solid .nav-logo{color:#fff;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-size:.78rem;letter-spacing:.04em;text-decoration:none;transition:color .25s;}
+nav:not(.solid) .nav-links a{color:rgba(255,255,255,.85);}
+nav:not(.solid) .nav-links a:hover{color:#fff;}
+nav.solid .nav-links a{color:rgba(255,255,255,.82);}
+nav.solid .nav-links a:hover{color:#8fc99a;}
+.nav-cta{background:#2d7a3e;color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:500;opacity:1!important;transition:background .25s!important;}
+.nav-cta:hover{background:#1e5a2c!important;}
+
+footer{background:#181822;padding: 64px var(--pad-x);border-top:1px solid rgba(255,255,255,.05);}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;align-items:start;}
+.footer-logo{font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-decoration:none;display:block;margin-bottom:12px;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.7;}
+.footer-nav-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:14px;}
+.footer-nav-link{display:block;font-size:.78rem;color:rgba(255,255,255,.75);text-decoration:none;margin-bottom:9px;transition:color .2s;letter-spacing:.02em;}
+.footer-nav-link:hover{color:#8fc99a;}
+.footer-tagline{font-size:.74rem;color:rgba(255,255,255,.6);line-height:1.7;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* HERO */
+.pg-hero{position:relative;height:60vh;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#181822;}
+.pg-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.4;}
+.pg-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(24,24,34,.95) 0%,rgba(24,24,34,.4) 100%);}
+.pg-hero-content{position:relative;z-index:2;padding: 0 var(--pad-x) 100px;}
+.pg-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fc99a;font-weight:600;margin-bottom:14px;display:block;}
+.pg-title{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,5vw,4.5rem);font-weight:400;line-height:1.08;color:#fff;}
+.pg-title em{font-style:italic;color:#8fc99a;}
+
+/* PI SECTION */
+.pi-section{padding: 128px var(--pad-x);border-bottom:1px solid rgba(0,0,0,.07);}
+.pi-grid{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start;}
+.pi-photo{aspect-ratio:1/1;background:#181822;border-radius:3px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
+.pi-photo img{width:100%;height:100%;object-fit:cover;}
+.pi-photo-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.pi-eyebrow{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:14px;display:block;}
+.pi-name{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:#545478;margin-bottom:6px;}
+.pi-role{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(84,84,120,.88);margin-bottom:28px;display:block;}
+.pi-bio{font-size:.96rem;line-height:1.86;color:#545478;margin-bottom:28px;}
+.pi-bio p+p{margin-top:14px;}
+.pi-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.pi-tag{border:1px solid rgba(45,122,62,.2);color:#2d7a3e;background:rgba(45,122,62,.05);padding:6px 14px;border-radius:100px;font-size:.72rem;letter-spacing:.04em;}
+
+/* PHD SECTION */
+.phd-section{padding: 112px var(--pad-x);background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.07);}
+.sec-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(84,84,120,.84);font-weight:500;display:flex;align-items:center;gap:14px;margin-bottom:48px;}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
+.phd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.phd-card{background:#fff;overflow:hidden;transition:background .25s;cursor:default;}
+.phd-card:hover{background:#eef5ef;}
+.phd-photo{height:240px;background:#181822;display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden;}
+.phd-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.phd-card:hover .phd-photo img{transform:scale(1.04);}
+.phd-info{padding:28px 26px;}
+.phd-name{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;color:#545478;margin-bottom:4px;}
+.phd-role{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2d7a3e;font-weight:600;margin-bottom:12px;}
+.phd-bio{font-size:.84rem;line-height:1.72;color:#545478;}
+.phd-research{margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.06);}
+.phd-research-label{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(84,84,120,.84);margin-bottom:6px;display:block;}
+.phd-research-text{font-size:.78rem;color:rgba(45,122,62,.8);}
+.phd-research-link{display:inline-block;margin-top:12px;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#2d7a3e;text-decoration:none;opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s;}
+.phd-card:hover .phd-research-link{opacity:1;transform:translateX(0);}
+
+/* ALUMNI */
+.alumni-section{padding: 112px var(--pad-x);border-bottom:1px solid rgba(0,0,0,.07);}
+.alumni-subsection{margin-bottom:60px;}
+.alumni-sub-label{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;color:rgba(84,84,120,.88);margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.06);}
+.alumni-table{width:100%;border-collapse:collapse;}
+.alumni-table tr{border-bottom:1px solid rgba(0,0,0,.06);transition:background .25s;}
+.alumni-table tr:hover{background:#f7faf7;}
+.alumni-table td{padding:18px 16px;vertical-align:top;}
+.alumni-table td:first-child{font-family:'DM Serif Display',serif;font-size:.98rem;color:#545478;width:220px;font-weight:400;}
+.alumni-table td:nth-child(2){font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#2d7a3e;font-weight:600;width:180px;padding-top:22px;}
+.alumni-table td:nth-child(3){font-size:.83rem;color:rgba(84,84,120,.88);line-height:1.55;}
+.alumni-award{display:inline-block;margin-left:6px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:#2d7a3e;color:#fff;padding:2px 8px;border-radius:100px;}
+
+/* JOIN CTA */
+.join-cta{background:#181822;padding: 112px var(--pad-x);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.join-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:16px;}
+.join-title em{font-style:italic;color:#8fc99a;}
+.join-body{font-size:.94rem;line-height:1.82;color:rgba(255,255,255,.72);}
+.join-form{display:flex;flex-direction:column;gap:13px;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg label{font-size:.61rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:3px;padding:11px 13px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .3s;}
+.fg input:focus,.fg textarea:focus{border-color:rgba(143,201,154,.4);}
+.fg textarea{height:100px;resize:none;}
+.fg select{color:rgba(255,255,255,.85);}
+.fg select option{background:#181822;}
+.btn-submit{background:#2d7a3e;color:#fff;border:none;cursor:pointer;padding:13px 28px;border-radius:100px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.04em;align-self:flex-start;transition:background .25s;}
+.btn-submit:hover{background:#3d9a52;}
+</style>
+<link rel="stylesheet" href="sketch.css">
+</head>
+<body>
+<!-- NAV + LIVE CARBON TICKER -->
+<style>
+/* ─── LIVE CARBON TICKER (docked in the nav bar) ─── */
+.co2{position:relative;display:inline-flex;align-items:center;gap:9px;margin-left:20px;margin-right:auto;padding:7px 14px;border-radius:100px;background:rgba(24,24,34,.4);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);text-decoration:none;flex-shrink:0;transition:background .25s,border-color .25s;}
+.co2:hover,.co2:focus-visible{background:rgba(24,24,34,.6);border-color:rgba(143,201,154,.45);outline:none;}
+nav.solid .co2{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.13);}
+nav.solid .co2:hover,nav.solid .co2:focus-visible{background:rgba(255,255,255,.1);border-color:rgba(143,201,154,.45);}
+.co2-dot{width:7px;height:7px;border-radius:50%;background:#c0392b;flex-shrink:0;animation:co2pulse 2s ease-out infinite;}
+@keyframes co2pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}70%{box-shadow:0 0 0 8px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+#co2-digits{font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;line-height:1;color:#8fc99a;font-variant-numeric:tabular-nums;letter-spacing:.01em;min-width:6.5ch;text-align:right;}
+.co2-unit{font-size:.58rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1;color:rgba(255,255,255,.55);white-space:nowrap;}
+/* the full sentence and a human-scale anchor, revealed on hover instead of
+   spending 64px of every viewport on a permanent strip */
+.co2-card{position:absolute;top:calc(100% + 13px);left:0;width:272px;padding:15px 17px 14px;background:#181822;border:1px solid rgba(255,255,255,.1);border-radius:9px;box-shadow:0 26px 64px rgba(24,24,34,.5);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .22s ease,transform .22s ease,visibility .22s;pointer-events:none;}
+.co2:hover .co2-card,.co2:focus-visible .co2-card{opacity:1;visibility:visible;transform:translateY(0);}
+.co2-card-t{display:block;font-size:.73rem;color:#fff;line-height:1.5;letter-spacing:.01em;}
+.co2-card-d{display:block;margin-top:9px;font-size:.66rem;color:rgba(255,255,255,.52);line-height:1.62;}
+.co2-card-d b{color:#8fc99a;font-weight:500;font-variant-numeric:tabular-nums;}
+.co2-card-more{display:block;margin-top:12px;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc99a;}
+@media (max-width:1240px){.co2-since{display:none;}}
+@media (max-width:1010px){.co2{margin-left:14px;padding:6px 11px;gap:7px;}.co2-card{display:none;}#co2-digits{font-size:.8rem;}}
+@media (prefers-reduced-motion:reduce){.co2-dot{animation:none;}}
+
+/* ─── NAV DROPDOWNS ─── */
+.nav-links > li { position: relative; }
+.nav-links > li > a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+.dd-caret {
+  width: 6px; height: 6px; flex-shrink: 0;
+  border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor;
+  transform: rotate(45deg) translateY(-1.5px);
+  transition: transform .28s ease, opacity .2s;
+  opacity: .5;
+}
+.has-dd:hover > a .dd-caret,
+.has-dd.open > a .dd-caret { opacity: 1; transform: rotate(225deg) translateY(1px); }
+
+.dd {
+  position: absolute; top: calc(100% + 18px); left: 50%;
+  min-width: 298px; padding: 12px;
+  background: #181822;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 9px;
+  box-shadow: 0 26px 64px rgba(24,24,34,.45), 0 3px 10px rgba(24,24,34,.28);
+  opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(10px);
+  transition: opacity .24s ease, transform .24s ease, visibility .24s;
+}
+/* invisible bridge so the pointer can cross the gap to the panel */
+.dd::before { content: ''; position: absolute; left: 0; right: 0; top: -20px; height: 20px; }
+.has-dd:hover > .dd,
+.has-dd:focus-within > .dd,
+.has-dd.open > .dd { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+.dd-link { display: block; padding: 10px 13px; border-radius: 5px; text-decoration: none; transition: background .18s; }
+.dd-link:hover { background: rgba(255,255,255,.07); }
+.dd-link:focus-visible { background: rgba(255,255,255,.07); outline: 2px solid #8fc99a; outline-offset: -2px; }
+.dd-t { display: block; font-size: .8rem; color: #fff; letter-spacing: .01em; line-height: 1.35; }
+.dd-d { display: block; margin-top: 3px; font-size: .66rem; color: rgba(255,255,255,.5); letter-spacing: .02em; line-height: 1.45; }
+.dd-link:hover .dd-d { color: rgba(255,255,255,.72); }
+
+/* anchor targets must clear the fixed CO2 strip + nav */
+[id] { scroll-margin-top: 92px; }
+
+/* ─── MOBILE NAV ─── */
+.nav-burger { display: none; background: none; border: 0; cursor: pointer; padding: 6px; flex-direction: column; gap: 4px; }
+.nav-burger span { display: block; width: 20px; height: 1.5px; background: currentColor; transition: transform .3s, opacity .3s; }
+nav:not(.solid) .nav-burger { color: #fff; }
+nav.solid .nav-burger { color: #fff; }
+
+@media (max-width: 1010px) {
+  nav, nav.solid { padding: 14px 20px; }
+  /* above the drawer, or the close affordance is unreachable */
+  .nav-burger { display: flex; position: relative; z-index: 2; }
+  .nav-links {
+    /* --nav-h is measured by script; the fallback matches the mobile nav row */
+    position: fixed; top: var(--nav-h, 61px); right: 0;
+    width: min(88vw, 344px); height: calc(100vh - var(--nav-h, 61px));
+    background: #181822;
+    flex-direction: column; align-items: stretch;
+    gap: 0; padding: 30px 20px 48px;
+    overflow-y: auto;
+    transform: translateX(102%);
+    visibility: hidden;
+    transition: transform .34s cubic-bezier(.4,0,.2,1), visibility .34s;
+    box-shadow: -22px 0 64px rgba(24,24,34,.45);
+  }
+  nav.menu-open .nav-links { transform: translateX(0); visibility: visible; }
+  .nav-links > li { border-bottom: 1px solid rgba(255,255,255,.08); }
+  .nav-links > li > a:not(.nav-cta),
+  nav.solid .nav-links > li > a:not(.nav-cta) { color: #fff; width: 100%; justify-content: space-between; padding: 15px 2px; font-size: .92rem; }
+  /* panels become inline accordions; selectors carry enough weight to
+     override the desktop hover/open transforms above */
+  .nav-links > li.has-dd > .dd,
+  .nav-links > li.has-dd.open > .dd,
+  .nav-links > li.has-dd:hover > .dd,
+  .nav-links > li.has-dd:focus-within > .dd {
+    position: static; left: auto; right: auto;
+    transform: none; opacity: 1; visibility: visible;
+    display: none;
+    min-width: 0; padding: 0 0 10px;
+    background: none; border: 0; border-radius: 0; box-shadow: none;
+  }
+  .nav-links > li.has-dd.open > .dd { display: block; }
+  .dd::before { display: none; }
+  .dd-link { padding: 9px 12px; }
+  .nav-links > li:last-child { border-bottom: 0; }
+  .nav-cta { align-self: flex-start; margin-top: 22px; }
+  nav.menu-open .nav-burger { color: #fff; }
+  nav.menu-open .nav-burger span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  nav.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+  nav.menu-open .nav-burger span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+}
+
+/* rightmost dropdown right-aligns so it never runs off the viewport */
+.nav-links > li.has-dd:nth-last-child(2) > .dd { left: auto; right: 0; transform: translateY(10px); }
+.nav-links > li.has-dd:nth-last-child(2):hover > .dd,
+.nav-links > li.has-dd:nth-last-child(2):focus-within > .dd,
+.nav-links > li.has-dd:nth-last-child(2).open > .dd { transform: translateY(0); }
+@media (max-width: 1010px) {
+  .nav-links > li.has-dd:nth-last-child(2) > .dd { transform: none; }
+}
+</style>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">ENSURE Lab</a>
+  <a href="carbon-visualization.html" class="co2" aria-label="CO2 released worldwide since you opened this page. Explore the data">
+    <span class="co2-dot" aria-hidden="true"></span>
+    <span id="co2-digits">0</span>
+    <span class="co2-unit">t CO&#8322;<span class="co2-since"> since you arrived</span></span>
+    <span class="co2-card">
+      <span class="co2-card-t">CO&#8322; released worldwide since you opened this page.</span>
+      <span class="co2-card-d">About what <b id="co2-cars">0</b> average cars put out in a whole year. Rate based on global fossil CO&#8322; emissions of 37.4&nbsp;Gt a year.</span>
+      <span class="co2-card-more">Explore the data &rarr;</span>
+    </span>
+  </a>
+  <button class="nav-burger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li class="has-dd">
+      <a href="science.html" aria-expanded="false">Explore our science<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="assess.html"><span class="dd-t">Assess</span><span class="dd-d">What are the environmental consequences?</span></a>
+        <a class="dd-link" href="optimize.html"><span class="dd-t">Optimize</span><span class="dd-d">What is the best solution?</span></a>
+        <a class="dd-link" href="predict.html"><span class="dd-t">Predict</span><span class="dd-d">What will happen next?</span></a>
+        <a class="dd-link" href="transform.html"><span class="dd-t">Transform</span><span class="dd-d">How do buildings endure?</span></a>
+        <a class="dd-link" href="educate.html"><span class="dd-t">Educate</span><span class="dd-d">Experiencing the invisible</span></a>
+      </div>
+    </li>
+    <li class="has-dd">
+      <a href="pi.html" aria-expanded="false">Our lab<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="pi.html"><span class="dd-t">Principal Investigator</span><span class="dd-d">Manish Dixit, Ph.D., LEED AP</span></a>
+        <a class="dd-link" href="team.html"><span class="dd-t">Team</span><span class="dd-d">Researchers in the lab</span></a>
+        <a class="dd-link" href="people.html"><span class="dd-t">Team at a Glance</span><span class="dd-d">Everyone and their research, in one place</span></a>
+        <a class="dd-link" href="team.html#alumni"><span class="dd-t">Lab Alumni</span><span class="dd-d">ENSURE Lab and SPACE Lab</span></a>
+        <a class="dd-link" href="team.html#partners"><span class="dd-t">Partner Organizations</span><span class="dd-d">Who we build the work with</span></a>
+      </div>
+    </li>
+    <li class="has-dd">
+      <a href="news.html" aria-expanded="false">News<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="news.html#featured"><span class="dd-t">Featured story</span><span class="dd-d">What we are highlighting now</span></a>
+        <a class="dd-link" href="news.html#recent"><span class="dd-t">Updates</span><span class="dd-d">Everything, newest first</span></a>
+      </div>
+    </li>
+    <li><a href="gallery.html">Galleries</a></li>
+    <li class="has-dd">
+      <a href="resources.html" aria-expanded="false">Resources<i class="dd-caret"></i></a>
+      <div class="dd">
+        <a class="dd-link" href="publications.html"><span class="dd-t">Publications</span><span class="dd-d">Papers, reports and theses</span></a>
+        <a class="dd-link" href="resources.html"><span class="dd-t">Resources</span><span class="dd-d">Tools, data and teaching material</span></a>
+      </div>
+    </li>
+    <li><a href="index.html#contact" class="nav-cta">Join us / Connect</a></li>
+  </ul>
+</nav>
+<script>
+// ── Live carbon ticker: 37.4 Gt global fossil CO2 a year ≈ 1186 t/s
+(function(){
+  var digits = document.getElementById('co2-digits');
+  var cars   = document.getElementById('co2-cars');
+  var RATE = 1186, CAR_TONNES_PER_YEAR = 4.6, t0 = Date.now();
+  function tick(){
+    var t = RATE * (Date.now() - t0) / 1000;
+    digits.textContent = Math.round(t).toLocaleString();
+    if (cars) cars.textContent = Math.round(t / CAR_TONNES_PER_YEAR).toLocaleString();
+  }
+  tick();
+  setInterval(tick, 80);
+})();
+</script>
+
+<!-- HERO -->
+<div class="pg-hero">
+  <img src="images/lab/showcase-2025-panel.jpg" alt="ENSURE Lab Team" onerror="this.style.visibility='hidden'">
+  <div class="pg-hero-overlay"></div>
+  <div class="pg-hero-content">
+    <span class="pg-eyebrow">Our lab &middot; ENSURE Lab</span>
+    <h1 class="pg-title">The whole team,<br><em>at a glance.</em></h1>
+  </div>
+</div>
+
+<section class="sk-lede-band">
+  <div class="sk-eyebrow">Team at a glance</div>
+  <p class="sk-lede">Everyone in the lab and everyone who has come through it, with the research each of them works on.</p>
+  <div class="tm-jump" role="navigation" aria-label="Jump to a group">
+    <a href="#director">Director</a>
+    <a href="#current">Current researchers <span>7</span></a>
+    <a href="#alumni-ensure">ENSURE Lab alumni <span>9</span></a>
+    <a href="#alumni-space">SPACE Lab alumni <span>2</span></a>
+    <a href="team.html" class="tm-back">&larr; Back to team page</a>
+  </div>
+</section>
+
+<section class="sk-band" id="director">
+  <div class="sk-band-label">Director &amp; Principal Investigator</div>
+  <div class="tm-grid tm-grid-one">
+    <article class="tm-card tm-card-pi" id="manish-dixit">
+      <div class="tm-photo"><img src="images/people/manish-dixit.jpg" alt="Manish Dixit" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Manish Dixit, Ph.D., LEED AP</h3>
+        <div class="tm-role">Professor and Clark Construction Group Endowed Professor &middot; Department of Construction Science &middot; Texas A&amp;M University</div>
+        <p class="tm-bio">Manish Dixit is the Director of the ENSURE Lab and a Professor and Clark Construction Group Endowed Professor in the Department of Construction Science at Texas A&amp;M University. He has more than a decade of professional experience in the building design and construction industry, with a primary focus on commercial construction.</p>
+        <p class="tm-bio">His research interests encompass life-cycle energy and environmental modeling, facilities management, virtual and augmented reality, embodied energy assessment, additive manufacturing in construction, Building Information Modeling, and spatial cognition in altered or extreme environments.</p>
+        <p class="tm-bio">The U.S. Department of Energy endorsed his nomination as the National Expert for IEA Annex 57 and Annex 72, two prominent multinational collaborative research projects that have substantially advanced global efforts to standardize life-cycle energy modeling for buildings.</p>
+        <p class="tm-bio">His research has been funded by the National Science Foundation, NASA, the U.S. Department of Energy, the New Frontiers in Research Fund, and Vanitec.</p>
+        <div class="tm-links">
+          <a class="tm-link" href="pi.html">Full profile <i aria-hidden="true">&rarr;</i></a>
+          <a class="tm-link" href="https://scholar.google.com/citations?user=WszMTX8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+          <a class="tm-link" href="https://orcid.org/0000-0001-8622-8388" target="_blank" rel="noopener">ORCID <i aria-hidden="true">&#8599;</i></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sk-band" id="current">
+  <div class="sk-band-label">Current researchers</div>
+  <div class="tm-grid">
+    <article class="tm-card" id="faezeh-salehi">
+      <div class="tm-photo"><img src="images/people/faezeh-salehi.jpg" alt="Faezeh Salehi" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Faezeh Salehi</h3>
+        <div class="tm-role">Ph.D. Candidate · Construction Science</div>
+        <p class="tm-bio">Faezeh joined the Ph.D. program in Construction Science in January 2022 and recently achieved doctoral candidacy. Her research focuses on spatial cognition, virtual and augmented reality, and human factors in extreme environments such as microgravity and Mars-like conditions. Integrating eye-tracking, EEG and advanced data analytics, her work investigates how altered visuospatial conditions affect spatial ability, perception and performance. She has published in Virtual Reality, Human Factors in Virtual Environments and Game Design, and Intelligent Human Systems Integration, contributing to NASA- and NSF-funded projects on astronaut training and spatial cognition modelling.</p>
+        <div class="tm-focus"><span>Research focus</span>Spatial cognition · VR/AR · Eye-tracking · EEG · NASA Astronaut Training</div>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=0E3XpR0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="maryam-abbasi-kamazani">
+      <div class="tm-photo"><img src="images/people/maryam-abbasi-kamazani.jpg" alt="Maryam Abbasi Kamazani" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Maryam Abbasi Kamazani</h3>
+        <div class="tm-role">Ph.D. Candidate · Construction Science</div>
+        <p class="tm-bio">Maryam joined the Ph.D. program in January 2022, bringing a Mechanical Engineering degree and professional HVAC design experience. Her research centres on building energy modelling and analysis, life cycle assessment, and multi-objective optimization for sustainable building design, contributing to the NSF CAREER-funded project on operational and embodied impacts — energy, carbon emissions and embodied water — across building life cycles. Her paper &ldquo;Addressing Environmental Impacts of Buildings Through the Optimization of Embodied Energy Factors&rdquo; won Best Paper at the 1st International Conference of Net Zero Carbon Built Environment, University of Nottingham.</p>
+        <div class="tm-focus"><span>Research focus</span>LCA · Multi-objective optimization · ECW nexus · Climate-aware modeling · NSF</div>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=paxatiEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="sejal-sanjay-shanbhag">
+      <div class="tm-photo"><img src="images/people/sejal-shanbhag.jpg" alt="Sejal Sanjay Shanbhag" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Sejal Sanjay Shanbhag</h3>
+        <div class="tm-role">Ph.D. Student · Construction Science</div>
+        <p class="tm-bio">Sejal&rsquo;s work centres on inverse optimization and life-cycle assessment for climate-responsive, low-carbon building design, integrating energy&ndash;carbon&ndash;water nexus modelling under future climate and energy scenarios. She has a background in architecture and received her MTech in Building Energy Performance from CEPT University, focusing on computational fluid dynamics for the optimization of ceiling diffuser placement. With more than four years of experience designing and constructing sustainable built environments, she brings an interdisciplinary view of how design decisions influence resource use, environmental impact and occupant comfort.</p>
+        <div class="tm-focus"><span>Research focus</span>LCA · Optimization · Low-carbon building design · Future climate scenarios</div>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=Frqo6JoAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="yasaman-norouzi">
+      <div class="tm-photo"><img src="images/people/yasaman-norouzi.jpg" alt="Yasaman Norouzi" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Yasaman Norouzi</h3>
+        <div class="tm-role">Ph.D. Candidate · Construction Science</div>
+        <p class="tm-bio">Yasaman joined the Ph.D. program in Fall 2022 and specialises in sustainable construction, optimization-based built environments and data-driven design. As part of the HESTIA project funded by the U.S. Department of Energy (ARPA-E), she performed cradle-to-grave life cycle assessments of buildings with 3D-printed hempcrete walls and developed optimization algorithms that reduced simulated building energy consumption. Her research integrates computational design, environmental analysis and machine learning to predict and optimize thermal conductivity and energy performance in wall systems and building designs.</p>
+        <div class="tm-focus"><span>Research focus</span>LCA · Hempcrete · 3D printing · Envelope optimization · DOE ARPA-E</div>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=gDvlIhUAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="mana-nemati-aghdam">
+      <div class="tm-photo"><img src="images/people/mana-nemati-aghdam.jpg" alt="Mana Nemati Aghdam" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Mana Nemati Aghdam</h3>
+        <div class="tm-role">Ph.D. Student · Construction Science</div>
+        <p class="tm-bio">Mana&rsquo;s research focuses on integrating carbon neutrality and climate resilience in building design, with an emphasis on material performance, life cycle assessment and environmental adaptation in vulnerable communities. She is currently developing frameworks and tools to balance environmental sustainability and climate resilience in construction practice.</p>
+        <div class="tm-focus"><span>Research focus</span>Carbon-resilience nexus · Material LCA · Vulnerable communities · Hazard-prone regions</div>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=y3Kgi3YAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="shilpi-dua">
+      <div class="tm-photo"><img src="images/people/shilpi-dua.jpg" alt="Shilpi Dua" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Shilpi Dua</h3>
+        <div class="tm-role">Graduate Research Assistant</div>
+        <p class="tm-bio">Shilpi is an architect with 15 years of professional experience spanning architecture, design, and entrepreneurship, with a strong emphasis on sustainable construction and environmentally responsive design. She joined ENSURE Lab in 2026, where she also serves as a Graduate Research Assistant and contributes to research at the intersection of building science, materials, and climate-responsive construction.</p>
+        <p class="tm-bio">Her research focuses on the multidimensional thermal behavior of building-envelope materials and the development of more adaptive, climate-responsive construction solutions. She is particularly interested in nature-inspired mechanisms and bio-based materials that can enable envelope components to respond more effectively to changing ambient conditions rather than relying solely on static thermal properties. Through this work, she aims to explore new pathways for improving envelope performance under increasingly variable and warmer climate conditions. The broader goal of her research is to reduce building heating and, especially, cooling demand while supporting more energy-efficient, low-impact, and climate-responsive buildings.</p>
+        <div class="tm-focus"><span>Research focus</span>Envelope thermal behavior &middot; Bio-based materials &middot; Nature-inspired design &middot; Climate-responsive construction</div>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Shilpi+Dua%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="soraya-mokhtari">
+      <div class="tm-photo"><img src="images/people/soraya-mokhtari.jpg" alt="Soraya Mokhtari" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Soraya Mokhtari</h3>
+        <div class="tm-role">Ph.D. Student</div>
+        <p class="tm-bio">Soraya Mokhtari is a Ph.D. student in the ENSURE Lab at Texas A&amp;M University, with an interdisciplinary background in architecture, urban design, and informatics. Her research focuses on embodied carbon, life cycle assessment (LCA), and the long-term environmental performance of buildings and building materials, with particular interest in the effects of future climate conditions and the application of machine learning methods to building-performance analysis.</p>
+        <p class="tm-bio">Her doctoral research examines how large hygrothermal swings, including changes in temperature and moisture exposure, can influence the deterioration and long-term performance of building-envelope materials and assemblies. By integrating current weather conditions with future climate projections, her work seeks to better understand how increasingly variable and extreme hygrothermal environments may affect envelope performance, maintenance and replacement needs, and long-term environmental impacts. The broader goal of her research is to support more durable, climate-responsive, and lower-carbon building-envelope design and life cycle decision-making.</p>
+        <div class="tm-focus"><span>Research focus</span>Embodied carbon &middot; LCA &middot; Hygrothermal deterioration &middot; Future climate &middot; Machine learning</div>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Soraya+Mokhtari%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sk-band" id="alumni-ensure">
+  <div class="sk-band-label">Lab alumni &middot; ENSURE Lab</div>
+  <div class="tm-grid">
+    <article class="tm-card" id="hassan-anifowose">
+      <div class="tm-photo"><img src="images/people/hassan-anifowose.jpg" alt="Hassan Anifowose" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Hassan Anifowose</h3>
+        <div class="tm-role">Ph.D. 2022</div>
+        <p class="tm-bio">Hassan&rsquo;s doctoral research developed and evaluated a gamified Virtual Reality interface for training construction science students in construction processes. His work assessed the impact of the gamified Virtual Construction Lab on players&rsquo; confidence while completing real-world building assembly tasks across levels of progression. A user study revealed a preference order of Player Experience, Level of Progression, Player Behavior and Object Interaction &mdash; work that matters for replacing resource-intensive field lab tasks with virtual training.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Hassan+Anifowose%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="varusha-venkatraj">
+      <div class="tm-photo"><img src="images/people/varusha-venkatraj.jpg" alt="Varusha Venkatraj" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Varusha Venkatraj</h3>
+        <div class="tm-role">Ph.D. 2022</div>
+        <p class="tm-bio">Varusha completed her Master&rsquo;s in 2019 on the trade-offs between embodied and operational energy, examining how orientation, envelope thermal properties, glazing type and window-to-wall ratio affect embodied energy. She earned her doctorate in 2022 by pioneering a machine learning algorithm to predict embodied and operational impacts of commercial buildings, generating simulated energy use data to train and test the model. It eased the limits of data availability and computation time, and proved accurate on a commercial building case study in climate zone 2A.</p>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=cmRWc74AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="lena-baker-m-abu-ennab">
+      <div class="tm-photo"><img src="images/people/lena-abu-ennab.jpg" alt="Lena Baker M. Abu-Ennab" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Lena Baker M. Abu-Ennab</h3>
+        <div class="tm-role">Ph.D. 2022 &middot; Civil Eng.</div>
+        <p class="tm-bio">Lena investigated the environmental impacts of incorporating kaolin clay into kaolinite-based calcium sulfoaluminate cement concrete for large-scale 3D printing. Her cradle-to-gate life cycle assessment of mixes at 0%, 5% and 10% kaolin by weight found that 3D-printed solid walls reduce embodied energy, global warming potential and eutrophication potential by roughly 12%, 55% and 4% per unit volume &mdash; and by roughly 55%, 77% and 53% per unit of compressive strength.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Lena+Abu-Ennab%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="fatemeh-pariafsai">
+      <div class="tm-photo"><img src="images/people/fatemeh-pariafsai.jpg" alt="Fatemeh Pariafsai" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Fatemeh Pariafsai</h3>
+        <div class="tm-role">Ph.D. 2023</div>
+        <p class="tm-bio">Fatemeh&rsquo;s research addressed gaps in construction project management training, particularly the competencies essential for successful project completion. She analysed the definitions and components of competency, proposed a conceptual competency model for educational and training applications, and set out the specific competencies construction project managers need, outlining the knowledge areas and personality characteristics behind each skill.</p>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=nxYqg7wAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="farnaz-nazari">
+      <div class="tm-photo"><img src="images/people/farnaz-nazari.jpg" alt="Farnaz Nazari" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Farnaz Nazari</h3>
+        <div class="tm-role">Ph.D. 2024</div>
+        <p class="tm-bio">Farnaz compared the performance of optimization approaches used for building energy efficiency, particularly during early design phases. Her research determined the suitability of different optimization algorithms and identified a more efficient alternative to traditional energy simulation tools.</p>
+        <a class="tm-link" href="https://scholar.google.com/citations?user=exotcrEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="omid-haghighi">
+      <div class="tm-photo"><img src="images/people/omid-haghighi.jpg" alt="Omid Haghighi" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Omid Haghighi</h3>
+        <div class="tm-role">M.S. 2020 &middot; Outstanding Award</div>
+        <p class="tm-bio">Omid&rsquo;s research used a BIM-based workflow through the Rhinoceros/Grasshopper interface to run multi-objective optimization across a building&rsquo;s embodied energy, operational energy and embodied water. He also contributed to an Input-Output-based Hybrid model for computing embodied water impacts across economic sectors. He graduated in May 2020 with the Outstanding Master&rsquo;s Student Research Award from the Department of Construction Science.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Omid+Haghighi%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="jason-bullen">
+      <div class="tm-photo"><img src="images/people/jason-bullen.jpg" alt="Jason Bullen" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Jason Bullen</h3>
+        <div class="tm-role">M.S. 2020 &middot; Best Thesis</div>
+        <p class="tm-bio">Jason&rsquo;s thesis investigated how site logistics factors influence the embodied impacts of construction projects, analysing how site logistics and project planning affect the movement of materials and equipment and potential damage to staged materials and work-in-progress. Using the Delphi method with a panel of construction specialists, he concluded that material and site management substantially influence initial embodied environmental impact. His thesis received the Best Research/Thesis Award.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Jason+Bullen%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="farshid-moosavi-tabatabaei">
+      <div class="tm-photo"><img src="images/people/farshid-moosavi.jpg" alt="Farshid Moosavi Tabatabaei" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Farshid Moosavi Tabatabaei</h3>
+        <div class="tm-role">M.S. 2019</div>
+        <p class="tm-bio">Farshid&rsquo;s research calculated embodied impacts for buildings, using BIM to develop an embodied energy calculation tool with a robust data exchange between Autodesk Revit and an IOH-based embodied impact database. He also contributed to BIM-based life cycle performance assessment by creating a workflow that uses colour codes to visualise and identify building elements and systems needing maintenance and replacement.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Farshid+Moosavi%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="shashank-singh">
+      <div class="tm-photo"><img src="images/people/shashank-singh.jpg" alt="Shashank Singh" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Shashank Singh</h3>
+        <div class="tm-role">M.S. 2017</div>
+        <p class="tm-bio">Shashank developed an Input-Output-based Hybrid model to quantify the embodied energy and carbon of construction materials. By collecting and collating statistical data with macroeconomic models, his research improved the specificity and reliability of IOH-based embodied impact calculations. He also explored facility managers&rsquo; preferences for selecting floor finishes in hospital environments.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Shashank+Singh%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sk-band" id="alumni-space">
+  <div class="sk-band-label">Lab alumni &middot; SPACE Lab (Spatial Processing in Altered and Challenging Environments)</div>
+  <div class="tm-grid">
+    <article class="tm-card" id="hannah-park">
+      <div class="tm-photo"><img src="images/people/hannah-park.jpg" alt="Hannah Park" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Hannah Park</h3>
+        <div class="tm-role">Ph.D. 2022</div>
+        <p class="tm-bio">Hannah&rsquo;s work was fundamental to establishing the SPACE Lab &mdash; she was the first researcher to define its procedures and protocols for human spatial cognition research. She focused on spatial navigation and spatial representation, examining whether particular learning perspectives suit people with differing cognitive styles, and how field dependence and independence alter navigation strategy and performance. Her research informs spatial navigation during natural disasters, where GPS signals and landmarks may be unavailable.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Hannah+Park%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="tm-card" id="vahideh-karimimansoob">
+      <div class="tm-photo"><img src="images/people/vahideh-karimimansoob.jpg" alt="Vahideh Karimimansoob" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="tm-body">
+        <h3 class="tm-name">Vahideh Karimimansoob</h3>
+        <div class="tm-role">M.S. 2023</div>
+        <p class="tm-bio">Vivian&rsquo;s role was pivotal in the lab&rsquo;s research on spatial ability and perception under the extreme visuospatial conditions of microgravity and other planets. Her thesis examined whether spatial ability differs significantly between heavy construction equipment operators and traditional construction workers, aiming to establish how far superior spatial ability matters for safe and efficient operations involving heavy equipment.</p>
+        <a class="tm-link" href="https://scholar.google.com/scholar?q=author%3A%22Vahideh+Karimimansoob%22" target="_blank" rel="noopener">Find on Google Scholar <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="footer-logo">ENSURE Lab</a>
+      <div class="footer-copy">© ENSURE Lab · Texas A&M University<br>College of Architecture · Francis Hall 208C</div>
+      <div class="sk-social">
+        <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2 9h6v13H2zM9 9h5.7v1.8h.1c.8-1.3 2.4-2.2 4.3-2.2 3.5 0 4.9 2.2 4.9 5.9V22h-6v-6.5c0-1.6-.6-2.7-2-2.7-1.2 0-1.9.8-2.2 1.6-.1.3-.1.7-.1 1V22H9z"/></svg></a>
+        <a href="#" aria-label="Google Scholar" title="Google Scholar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 8.5l11 5.5 11-5.5zM4 12.6V17c0 1.9 3.6 3.4 8 3.4s8-1.5 8-3.4v-4.4l-8 4z"/></svg></a>
+        <a href="#" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7 8 7.5 12h-6l-4.7-7.6L6.3 22H3l7.4-8.4L3.2 2h6.1l4.4 7.1z"/></svg></a>
+        <a href="index.html#contact" aria-label="Email the lab" title="Email the lab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5v14h20V5zm2.3 2h15.4L12 12.3zM4 8.9l8 5.6 8-5.6V17H4z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Research</div>
+      <a href="assess.html" class="footer-nav-link">Assess</a>
+      <a href="optimize.html" class="footer-nav-link">Optimize</a>
+      <a href="predict.html" class="footer-nav-link">Predict</a>
+      <a href="transform.html" class="footer-nav-link">Transform</a>
+      <a href="educate.html" class="footer-nav-link">Educate</a>
+    </div>
+    <div class="footer-col footer-nav-col">
+      <div class="footer-nav-label">Site</div>
+      <a href="team.html" class="footer-nav-link">Our Team</a>
+      <a href="news.html" class="footer-nav-link">News & Updates</a>
+      <a href="carbon-visualization.html" class="footer-nav-link">Carbon Visualization</a>
+      <a href="gallery.html" class="footer-nav-link">Galleries</a>
+      <a href="index.html#contact" class="footer-nav-link">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-tagline">Advancing life-cycle assessment and climate-resilient building design through data-driven methods.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>60));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+<script>
+// ── Nav dropdowns: hover on pointer devices, tap-to-expand on touch or narrow screens
+(function () {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const burger = nav.querySelector('.nav-burger');
+  const items  = [...nav.querySelectorAll('.has-dd')];
+  // tap mode whenever the drawer is in play OR the device cannot hover
+  const tapMode = () => window.matchMedia('(max-width: 900px), (hover: none)').matches;
+
+  // publish the nav row's real height so the mobile drawer can sit below it
+  // instead of painting over the logo and the close button
+  const setNavH = () => nav.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+  setNavH();
+  window.addEventListener('resize', setNavH);
+
+  function setExp(li, v) {
+    const a = li.querySelector(':scope > a');
+    if (a) a.setAttribute('aria-expanded', v ? 'true' : 'false');
+  }
+  function closeAll() { items.forEach(li => { li.classList.remove('open'); setExp(li, false); }); }
+  function closeMenu() {
+    nav.classList.remove('menu-open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+    closeAll();
+  }
+
+  if (burger) burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!open) closeAll();
+  });
+
+  items.forEach(li => {
+    const link = li.querySelector(':scope > a');
+    // CSS opens the panel on hover/focus; mirror that state for assistive tech
+    li.addEventListener('pointerenter', () => { if (!tapMode()) setExp(li, true); });
+    li.addEventListener('pointerleave', () => { if (!tapMode()) setExp(li, false); });
+    li.addEventListener('focusin',      () => { if (!tapMode()) setExp(li, true); });
+    li.addEventListener('focusout',     () => {
+      if (!tapMode() && !li.contains(document.activeElement)) setExp(li, false);
+    });
+    link.addEventListener('click', e => {
+      if (!tapMode()) return;               // pointer devices: let the tab navigate
+      e.preventDefault();
+      const wasOpen = li.classList.contains('open');
+      closeAll();
+      if (!wasOpen) { li.classList.add('open'); setExp(li, true); }
+    });
+  });
+
+  // choosing a destination closes the drawer
+  nav.querySelectorAll('.dd-link, .nav-cta').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeMenu();
+    // also dismiss a focus-opened desktop panel
+    if (nav.contains(document.activeElement) && document.activeElement.blur) document.activeElement.blur();
+  });
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) closeMenu(); });
+
+  // crossing the breakpoint must not leave a half-open drawer behind
+  const mq = window.matchMedia('(max-width: 900px)');
+  if (mq.addEventListener) mq.addEventListener('change', closeMenu);
+  else if (mq.addListener) mq.addListener(closeMenu);
+})();
+</script>
+</body>
+</html>

@@ -32,6 +32,96 @@
   --sq-3:  3in;     /* sheets 2 & 4, portrait / researcher card */
 }
 
+/* ── theme card base layout, moved from index.html when the cards moved
+   to the domain pages; the sheet rules below refine it ── */
+/* Each project: full-width, image left ~44%, text right ~56% */
+/* On hover: image zooms, "Learn more" appears */
+.project { padding-inline: var(--pad-x);
+  display: grid;
+  grid-template-columns: 44% 56%;
+  min-height: 420px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  transition: background .3s;
+  background: #fff;
+}
+.project:hover { background: #f7faf7; }
+
+/* Alternate: even projects flip image right */
+.project.flip { grid-template-columns: 56% 44%; }
+.project.flip .proj-img { order: 2; }
+.project.flip .proj-text { order: 1; }
+
+.proj-img {
+  overflow: hidden; position: relative;
+  background: #c8d8c2;
+  min-height: 460px;
+}
+.proj-img-inner {
+  width: 100%; height: 100%;
+  transition: transform .7s ease;
+  position: absolute; inset: 0;
+}
+.proj-img-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.project:hover .proj-img-inner { transform: scale(1.05); }
+
+.proj-text {
+  padding: 80px 80px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.project.flip .proj-text {
+  padding: 80px 72px 80px 80px;
+}
+.proj-label {
+  font-size: .66rem; letter-spacing: .22em; text-transform: uppercase;
+  color: #2d7a3e; font-weight: 600; margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.proj-label::before { content: ''; width: 20px; height: 1px; background: #2d7a3e; }
+.proj-statement {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 400; line-height: 1.15;
+  color: #545478; margin-bottom: 24px;
+  transition: color .3s;
+}
+.project:hover .proj-statement { color: #2d7a3e; }
+.proj-body {
+  font-size: .96rem; line-height: 1.84;
+  color: #545478; margin-bottom: 32px;
+}
+.proj-more {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .85rem; font-weight: 500; letter-spacing: .06em;
+  color: #2d7a3e;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity .3s, transform .3s;
+}
+.project:hover .proj-more { opacity: 1; transform: translateX(0); }
+
+/* section header */
+.projects-header {
+  padding: 100px var(--pad-x) 0;
+  border-top: 1px solid rgba(0,0,0,.07);
+}
+.projects-header .section-label {
+  font-size: .66rem; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(84,84,120,.84); font-weight: 500;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 0;
+}
+.projects-header .section-label::after {
+  content: ''; flex: 1; height: 1px; background: rgba(0,0,0,.08);
+}
+
+
+
 /* ── INTER everywhere (sheets: "F- INTER EXTRABOLD", "F- INTER BOLD") ── */
 body,
 input, select, textarea, button{
@@ -1345,7 +1435,7 @@ body.home{ --sq: 24rem; }
 .pi-photo, .pp-photo, .al-photo, .pp-pop-img, .al-pop-img,
 .proj-img, .proj-img-inner, .sci-fig, .rp-fig, .gal-item, .gal-ph,
 .hg-item, .sk-figure, .sk-person-img, .phd-photo, .slide, .slide-inner,
-.nf-img, .nc-img, .news-feat-img, .t-card-photo, .pub-img{
+.nf-img, .nc-img, .news-feat-img, .t-card-photo, .pub-img, .tm-photo{
   aspect-ratio: 1 / 1 !important;
   min-height: 0 !important;
   overflow: hidden;
@@ -1358,7 +1448,7 @@ body.home{ --sq: 24rem; }
 .al-pop-img > img, .proj-img-inner > img, .sci-fig > img, .rp-fig > img,
 .gal-item > img, .hg-item > img, .sk-figure > img, .sk-person-img > img,
 .phd-photo > img, .slide-inner > img, .nf-img > img, .nc-img > img,
-.news-feat-img > img, .t-card-photo > img, .pub-img > img{
+.news-feat-img > img, .t-card-photo > img, .pub-img > img, .tm-photo > img{
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -1436,3 +1526,324 @@ body.home{ --sq: 24rem; }
   gap: 14px !important;
 }
 #photos .gal-item{ width: 100% !important; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   PUBLICATIONS LIST
+   Generated from the lab's publication list. Each row is one link out to
+   the paper where it was published; rows with no online version yet open
+   a Google Scholar search for the title instead, and are marked as such.
+   ══════════════════════════════════════════════════════════════════════ */
+.pub-bar{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 24px;
+  padding:22px var(--pad-x); background:var(--pale-white); border-bottom:1px solid var(--rule);
+}
+.pub-filters{ display:flex; flex-wrap:wrap; gap:8px; }
+.pub-chip{
+  font-size:.72rem; letter-spacing:.06em; font-weight:600; cursor:pointer;
+  padding:8px 15px; border-radius:100px; border:1px solid var(--rule);
+  background:#fff; color:var(--pale-black-soft); transition:background .2s, color .2s, border-color .2s;
+}
+.pub-chip span{ font-weight:500; opacity:.6; margin-left:4px; font-variant-numeric:tabular-nums; }
+.pub-chip:hover{ border-color:var(--accent); color:var(--accent); }
+.pub-chip.is-on{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.pub-chip:focus-visible, .pub-search input:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.pub-search{ flex:0 1 22rem; min-width:0; }
+.pub-search input{
+  width:100%; padding:10px 14px; border:1px solid var(--rule); border-radius:100px;
+  background:#fff; font-size:.85rem; color:var(--pale-black);
+}
+.pub-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.pub-empty{ padding:48px var(--pad-x); font-size:.95rem; color:var(--pale-black-soft); }
+
+.pub-count{ font-weight:500; color:var(--pale-black-soft); letter-spacing:.06em; }
+.pub-year{ display:grid; grid-template-columns:5.5rem 1fr; gap:22px; border-top:1px solid var(--rule); }
+.pub-year:last-child{ border-bottom:1px solid var(--rule); }
+.pub-yr{
+  position:sticky; top:92px; align-self:start; padding-top:22px;
+  font-size:1.05rem; font-weight:800; color:var(--accent); letter-spacing:.02em; font-variant-numeric:tabular-nums;
+}
+.pub-list{ list-style:none; }
+.pub-list li + li{ border-top:1px solid var(--rule); }
+.pub{
+  display:grid; grid-template-columns:1fr auto; column-gap:24px; align-items:baseline;
+  padding:20px 0; text-decoration:none; color:inherit;
+}
+.pub-t{ grid-column:1; font-size:.98rem; font-weight:600; color:var(--pale-black); line-height:1.45; transition:color .2s; }
+.pub-a{ grid-column:1; margin-top:6px; font-size:.8rem; color:var(--pale-black-soft); line-height:1.55; }
+.pub-a b{ font-weight:700; color:var(--pale-black); }
+.pub-v{ grid-column:1; margin-top:3px; font-size:.8rem; color:rgba(38,38,47,.6); line-height:1.55; }
+.pub-v i{ font-style:italic; color:var(--pale-black-soft); }
+.pub-go{
+  grid-column:2; grid-row:1; white-space:nowrap;
+  font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700;
+  color:var(--accent); border:1px solid var(--rule); padding:5px 10px; transition:background .2s, color .2s, border-color .2s;
+}
+.pub-go i{ font-style:normal; }
+.pub:hover .pub-t, .pub:focus-visible .pub-t{ color:var(--accent); }
+.pub:hover .pub-go, .pub:focus-visible .pub-go{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.pub:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.pub-nolink .pub-go{ color:var(--pale-black-soft); border-style:dashed; }
+.pub-sec[hidden], .pub-year[hidden], .pub-list li[hidden]{ display:none; }
+@media (max-width:760px){
+  .pub-year{ grid-template-columns:1fr; gap:0; }
+  .pub-yr{ position:static; padding-top:18px; }
+  .pub{ grid-template-columns:1fr; padding:14px 0 18px; }
+  .pub-go{ grid-column:1; grid-row:auto; justify-self:start; margin-top:10px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOVER CARDS CARRY A LINK
+   Each researcher / alumni popup ends in a "Click here" button to the
+   people.html directory, so the popup has to take the pointer once shown.
+   The researcher tile is now a <div> holding the tile link and the popup
+   side by side (a link inside a link is invalid HTML). An invisible strip
+   bridges the 12px gap so the card stays open while the pointer crosses it.
+   ══════════════════════════════════════════════════════════════════════ */
+.pp-tile{ display:block; text-decoration:none; color:inherit; }
+.pp-tile:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.pp-item:focus-within .pp-photo img{ filter:grayscale(0); transform:scale(1.05); }
+.pp-item:focus-within .pp-pop{ opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+.pp-item:first-child:focus-within .pp-pop,
+.pp-item:last-child:focus-within .pp-pop{ transform:translateX(0) translateY(0); }
+.pp-item:hover .pp-pop, .pp-item:focus-within .pp-pop,
+.al-item:hover .al-pop, .al-item:focus .al-pop, .al-item:focus-within .al-pop{ pointer-events:auto; }
+.pp-pop::before, .al-pop::before{ content:''; position:absolute; left:0; right:0; top:-14px; height:14px; }
+
+.pp-more{
+  display:inline-flex; align-items:center; gap:6px; margin-top:12px;
+  padding:8px 14px; border-radius:100px; background:var(--accent); color:#fff;
+  font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+  text-decoration:none; transition:background .2s;
+}
+.pp-more span{ text-transform:none; letter-spacing:.01em; font-weight:500; opacity:.85; }
+.pp-more i{ font-style:normal; transition:transform .2s; }
+.pp-more:hover{ background:#1e5a2c; }
+.pp-more:hover i{ transform:translateX(3px); }
+.pp-more:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.al-pop .al-link{ display:block; }
+.pp-hint a{ color:var(--accent); font-weight:600; text-decoration:none; margin-left:6px; }
+.pp-hint a:hover{ text-decoration:underline; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TEAM AT A GLANCE (people.html)
+   One card per person: square portrait beside the full bio. The "Click
+   here" button in each team.html popup lands on that person's card, which
+   :target lifts out in colour.
+   ══════════════════════════════════════════════════════════════════════ */
+.tm-jump{ display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; }
+.tm-jump a{
+  font-size:.72rem; letter-spacing:.06em; font-weight:600; text-decoration:none;
+  padding:8px 15px; border-radius:100px; border:1px solid var(--rule); color:var(--pale-black-soft);
+  transition:border-color .2s, color .2s;
+}
+.tm-jump a span{ opacity:.6; font-weight:500; margin-left:3px; }
+.tm-jump a:hover{ border-color:var(--accent); color:var(--accent); }
+.tm-jump .tm-back{ border-color:transparent; }
+.tm-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px; }
+.tm-grid-one{ grid-template-columns:1fr; }
+.tm-card{
+  display:grid; grid-template-columns:9rem 1fr; gap:24px; align-items:start;
+  padding:22px; background:#fff; border:1px solid var(--rule);
+  scroll-margin-top:110px; transition:border-color .3s, box-shadow .3s;
+}
+.tm-card-pi{ grid-template-columns:var(--sq) 1fr; }
+.tm-photo{ background:#dfe4de; border:1px solid var(--rule); }
+.tm-photo img{ filter:grayscale(1) contrast(1.02); transition:filter .5s ease; }
+.tm-card:hover .tm-photo img, .tm-card:target .tm-photo img{ filter:grayscale(0); }
+.tm-card:target{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(45,122,62,.16), 0 20px 44px rgba(24,24,34,.1); }
+.tm-name{ font-size:1.1rem; font-weight:700; color:var(--pale-black); line-height:1.3; letter-spacing:-.01em; }
+.tm-role{ margin-top:4px; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; color:var(--accent); }
+.tm-bio{ margin-top:12px; font-size:.86rem; line-height:1.7; color:var(--pale-black-soft); }
+.tm-focus{ margin-top:14px; padding-top:12px; border-top:1px solid var(--rule); font-size:.76rem; line-height:1.55; color:var(--pale-black-soft); }
+.tm-focus span{ display:block; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--accent); margin-bottom:3px; }
+.tm-links{ display:flex; flex-wrap:wrap; gap:18px; }
+.tm-link{
+  display:inline-block; margin-top:14px; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  font-weight:700; color:var(--accent); text-decoration:none;
+}
+.tm-link i{ font-style:normal; }
+.tm-link:hover{ opacity:.65; }
+@media (max-width:1010px){ .tm-grid{ grid-template-columns:1fr; } }
+@media (max-width:620px){
+  .tm-card, .tm-card-pi{ grid-template-columns:1fr; gap:16px; padding:18px; }
+  .tm-photo{ width:7.5rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESEARCH DIAGRAM CARDS (assess / optimize / predict)
+   The lab's own slide diagrams, redrawn as SVG and animated. One full-width
+   card per page; where a page has two diagrams they share the card as
+   scenes with tabs. Parts enter in the order the idea is built (--d is each
+   part's delay), then the working parts keep moving: gears turn, arrows
+   nudge, gauges settle, the matrix flickers. Diagram images inside the SVG
+   are not photo tiles, so the site's square rule does not apply here.
+   ══════════════════════════════════════════════════════════════════════ */
+.vp-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:clamp(14px, 2vw, 22px); }
+.vp-tab{
+  display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+  font:inherit; font-size:.74rem; font-weight:600; letter-spacing:.04em;
+  padding:8px 16px 8px 8px; border-radius:100px; border:1px solid var(--rule);
+  background:#fff; color:var(--pale-black-soft); transition:border-color .2s, color .2s, background .2s;
+}
+.vp-tab span{
+  display:grid; place-items:center; width:22px; height:22px; border-radius:50%;
+  background:var(--pale-white); font-size:.68rem; font-weight:700;
+}
+.vp-tab:hover{ border-color:var(--accent); color:var(--accent); }
+.vp-tab.on{ border-color:var(--accent); background:var(--accent); color:#fff; }
+.vp-tab.on span{ background:rgba(255,255,255,.22); }
+.vp-tab:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vp-scene[hidden]{ display:none; }
+.vp-svg{ max-height:min(72vh, 640px); margin:0 auto; }
+.vp-svg text{ font-family:'Inter', system-ui, sans-serif; }
+
+/* resting state: hidden until the scene runs */
+.vp-scene :is(.vp-fade,.vp-pop,.vp-up,.vp-in-l,.vp-in-r,.vp-in-u,.vp-in-d,.vp-drop){ opacity:0; }
+.vp-scene .vp-draw{ stroke-dasharray:1; stroke-dashoffset:1; }
+.vp-scene :is(.vp-pop,.vp-spin,.vp-pulse,.vp-push,.vp-scan,.vp-nudge){ transform-box:fill-box; transform-origin:center; }
+.vp-scene .vp-needle{ transform-box:view-box; transform:rotate(-75deg); }
+
+.vp-scene.run .vp-fade { animation:vp-fade .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-pop  { animation:vp-pop .55s cubic-bezier(.3,1.4,.5,1) var(--d,0s) both; }
+.vp-scene.run .vp-up   { animation:vp-up .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-in-l { animation:vp-in-l .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-in-r { animation:vp-in-r .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-in-u { animation:vp-in-u .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-in-d { animation:vp-in-d .6s ease-out var(--d,0s) both; }
+.vp-scene.run .vp-drop { animation:vp-drop .7s cubic-bezier(.3,1.3,.5,1) var(--d,0s) both; }
+.vp-scene.run .vp-draw { animation:vp-draw .9s ease-out var(--d,0s) both; }
+/* the parts that keep working once they are in place */
+.vp-scene.run .vp-spin  { animation:vp-spin 14s linear 1s infinite; }
+.vp-scene.run .vp-rev   { animation-direction:reverse; animation-duration:9s; }
+.vp-scene.run .vp-nudge { animation:vp-nudge 1.6s ease-in-out 3s infinite; }
+.vp-scene.run .vp-scan  { animation:vp-scan 4s ease-in-out 3.5s infinite; }
+.vp-scene.run .vp-pulse { animation:vp-pulse 2.4s ease-in-out 3s infinite; }
+.vp-scene.run .vp-push  { animation:vp-push 1.8s ease-in-out 3s infinite; }
+.vp-scene.run .vp-bit   { animation:vp-bit 2.6s steps(1) calc(1.2s + var(--k) * .37s) infinite; }
+.vp-scene.run .vp-needle{ animation:vp-needle 1.4s cubic-bezier(.3,1.5,.5,1) var(--d,0s) both, vp-wobble 3s ease-in-out calc(var(--d,0s) + 1.4s) infinite; }
+
+@keyframes vp-fade  { from{ opacity:0; } to{ opacity:1; } }
+@keyframes vp-pop   { from{ opacity:0; transform:scale(.6); } to{ opacity:1; transform:scale(1); } }
+@keyframes vp-up    { from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:none; } }
+@keyframes vp-in-l  { from{ opacity:0; transform:translateX(-40px); } to{ opacity:1; transform:none; } }
+@keyframes vp-in-r  { from{ opacity:0; transform:translateX(40px); } to{ opacity:1; transform:none; } }
+@keyframes vp-in-u  { from{ opacity:0; transform:translateY(40px); } to{ opacity:1; transform:none; } }
+@keyframes vp-in-d  { from{ opacity:0; transform:translateY(-40px); } to{ opacity:1; transform:none; } }
+@keyframes vp-drop  { from{ opacity:0; transform:translateY(-60px); } to{ opacity:1; transform:none; } }
+@keyframes vp-draw  { to{ stroke-dashoffset:0; } }
+@keyframes vp-spin  { to{ transform:rotate(360deg); } }
+@keyframes vp-nudge { 0%,100%{ transform:none; } 50%{ transform:translateX(9px); } }
+@keyframes vp-scan  { 0%,100%{ transform:none; } 30%{ transform:translate(-8px,6px) rotate(-3deg); } 65%{ transform:translate(7px,-4px) rotate(2deg); } }
+@keyframes vp-pulse { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.07); } }
+@keyframes vp-push  { 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(.88); opacity:.75; } }
+@keyframes vp-bit   { 0%,100%{ opacity:1; } 50%{ opacity:.25; } }
+@keyframes vp-needle{ from{ transform:rotate(-75deg); } to{ transform:rotate(var(--a)); } }
+@keyframes vp-wobble{ 0%,100%{ transform:rotate(var(--a)); } 50%{ transform:rotate(calc(var(--a) + 10deg)); } }
+
+@media (prefers-reduced-motion: reduce){
+  .vp-scene :is(.vp-fade,.vp-pop,.vp-up,.vp-in-l,.vp-in-r,.vp-in-u,.vp-in-d,.vp-drop){ opacity:1 !important; }
+  .vp-scene .vp-draw{ stroke-dashoffset:0 !important; }
+  .vp-scene .vp-needle{ transform:rotate(var(--a)) !important; }
+  .vp-scene *{ animation:none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOME · B3 RESEARCH DOMAINS LIST
+   Each bullet: the domain and its question (links to the domain page),
+   the bold lead line, then the body copy.
+   ══════════════════════════════════════════════════════════════════════ */
+.sk-domains li{ font-size: .95rem; line-height: 1.7; color: var(--pale-black-soft); padding: 16px 0; }
+.sk-dom-q{
+  display: block; margin-bottom: 4px; text-decoration: none;
+  font-size: 1.05rem; font-weight: 700; color: var(--pale-black); transition: color .2s;
+}
+.sk-dom-q b{ font-weight: 800; color: var(--accent); }
+.sk-dom-q:hover{ color: var(--accent); }
+.sk-dom-lead{ display: block; margin-bottom: 4px; font-weight: 600; color: var(--pale-black); }
+.sk-domains li > div > b:not(.sk-dom-lead){ color: var(--pale-black); }
+
+/* the vision section lost its photo carousel: the statement runs alone */
+#vision{ grid-template-columns: 1fr !important; }
+#vision .vision-text{ max-width: 64rem; }
+/* home vision block: centred on the page, text justified, title 25% smaller */
+#vision{ justify-items: center; }
+#vision .vision-text{ margin-inline: auto; }
+#vision .sk-title{ font-size: calc(var(--fs-b1) * .75); text-align: center; }
+#vision .vision-headline,
+#vision .sk-domains li{ text-align: justify; hyphens: auto; }
+#vision .sk-dom-q{ text-align: left; }
+#vision .sk-lm{ display: flex; width: max-content; margin-inline: auto; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   DOMAIN PAGE THEME CARDS (C/D, E/F, G, H, J on each domain page)
+   Same card as the old home rows, but it is not a link: the image plays
+   its animation on hover and "Learn more about projects" jumps down to the
+   page's project list.
+   ══════════════════════════════════════════════════════════════════════ */
+.dom-cards{ border-top: 1px solid var(--rule); }
+.dom-card{ cursor: default; }
+.dom-card .proj-more{ opacity: 1; transform: none; text-decoration: none; margin-top: 6px; font-weight: 600; font-style: italic; }
+.dom-card .proj-more i{ font-style: normal; transition: transform .25s; }
+.dom-card .proj-more:hover i{ transform: translateX(4px); }
+.dom-card .proj-body{ text-align: justify; hyphens: auto; }
+
+/* D · a century of impacts: embodied up front, replacements, operational climbing */
+.sk-life{ background: #161b24; }
+.sk-life svg, .sk-nexus svg, .sk-vr svg{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.sk-life .axis{ stroke: rgba(255,255,255,.25); stroke-width: 1; }
+.sk-life .yr{ fill: rgba(255,255,255,.45); font-size: 4.6px; font-weight: 600; }
+.sk-life .key{ fill: var(--accent-lift); font-size: 5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.sk-life .key.k2{ fill: #e39a5c; }
+.sk-life .emb, .sk-life .rep{ fill: #e39a5c; transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); }
+.sk-life .op{ fill: none; stroke: var(--accent-lift); stroke-width: 1.6; stroke-dasharray: 160; stroke-dashoffset: 160; }
+.sk-life .dot{ fill: var(--accent-lift); opacity: 0; }
+.project:hover .sk-life .emb{ animation: sk-grow .6s ease-out forwards; }
+.project:hover .sk-life .rep{ animation: sk-grow .5s ease-out forwards; animation-delay: calc(1s + var(--i) * .6s); }
+.project:hover .sk-life .op{ animation: sk-draw 2.6s ease-in-out .5s forwards; }
+.project:hover .sk-life .dot{ animation: sk-pick .4s ease-out 3.1s forwards; }
+@keyframes sk-grow{ to{ transform: scaleY(1); } }
+
+/* F · energy, carbon and water as one nexus, against a warming future */
+.sk-nexus{ background: #121822; }
+.sk-nexus .future{ fill: none; stroke: #e0463c; stroke-width: 1.3; stroke-dasharray: 160; stroke-dashoffset: 160; opacity: .8; }
+.sk-nexus .fy{ fill: rgba(255,255,255,.45); font-size: 4.6px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.sk-nexus .ring{ fill-opacity: .2; stroke-width: 1.2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.sk-nexus .en{ fill: #f2c14e; stroke: #f2c14e; }
+.sk-nexus .co{ fill: #b9bec7; stroke: #b9bec7; }
+.sk-nexus .wa{ fill: #6fb3d9; stroke: #6fb3d9; }
+.sk-nexus .rl{ fill: #fff; font-size: 5px; font-weight: 700; opacity: 0; }
+.project:hover .sk-nexus .ring{ animation: sk-pick .5s ease-out forwards, sk-breathe 3s ease-in-out 1.2s infinite; }
+.project:hover .sk-nexus .co{ animation-delay: .25s, 1.45s; }
+.project:hover .sk-nexus .wa{ animation-delay: .5s, 1.7s; }
+.project:hover .sk-nexus .rl{ animation: sk-fadein .4s ease-out .9s forwards; }
+.project:hover .sk-nexus .future{ animation: sk-draw 2.4s ease-in-out 1s forwards; }
+@keyframes sk-breathe{ 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.08); } }
+@keyframes sk-fadein{ to{ opacity: 1; } }
+
+/* J · a VR headset reveals the heat flowing through a wall */
+.sk-vr{ background: #10141b; }
+.sk-vr .headset{ fill: rgba(143,201,154,.1); stroke: #dfe8e1; stroke-width: 1.3; }
+.sk-vr .wall{ fill: #3a4452; }
+.sk-vr .flow path{ fill: none; stroke: #e39a5c; stroke-width: 1.4; stroke-dasharray: 4 6; opacity: 0; }
+.sk-vr .motes circle{ fill: rgba(214,222,232,.75); opacity: 0; }
+.project:hover .sk-vr .flow path{ animation: sk-fadein .4s ease-out forwards, sk-flow 1.2s linear infinite; animation-delay: calc(.3s + var(--i) * .2s); }
+.project:hover .sk-vr .motes circle{ animation: sk-rise 3s ease-out infinite; animation-delay: calc(.8s + var(--i) * .5s); }
+@keyframes sk-flow{ to{ stroke-dashoffset: -20; } }
+@keyframes sk-rise{ 0%{ opacity: 0; transform: translateY(6px); } 30%{ opacity: .9; } 100%{ opacity: 0; transform: translateY(-18px); } }
+
+/* touch devices: the page script adds .on while the image is in view */
+.sk-life.on .emb{ animation: sk-grow .6s ease-out forwards; }
+.sk-life.on .rep{ animation: sk-grow .5s ease-out forwards; animation-delay: calc(1s + var(--i) * .6s); }
+.sk-life.on .op{ animation: sk-draw 2.6s ease-in-out .5s forwards; }
+.sk-life.on .dot{ animation: sk-pick .4s ease-out 3.1s forwards; }
+.sk-nexus.on .ring{ animation: sk-pick .5s ease-out forwards; opacity: 1; }
+.sk-nexus.on .rl{ opacity: 1; }
+.sk-nexus.on .future{ animation: sk-draw 2.4s ease-in-out 1s forwards; }
+.sk-vr.on .flow path{ opacity: 1; animation: sk-flow 1.2s linear infinite; }
+.sk-vr.on .motes circle{ animation: sk-rise 3s ease-out infinite; animation-delay: calc(.8s + var(--i) * .5s); }
+@media (prefers-reduced-motion: reduce){
+  .sk-life .emb, .sk-life .rep{ transform: none !important; }
+  .sk-life .op, .sk-nexus .future{ stroke-dashoffset: 0 !important; }
+}
+/* PI page X2 / X3: one prose paragraph per block */
+.pi-prose{ max-width: 62rem; font-size: var(--fs-c2); line-height: 1.78; color: var(--pale-black-soft); text-align: justify; hyphens: auto; }
