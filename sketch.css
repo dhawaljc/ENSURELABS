@@ -1847,3 +1847,11 @@ body.home{ --sq: 24rem; }
 }
 /* PI page X2 / X3: one prose paragraph per block */
 .pi-prose{ max-width: 62rem; font-size: var(--fs-c2); line-height: 1.78; color: var(--pale-black-soft); text-align: justify; hyphens: auto; }
+/* home vision: underlined title, numbered domain list instead of dashes */
+#vision .sk-title{ text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .18em; }
+#vision .sk-domains{ counter-reset: dom; }
+#vision .sk-domains li{ counter-increment: dom; grid-template-columns: 28px 1fr; }
+#vision .sk-domains li::before{
+  content: counter(dom) "."; width: auto; height: auto; margin-top: .05em; background: none;
+  font-size: 1.05rem; font-weight: 800; color: var(--accent); line-height: 1.7;
+}
