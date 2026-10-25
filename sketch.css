@@ -1855,3 +1855,75 @@ body.home{ --sq: 24rem; }
   content: counter(dom) "."; width: auto; height: auto; margin-top: .05em; background: none;
   font-size: 1.05rem; font-weight: 800; color: var(--accent); line-height: 1.7;
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   REVISIONS (Oct 2026)
+   ══════════════════════════════════════════════════════════════════════ */
+/* header: logo +30%, tabs +15%; "Connect" is a plain tab, not a green pill */
+:root{ --nav-fs: 1.09rem; }
+@media (max-width: 1180px){ :root{ --nav-fs: .99rem; } }
+.nav-logo{ font-size: 1.33rem; }
+.nav-cta, nav.solid .nav-cta, nav:not(.solid) .nav-cta{
+  background: none !important; padding: 0 !important; border-radius: 0;
+  font-weight: 500; letter-spacing: .015em;
+}
+nav:not(.solid) .nav-links a.nav-cta{ color: rgba(255,255,255,.85) !important; }
+nav.solid .nav-links a.nav-cta{ color: rgba(255,255,255,.82) !important; }
+.nav-links a.nav-cta:hover{ color: #8fc99a !important; background: none !important; }
+/* home hero: "Our approach" at tab size above the headline, headline -10% */
+.hero-kicker{
+  display: block; margin-bottom: 14px;
+  font-size: var(--nav-fs); font-weight: 600; letter-spacing: .04em; color: var(--accent-lift);
+}
+.hero-text h1{ font-size: calc(var(--fs-a1) * .9); }
+/* home vision: aligned with the header column, title -15% and no underline,
+   regular-weight copy, theme text at the size of the domain cards' text */
+#vision .vision-text{ max-width: none; width: 100%; }
+#vision .sk-title{ font-size: calc(var(--fs-b1) * .6375); text-decoration: none; color: var(--pale-black); }
+.vision-sub{
+  display: flex; align-items: center; gap: 14px; margin: 44px 0 18px;
+  font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; color: var(--accent);
+}
+.vision-sub::after{ content: ''; flex: 1; height: 1px; background: var(--rule); }
+#vision .vision-headline{ font-weight: 400; font-size: var(--fs-c2); line-height: 1.7; color: var(--pale-black-soft); margin-bottom: 16px; }
+#vision .sk-domains li{ font-size: var(--fs-c2); line-height: 1.7; }
+#vision .sk-dom-q{ font-size: calc(var(--fs-c2) * 1.12); }
+#vision .sk-dom-lead{ font-size: clamp(1.12rem, 1.65vw, 1.55rem); line-height: 1.45; color: var(--accent); margin: 4px 0 8px; }
+#vision .sk-domains li::before{ font-size: calc(var(--fs-c2) * 1.12); }
+#vision .sk-domains li{ grid-template-columns: 34px 1fr; }
+/* section headings share the site's heading colour */
+.news-title{ color: var(--pale-black) !important; }
+/* contact form extras */
+.cf-honey{ position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.cf-sent{ margin-top: 6px; font-size: .9rem; color: var(--accent-lift); }
+span.clink{ cursor: default; }
+/* PI page: name -20% and regular weight; paragraphs match the team page */
+.sk-bio-name{ font-size: calc(var(--fs-c1) * .8); font-weight: 400; }
+.sk-bio p, .pi-prose{ font-size: .96rem; line-height: 1.86; font-weight: 300; }
+/* sponsor logos only, no captions */
+.pi-logos .sk-logo-img{ min-height: 7.5rem; justify-content: center; }
+.pi-logos .sk-logo-img img{ max-height: 4.2rem; max-width: 85%; object-fit: contain; }
+/* team: current researchers use the alumni square, 4 per row on desktop */
+.pp-grid{
+  grid-auto-flow: row !important; grid-auto-columns: auto !important;
+  grid-template-columns: repeat(auto-fill, var(--sq)) !important; gap: 22px !important;
+}
+.pp-grid .pp-name{ font-size: .98rem; }
+/* hover cards open toward the middle of the page: the script tags each
+   tile by where it sits in its row (left third, middle, right third) */
+:is(.pp-item, .al-item).pop-l :is(.pp-pop, .al-pop){ left: 0 !important; right: auto !important; transform: translateY(6px) !important; }
+:is(.pp-item, .al-item).pop-r :is(.pp-pop, .al-pop){ left: auto !important; right: 0 !important; transform: translateY(6px) !important; }
+:is(.pp-item, .al-item).pop-c :is(.pp-pop, .al-pop){ left: 50% !important; right: auto !important; transform: translateX(-50%) translateY(6px) !important; }
+:is(.pp-item, .al-item):is(.pop-l, .pop-r):is(:hover, :focus, :focus-within) :is(.pp-pop, .al-pop){ transform: none !important; }
+:is(.pp-item, .al-item).pop-c:is(:hover, :focus, :focus-within) :is(.pp-pop, .al-pop){ transform: translateX(-50%) !important; }
+/* "Research directions" heading above a domain page's theme cards */
+.dom-head{
+  display: flex; align-items: center; gap: 14px; margin: 0; padding: var(--sec-pad) var(--pad-x) 0;
+  font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; color: var(--pale-black);
+}
+.dom-head::after{ content: ''; flex: 1; height: 1px; background: var(--rule); }
+.hero-kicker{ align-self: flex-start; text-align: left; }
+#vision .sk-dom-lead{ text-align: left; }
+.pi-logos{ grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important; gap: 16px !important; }
+.pi-logos .sk-logo-img{ min-height: 9rem; padding: 22px !important; background: #fff; }
+.pi-logos .sk-logo-img img{ max-height: 5.2rem !important; max-width: 88% !important; filter: none !important; opacity: 1 !important; }
