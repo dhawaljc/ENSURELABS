@@ -1968,3 +1968,15 @@ span.clink{ cursor: default; }
 .vp-scene .vp-gust{ transform-box: fill-box; }
 .vp-scene.run .vp-gust{ animation: vp-gust 1.6s ease-in-out 1.6s infinite; }
 @keyframes vp-gust{ 0%,100%{ transform: translateX(0); } 50%{ transform: translateX(-12px); } }
+
+/* Material Symbols in place of emoji (contact details, PI sidebar) */
+.msym{
+  font-family: 'Material Symbols Outlined'; font-weight: 400; font-style: normal;
+  font-size: 1.15em; line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; vertical-align: -.2em; white-space: nowrap; direction: ltr;
+  -webkit-font-smoothing: antialiased; font-variation-settings: 'FILL' 0, 'wght' 400, 'opsz' 24;
+}
+.clink-icon .msym{ font-size: 1.25rem; color: var(--accent-lift); vertical-align: middle; }
+.sk-pi-meta .msym{ margin-right: 7px; color: var(--accent); flex-shrink: 0; }
+.sk-pi-meta a, .sk-pi-meta span:has(> .msym){ display: flex; align-items: flex-start; }
+.clink-icon{ width: 24px !important; padding-top: 0 !important; }
