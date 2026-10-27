@@ -1980,3 +1980,15 @@ span.clink{ cursor: default; }
 .sk-pi-meta .msym{ margin-right: 7px; color: var(--accent); flex-shrink: 0; }
 .sk-pi-meta a, .sk-pi-meta span:has(> .msym){ display: flex; align-items: flex-start; }
 .clink-icon{ width: 24px !important; padding-top: 0 !important; }
+/* Transform: the water rises and falls; Educate: the balance tips side to
+   side and the gauge needles keep sweeping, slowly */
+.vp-scene .vp-swell{ transform-box: fill-box; }
+.vp-scene.run .vp-swell{ animation: vp-swell 4.2s ease-in-out 1.2s infinite; }
+.vp-scene.run .vp-swell.vp-rev{ animation-duration: 3.4s; animation-direction: alternate-reverse; }
+@keyframes vp-swell{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-34px); } }
+.vp-scene .vp-tip{ transform-box: view-box; }
+.vp-scene.run .vp-tip{ animation: vp-tip 5.5s ease-in-out 2.4s infinite; }
+@keyframes vp-tip{ 0%,100%{ transform: rotate(0); } 25%{ transform: rotate(-5deg); } 75%{ transform: rotate(5deg); } }
+.vp-scene .vp-dial{ transform-box: fill-box; transform-origin: 88.3% 89.4%; }
+.vp-scene.run .vp-dial{ animation: vp-dial 9s ease-in-out calc(2.6s + var(--k,0) * 1.8s) infinite; }
+@keyframes vp-dial{ 0%,100%{ transform: rotate(0); } 30%{ transform: rotate(58deg); } 55%{ transform: rotate(34deg); } 80%{ transform: rotate(92deg); } }
