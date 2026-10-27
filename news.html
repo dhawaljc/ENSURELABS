@@ -97,7 +97,8 @@ footer{background:#181822;padding: 64px var(--pad-x);border-top:1px solid rgba(2
 .section-div-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(84,84,120,.84);font-weight:500;display:flex;align-items:center;gap:14px;}
 .section-div-label::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08);}
 </style>
-<link rel="stylesheet" href="sketch.css?v=20261027">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=badge,call,chevron_left,chevron_right,groups,link,location_on,mail,school&display=block">
+<link rel="stylesheet" href="sketch.css?v=20261027b">
 </head>
 <body>
 <!-- NAV + LIVE CARBON TICKER -->
@@ -304,26 +305,25 @@ nav.solid .nav-burger { color: #fff; }
 <!-- FILTER -->
 <div class="filter-bar">
   <button class="filter-btn active">All</button>
-  <button class="filter-btn">Awards</button>
-  <button class="filter-btn">Funding</button>
-  <button class="filter-btn">Research</button>
-  <button class="filter-btn">Collaboration</button>
-  <button class="filter-btn">Publications</button>
+  <button class="filter-btn" data-type="Award">Awards</button>
+  <button class="filter-btn" data-type="Funding">Funding</button>
+  <button class="filter-btn" data-type="Presentation">Presentations</button>
+  <button class="filter-btn" data-type="Research">Research</button>
+  <button class="filter-btn" data-type="Collaboration">Collaboration</button>
+  <button class="filter-btn" data-type="Lab life">Lab life</button>
 </div>
 
 <!-- FEATURED NEWS ITEM -->
 <section class="featured" id="featured">
-  <a class="news-featured reveal" href="#" onclick="return false">
-    <div class="nf-img">
-      <img src="images/lab/showcase-2024-talk.jpg" alt="Best Paper Award" onerror="this.style.visibility='hidden'">
-    </div>
+  <article class="news-featured reveal">
+    <div class="nf-img"><img src="images/news/2026-ensure-researcher-maryam-wins-the-best-presentation-award-at.jpg" alt="ENSURE researcher Maryam wins the Best Presentation Award at Net Zero Future 2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
     <div class="nf-text">
       <div class="news-type">Award</div>
-      <span class="news-date">2024</span>
-      <div class="news-title">Maryam Abbasi Kamazani wins Best Paper Award at the International Conference on Net Zero Carbon Built Environment</div>
-      <p class="news-body">Ph.D. Candidate Maryam Abbasi Kamazani received the Best Paper Award for her research on climate-aware multi-objective optimization of building envelope performance. The paper presented a prognostic framework jointly optimizing the energy-carbon-water nexus under future climate scenarios, funded by the National Science Foundation.</p>
+      <span class="news-date">2026</span>
+      <h2 class="news-title">ENSURE researcher Maryam wins the Best Presentation Award at Net Zero Future 2026</h2>
+      <div class="news-body"><p>Maryam Abbasi Kamazani received the Best Presentation Award at the 3rd International Net-Zero Future Conference in Darmstadt, Germany, for “A Methodological Framework for Surrogate-Based Operational Energy Prediction Using Envelope Material Variables.” The research develops a surrogate-modeling framework that uses envelope material variables to predict operational energy. The award recognized the clarity and quality of her presentation at an international research forum.</p></div>
     </div>
-  </a>
+  </article>
 </section>
 
 <!-- NEWS GRID -->
@@ -333,85 +333,466 @@ nav.solid .nav-burger { color: #fff; }
 
 <section class="news-section" id="recent">
   <div class="news-grid">
-
-    <a class="nc reveal" href="https://lnkd.in/p/g9BZgA8j" target="_blank" rel="noopener">
-      <div class="nc-img"><img src="images/lab/showcase-2025-talk.jpg" alt="Best Presentation Award" onerror="this.style.visibility='hidden'"></div>
+    <article class="nc reveal" id="n-ensure-lab-presents-five-research-papers-on-net-zero-carbon-">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-presents-five-research-papers-on-net-zero-carbon-.jpg" alt="ENSURE Lab Presents five Research Papers on Net-Zero Carbon and Climate-Resilient Buildings in Germany" loading="lazy" onerror="this.style.visibility='hidden'"></div>
       <div class="nc-body">
-        <div class="nc-type">Award</div>
-        <span class="nc-date">2026 · Darmstadt, Germany</span>
-        <div class="nc-headline">Maryam Abbasi Kamazani wins the Best Presentation Award at the 3rd International Net-Zero Future Conference</div>
-        <div class="nc-desc">Ph.D. Candidate Maryam Abbasi Kamazani received the Best Presentation Award at the 3rd International Net-Zero Future Conference in Darmstadt, Germany.</div>
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab Presents five Research Papers on Net-Zero Carbon and Climate-Resilient Buildings in Germany</h3>
+        <p class="nc-desc">Manish Dixit presented three research papers highlighting the work of ENSURE Lab researchers Mana Nemati Aghdam, Sejal Sanjay Shanbhag, and Yasaman Norouzi at the Net-Zero Future 2026 Conference in Darmstadt, Germany.</p>
+        <details class="nc-more"><summary>Read more</summary><p>Using Port Arthur, Texas, as a case study, Mana’s research introduces an integrated framework for evaluating building envelope materials based on life cycle environmental impacts and resistance to climate hazards, including wind, moisture, fire, and thermal stresses. The study advances ENSURE Lab’s vision of integrating climate mitigation and adaptation into building design.</p><p>In collaboration with Penn State researchers Julian Wang, Mohammad Elmi, Hannah Yang, and Jessica Nicole Miklos, Sejal’s research investigates how extreme hygrothermal fluctuations can accelerate building envelope deterioration, potentially increasing both embodied and operational carbon emissions over a building’s life cycle.</p><p>Yasaman’s research explores the optimization of embodied and operational global warming potential (GWP) in residential buildings constructed using 3D-printable hempcrete. Spanning all 16 U.S. climate subzones, the study examines the challenges and opportunities of achieving net-zero life cycle GWP across diverse climatic conditions.</p><p>Another presentation introduced a surrogate-based operational energy prediction framework integrating physics-based building energy simulations with machine learning. The research aims to enable computationally efficient energy predictions and support informed building envelope design and optimization, advancing the application of artificial intelligence in sustainable building design.</p><p>An international collaborative study involving researchers from Canada, the United States, and Norway presented a place-based, climate-adaptive key performance indicator (KPI) framework for the Indonesia Living Lab. The framework extends conventional net-zero assessments by incorporating flood resilience, service continuity, repairability, and maintenance needs, highlighting the importance of aligning environmental sustainability metrics with local climate vulnerabilities and community priorities.</p><p>Together, these studies demonstrate ENSURE Lab’s commitment to interdisciplinary and international collaboration, advancing integrated approaches to environmental assessment, AI-driven optimization, material innovation, and climate resilience for sustainable and adaptive built environments.</p></details>
       </div>
-    </a>
-
-    <a class="nc reveal" href="publications.html#conference">
-      <div class="nc-img"><img src="images/lab/showcase-2025-panel-2.jpg" alt="Net-Zero Future Conference" onerror="this.style.visibility='hidden'"></div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-welcomes-two-new-doctoral-researchers-advancing-c">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-welcomes-two-new-doctoral-researchers-advancing-c.jpg" alt="ENSURE Lab Welcomes Two New Doctoral Researchers Advancing Climate-Responsive and Low-Carbon Building Science" loading="lazy" onerror="this.style.visibility='hidden'"></div>
       <div class="nc-body">
-        <div class="nc-type">Publication</div>
-        <span class="nc-date">2026 · Darmstadt, Germany</span>
-        <div class="nc-headline">ENSURE Lab presents five papers at the 3rd International Net-Zero Future Conference</div>
-        <div class="nc-desc">The lab presented five papers at the 3rd International Net-Zero Future Conference in Darmstadt, Germany, on surrogate modeling of operational energy, an integrated rating framework for net-zero and resilient envelopes, envelope optimization for bio-based construction, weather-induced envelope degradation, and a climate-adaptive KPI framework from an Indonesian Living Lab.</div>
+        <div class="nc-type">Lab life</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab Welcomes Two New Doctoral Researchers Advancing Climate-Responsive and Low-Carbon Building Science</h3>
+        <p class="nc-desc">ENSURE Lab is delighted to welcome Shilpi Dua and Soraya Mokhtari, who joined the lab in 2026 as doctoral researchers. Bringing complementary expertise in architecture, sustainable design, urban planning, and informatics, they will advance innovative research on building-envelope performance, sustainable materials, and climate-responsive construction.</p>
+        <details class="nc-more"><summary>Read more</summary><p>Shilpi Dua brings 15 years of professional experience in architecture, design, and entrepreneurship, with a strong focus on sustainable construction. Her doctoral research explores multifunctional, bio-based, and nature-inspired building-envelope materials capable of adapting to changing thermal conditions. By investigating dynamic material behavior and climate-responsive design strategies, her work aims to reduce building heating and cooling demands, particularly under increasingly warmer and more variable climatic conditions.</p><p>Soraya Mokhtari brings an interdisciplinary background in architecture, urban design, and informatics. Her doctoral research investigates how extreme temperature and moisture fluctuations, under current and projected future climates, influence the deterioration, durability, and life cycle environmental impacts of building-envelope materials and assemblies. By integrating hygrothermal performance analysis, climate projections, life cycle assessment, and machine learning, her work seeks to inform more durable, resilient, and lower-carbon building design.</p><p>Together, their research strengthens ENSURE Lab's mission to advance science-informed, environmentally sustainable, and climate-resilient built environments through interdisciplinary innovation, advanced modeling, and the development of next-generation building materials and systems.</p><p>We warmly welcome Shilpi and Soraya to ENSURE Lab and look forward to their contributions to advancing sustainable and resilient construction research.</p></details>
       </div>
-    </a>
-
-    <a class="nc reveal" href="https://www.cnn.com/2026/06/24/business/hemp-homes-heat-wave-europe-cooler-greener-spc" target="_blank" rel="noopener">
-      <div class="nc-img"><img src="images/lab/seedlings.jpg" alt="Hempcrete research on CNN" onerror="this.style.visibility='hidden'"></div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-completes-nsf-regional-i-corps-project-on-ai-powe">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-completes-nsf-regional-i-corps-project-on-ai-powe.jpg" alt="ENSURE Lab Completes NSF Regional I-Corps Project on AI-Powered Environmental Product Declaration Generation" loading="lazy" onerror="this.style.visibility='hidden'"></div>
       <div class="nc-body">
         <div class="nc-type">Research</div>
-        <span class="nc-date">2026 · CNN</span>
-        <div class="nc-headline">The lab&rsquo;s hempcrete research is cited in a CNN article on hemp homes</div>
-        <div class="nc-desc">CNN&rsquo;s report on hemp homes staying cooler and greener during Europe&rsquo;s heat waves cites the lab&rsquo;s hempcrete research.</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab Completes NSF Regional I-Corps Project on AI-Powered Environmental Product Declaration Generation</h3>
+        <p class="nc-desc">ENSURE Lab successfully completed an NSF Regional I-Corps project exploring the commercialization potential of artificial intelligence (AI)-powered Environmental Product Declaration (EPD) generation and data development. ENSURE Lab researchers Sejal Sanjay Shanbhag, Maryam Abbasi Kamazani, and Yasaman Norouzi conducted extensive market discovery through 31 interviews with sustainability and life cycle assessment (LCA) consultants, EPD developers and verifiers, and architecture, engineering, and construction professionals.</p>
+        <details class="nc-more"><summary>Read more</summary><p>The project investigated industry needs, commercialization opportunities, and barriers to adopting AI-generated EPDs, with particular emphasis on data reliability, transparency, verification, and professional trust. The findings provide valuable insights into the potential for AI-driven solutions to streamline EPD development and improve access to reliable environmental data for informed, low-carbon building design and construction.</p></details>
       </div>
-    </a>
-
-    <a class="nc reveal" href="#" onclick="return false">
-      <div class="nc-img"><img src="images/lab/colloquia-2025-room.jpg" alt="NSF Funding" onerror="this.style.visibility='hidden'"></div>
-      <div class="nc-body">
-        <div class="nc-type">Funding</div>
-        <span class="nc-date">Active Grant · National Science Foundation</span>
-        <div class="nc-headline">NSF funds prognostic multi-objective optimization of building energy-carbon-water nexus</div>
-        <div class="nc-desc">This grant supports development of a prognostic optimization framework that anticipates non-stationary climate and energy system conditions across all U.S. sub-climate zones. Led by Prof. Dixit with Ph.D. Candidate Maryam Abbasi Kamazani.</div>
-      </div>
-    </a>
-
-    <a class="nc reveal d1" href="#" onclick="return false">
-      <div class="nc-img"><img src="images/lab/seedlings.jpg" alt="DOE ARPA-E" onerror="this.style.visibility='hidden'"></div>
-      <div class="nc-body">
-        <div class="nc-type">Funding</div>
-        <span class="nc-date">Active Grant · DOE ARPA-E</span>
-        <div class="nc-headline">DOE ARPA-E funds LCA of 3D-printed hempcrete walls for large-scale additive construction</div>
-        <div class="nc-desc">Ph.D. Candidate Yasaman Norouzi is conducting a cradle-to-grave life cycle assessment of hempcrete for extrusion-based large-scale 3D printing as part of this collaborative DOE project.</div>
-      </div>
-    </a>
-
-    <a class="nc reveal d2" href="#" onclick="return false">
-      <div class="nc-img"><img src="images/lab/hands-globe.jpg" alt="Living Labs" onerror="this.style.visibility='hidden'"></div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-participates-in-parcs-workshop-at-desa-laguna-ind">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-participates-in-parcs-workshop-at-desa-laguna-ind.jpg" alt="ENSURE Lab participates in PARCS Workshop at Desa Laguna, Indonesia" loading="lazy" onerror="this.style.visibility='hidden'"></div>
       <div class="nc-body">
         <div class="nc-type">Collaboration</div>
-        <span class="nc-date">Ongoing · New Frontiers in Research Fund</span>
-        <div class="nc-headline">7-country Living Lab collaboration on climate resilience spans three continents</div>
-        <div class="nc-desc">Our multinational collaboration with partners in the US, Canada, Norway, UK, Switzerland, Indonesia, and Colombia is co-designing resilience solutions with communities in Port Arthur TX, Medellín Colombia, and Indramayu Indonesia.</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab participates in PARCS Workshop at Desa Laguna, Indonesia</h3>
+        <p class="nc-desc">ENSURE Lab participated in an international PARCS workshop at Desa Laguna, a regenerative island resort in Indonesia. The workshop brought together international collaborators to assess research progress, explore innovative regenerative and climate-resilient solutions, and identify future funding opportunities. Discussions focused on strengthening the seven-country partnership and expanding the impact of community-engaged living labs in Port Arthur, Texas; Indramayu, Indonesia; and Medellín, Colombia, to support climate-vulnerable communities worldwide.</p>
+        
       </div>
-    </a>
-
-    <a class="nc reveal" href="#" onclick="return false">
-      <div class="nc-img"><img src="images/lab/colloquia-2025.jpg" alt="Penn State Collaboration" onerror="this.style.visibility='hidden'"></div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-visits-indramayu-living-lab-to-explore-community-">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-visits-indramayu-living-lab-to-explore-community-.jpg" alt="ENSURE Lab visits Indramayu Living Lab to explore community-based climate resilience" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab visits Indramayu Living Lab to explore community-based climate resilience</h3>
+        <p class="nc-desc">Manish Dixit joined the international PARCS team on a field visit to Eretan Wetan in Indonesia's Indramayu region to better understand community vulnerabilities, climate-related threats, and resilience priorities. Interactions with local communities highlighted how socioeconomic conditions, geographic characteristics, and lived experiences shape climate risks and adaptation needs. The visit reinforced the importance of place-based, participatory research in developing context-sensitive climate resilience strategies that respond to the unique challenges facing vulnerable communities.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-advances-community-engaged-climate-research-at-pa">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-advances-community-engaged-climate-research-at-pa.jpg" alt="ENSURE Lab advances community-engaged climate research at PARCS Workshop in Bogor, Indonesia" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab advances community-engaged climate research at PARCS Workshop in Bogor, Indonesia</h3>
+        <p class="nc-desc">Manish Dixit presented doctoral researcher Mana Nemati Aghdam's work and participated in an international PARCS workshop in Bogor, Indonesia. Bringing together collaborators from the United States, Canada, the United Kingdom, Norway, Switzerland, and Indonesia, the workshop explored participatory methods for engaging communities in co-creating innovative climate solutions. Discussions emphasized integrating climate adaptation with mitigation to develop regenerative, carbon-neutral or carbon-negative, and climate-resilient built environments that address local community needs.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-hempcrete-research-cited-in-a-cnn-article-on-hemp-homes">
+      <div class="nc-img"><img src="images/lab/seedlings.jpg" alt="Hempcrete research cited in a CNN article on hemp homes" loading="lazy" onerror="this.style.visibility='hidden'"></div>
       <div class="nc-body">
         <div class="nc-type">Research</div>
-        <span class="nc-date">2024 · NSF-Funded</span>
-        <div class="nc-headline">NSF-funded collaboration with Penn State examines hygrothermal climate stress on building envelopes</div>
-        <div class="nc-desc">ENSURE Lab and Penn State are jointly studying how climate-driven temperature and humidity swings degrade building envelope performance over 100+ year life cycles, integrating CMIP6 projections and CORDEX downscaled data.</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">Hempcrete research cited in a CNN article on hemp homes</h3>
+        <p class="nc-desc">CNN&rsquo;s report on hemp homes staying cooler and greener during Europe&rsquo;s heat waves cites the lab&rsquo;s hempcrete research.</p>
+        <a class="nc-src" href="https://www.cnn.com/2026/06/24/business/hemp-homes-heat-wave-europe-cooler-greener-spc" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
       </div>
-    </a>
-
-    <div class="news-ph-card reveal d1">
-      <p>More news coming soon<br>Please provide recent lab updates, events, and announcements</p>
-    </div>
-
-    <div class="news-ph-card reveal d2">
-      <p>More news coming soon<br>Please provide recent lab updates, events, and announcements</p>
-    </div>
-
+    </article>
+    <article class="nc reveal" id="n-advancing-community-engaged-climate-resilience-at-the-2026-s">
+      <div class="nc-img"><img src="images/news/2026-advancing-community-engaged-climate-resilience-at-the-2026-s.jpg" alt="Advancing Community-Engaged Climate Resilience at the 2026 S-LCA Conference" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">Advancing Community-Engaged Climate Resilience at the 2026 S-LCA Conference</h3>
+        <p class="nc-desc">Manish Dixit presented doctoral student Mana Nemati Aghdam’s research at the 2026 Social Life Cycle Assessment Conference in Indonesia. The research integrates participatory community engagement with social life cycle assessment to advance low-carbon, climate-resilient, and socially sustainable built environments, building on ongoing collaborations with the Port Arthur Living Lab and PARCS teams.</p>
+        <a class="nc-src" href="https://lnkd.in/p/gMNC_N_4" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-university-of-florida-studio-receives-2026-course-dev">
+      <div class="nc-img"><img src="images/news/2026-ensure-university-of-florida-studio-receives-2026-course-dev.jpg" alt="ENSURE: University of Florida studio receives 2026 Course Development Prize" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: University of Florida studio receives 2026 Course Development Prize</h3>
+        <p class="nc-desc">The 2026 ACSA Course Development Prize recognized OASIS, a University of Florida design studio connected to the PARCS Port Arthur Living Lab. Led by Carla Brisotto and Aoife Houlihan Wiberg, the studio uses Port Arthur as its case study. Texas A&amp;M’s PARCS team supported the collaboration by sharing community engagement findings, local building and hazard information, and introductory materials for participating students.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-research-featured-at-iaqvec-2026">
+      <div class="nc-img"><img src="images/news/2026-ensure-research-featured-at-iaqvec-2026.jpg" alt="ENSURE research featured at IAQVEC 2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE research featured at IAQVEC 2026</h3>
+        <p class="nc-desc">Two studies by doctoral researcher Mana Nemati Aghdam and Manish Dixit appeared in the technical program of IAQVEC 2026 in Los Angeles. One examined hurricane-related building damage and its effect on embodied carbon assessments. The second used life cycle assessment and energy simulation to compare building envelope choices across climates. Both papers addressed environmental impacts over the life of buildings.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-research-on-ai-driven-building-envelope-optimization-">
+      <div class="nc-img"><img src="images/news/2026-ensure-research-on-ai-driven-building-envelope-optimization-.jpg" alt="ENSURE: Research on AI driven building envelope optimization presented at IAQVEC 2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: Research on AI driven building envelope optimization presented at IAQVEC 2026</h3>
+        <p class="nc-desc">At IAQVEC 2026 in Los Angeles, Maryam Abbasi Kamazani presented “AI-driven and simulation-based multi-objective building envelope optimization: Strengths, limitations, and gaps,” co-authored with Manish K. Dixit. The published paper examines physics-based and AI-assisted optimization for building envelopes, emphasizing computational burden, model generalizability, and decision-making challenges. It proposes research directions for scalable, climate-responsive, and more transferable optimization workflows.</p>
+        <a class="nc-src" href="https://lnkd.in/p/g-54qWfQ" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-presents-target-oriented-inverse-optimization-research">
+      <div class="nc-img"><img src="images/news/2026-sejal-presents-target-oriented-inverse-optimization-research.jpg" alt="Sejal Presents Target-Oriented Inverse Optimization Research at AEI | IRD 2026 in San Antonio" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">Sejal Presents Target-Oriented Inverse Optimization Research at AEI | IRD 2026 in San Antonio</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag presented the paper A Target-Oriented Inverse Optimization of Building Envelope for Operational and Embodied Performance in Diverse Climates at the AEI | IRD 2026 Conference in San Antonio, Texas. The research introduces an inverse optimization framework that identifies building envelope configurations meeting predefined operational and embodied performance targets while preserving architectural design flexibility. The presentation highlighted computational efficiency, target-driven sustainable design, and opportunities to integrate climate resilience and AI-driven optimization into future research.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-physics-based-optimization-research-presented-at-aei-">
+      <div class="nc-img"><img src="images/news/2026-ensure-physics-based-optimization-research-presented-at-aei-.jpg" alt="ENSURE: Physics based optimization research presented at AEI and CRC 2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: Physics based optimization research presented at AEI and CRC 2026</h3>
+        <p class="nc-desc">At the AEI and CRC conferences in San Antonio, Maryam Abbasi Kamazani presented “Physics-Based Simulation Coupled Multi-Objective Optimization for Building Design: Strengths, Challenges, and Research Gaps.” The paper reviews how physics-based simulation and multi-objective optimization can inform performance-driven design while identifying computational cost, workflow complexity, and unresolved methodological gaps that limit broader application. The presentation was part of the ENSURE research team’s conference participation.</p>
+        <a class="nc-src" href="https://lnkd.in/p/gkN928jt" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-shares-resilience-research-at-aei-ird-2026">
+      <div class="nc-img"><img src="images/news/2026-ensure-lab-shares-resilience-research-at-aei-ird-2026.jpg" alt="ENSURE Lab shares resilience research at AEI/IRD 2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Lab shares resilience research at AEI/IRD 2026</h3>
+        <p class="nc-desc">The ENSURE research group presented four papers and contributed to the doctoral forum at the AEI/IRD 2026 Conference in San Antonio. The work covered building energy use, embodied carbon, design optimization, future electricity grids, and climate resilience. Led by Manish Dixit, the group included graduate researchers Sejal Shanbhag, Mana Nemati Aghdam, Maryam Abbasi, and Yasaman Norouzi, who shared their work with the wider building research community.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-parcs-community-engagement">
+      <div class="nc-img"><img src="images/news/2026-ensure-parcs-community-engagement.jpg" alt="ENSURE: PARCS community engagement" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: PARCS community engagement</h3>
+        <p class="nc-desc">Two focus group sessions held in Port Arthur on March 10 and 11, 2026, brought residents and other community members into conversations about housing, past storms, and recovery. The research team used discussion questions and visual materials to gather input from different stakeholder groups. The sessions helped identify concerns that may not appear in building records or hazard maps alone.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-parcs-research-team-visits-port-arthur">
+      <div class="nc-img"><img src="images/news/2026-ensure-parcs-research-team-visits-port-arthur.jpg" alt="ENSURE: PARCS Research Team Visits Port Arthur" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: PARCS Research Team Visits Port Arthur</h3>
+        <p class="nc-desc">On March 10 and 11, researchers from Texas A&amp;M University and partner institutions visited Port Arthur to observe local housing conditions and meet community members. The visit included a tour of the city and discussions about neighborhoods affected by past storms. Firsthand observations helped the visiting team connect their ongoing work with the everyday conditions and concerns of residents.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-sanjay-shanbhag-selected-to-participate-in-microsoft-s">
+      <div class="nc-img"><img src="images/news/2026-sejal-sanjay-shanbhag-selected-to-participate-in-microsoft-s.jpg" alt="Sejal Sanjay Shanbhag Selected to Participate in Microsoft’s “AI and Sustainability Day” in Houston" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">Sejal Sanjay Shanbhag Selected to Participate in Microsoft’s “AI and Sustainability Day” in Houston</h3>
+        <p class="nc-desc">Sejal Shanbhag was selected to attend the AI and Sustainability Day organized by Microsoft and TEX-E at the Ion Houston. The event brought together industry leaders, researchers, and innovators to explore Agentic AI, carbon reduction strategies, and corporate sustainability initiatives. Discussions emphasized reduction-first approaches, Scope 3 emissions, and carbon removal technologies, offering insights into the intersection of artificial intelligence, life cycle assessment, and scalable decarbonization solutions.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-researchers-visit-the-university-of-florida-for-parcs">
+      <div class="nc-img"><img src="images/news/2026-ensure-researchers-visit-the-university-of-florida-for-parcs.jpg" alt="ENSURE Researchers visit the University of Florida for PARCS research workshop and collaboration coordination" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE Researchers visit the University of Florida for PARCS research workshop and collaboration coordination</h3>
+        <p class="nc-desc">Dr. Manish Dixit and doctoral student Mana Nemati Aghdam visited the University of Florida in March 2026 for research meetings and a workshop with academic partners. Discussions focused on combining climate resilience with lower-carbon building design and retrofit decisions. The visit also included meetings with researchers at the Florida Institute for Built Environment Resilience (FIBER) and conversations about future joint research.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-texas-a-amp-m-researchers-attend-the-low-impact-devel">
+      <div class="nc-img"><img src="images/news/2026-ensure-texas-a-amp-m-researchers-attend-the-low-impact-devel.jpg" alt="ENSURE: Texas A&amp;amp;M researchers attend the Low Impact Development Conference" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2026</span>
+        <h3 class="nc-headline">ENSURE: Texas A&amp;M researchers attend the Low Impact Development Conference</h3>
+        <p class="nc-desc">Doctoral researcher Mana Nemati Aghdam and Professor Manish Dixit presented two studies at the 2026 International Low Impact Development Conference in Jacksonville, Florida. The first examined housing vulnerabilities reported by Port Arthur residents through a community survey. The second discussed how a Living Lab connects local experiences with technical assessments to guide climate-resilient housing strategies. Both presentations shared ongoing research with an interdisciplinary audience.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-residents-take-part-in-a-port-arthur-co-design-sessio">
+      <div class="nc-img"><img src="images/news/2025-ensure-residents-take-part-in-a-port-arthur-co-design-sessio.jpg" alt="ENSURE: Residents Take Part in a Port Arthur Co-Design Session" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE: Residents Take Part in a Port Arthur Co-Design Session</h3>
+        <p class="nc-desc">Residents and local stakeholders joined a hands-on focus group in Port Arthur on December 5, 2025, to discuss housing and post-disaster recovery. Participants used house drawings, sticky notes, and group activities to describe their experiences and priorities. The session gave the research team a clearer picture of which housing features and recovery challenges matter most to community members.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-celebrates-thanksgiving-2025-with-current-and-for">
+      <div class="nc-img nc-noimg" aria-hidden="true"><span class="msym">groups</span></div>
+      <div class="nc-body">
+        <div class="nc-type">Lab life</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE Lab Celebrates Thanksgiving 2025 with Current and Former Graduate Students</h3>
+        <p class="nc-desc">The ENSURE Lab family gathered for a memorable Thanksgiving dinner in 2025, bringing together current and former graduate students, friends, and loved ones to celebrate gratitude, friendship, and togetherness. It was especially rewarding to reconnect with our alumni, reminisce about shared experiences, and celebrate the lasting relationships built through our research journey. The gathering reflected the spirit of ENSURE Lab as a close-knit academic family, where friendships, mentorship, and collaboration continue well beyond graduation. We are grateful for everyone who has contributed to making ENSURE Lab a welcoming and supportive community.</p>
+        <details class="nc-more"><summary>Read more</summary><p>2026</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-showcases-innovative-net-zero-and-climate-resilie">
+      <div class="nc-img"><img src="images/news/2025-ensure-lab-showcases-innovative-net-zero-and-climate-resilie.jpg" alt="ENSURE Lab Showcases Innovative Net-Zero and Climate-Resilient Building Research in Cape Town, South Africa" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE Lab Showcases Innovative Net-Zero and Climate-Resilient Building Research in Cape Town, South Africa</h3>
+        <p class="nc-desc">Manish Dixit and Sejal Shanbhag presented ENSURE Lab research at the 2025 Net-Zero Future Conference, hosted by the University of Cape Town, South Africa. The presentations showcased innovative research by doctoral researchers Mana Nemati Aghdam, Yasaman Norouzi, and Maryam Abbasi Kamazani, advancing integrated approaches to sustainable and climate-resilient building design.</p>
+        <details class="nc-more"><summary>Read more</summary><p>Mana Nemati Aghdam’s research introduced an integrated rating framework that combines life cycle environmental sustainability indicators with location-specific climate resilience metrics. The framework seeks to bridge the gap between climate mitigation and adaptation, enabling more informed decisions about building materials and systems that minimize environmental impacts while improving resistance to climate hazards.</p><p>Yasaman Norouzi’s research presented an AI-driven computational framework for optimizing the geometric configurations of 3D-printed hempcrete walls. By integrating advanced optimization methods with thermal performance assessment, the study explores opportunities to minimize global warming potential while enhancing the thermal efficiency of innovative bio-based building systems.</p><p>Maryam Abbasi Kamazani’s research advanced a holistic, performance-driven framework for optimizing interconnected energy, carbon, and water impacts in building design. Through multi-objective optimization, the study examines environmental trade-offs and synergies to support more balanced, resource-efficient, and environmentally responsible design decisions.</p><p>Together, these studies highlight ENSURE Lab’s commitment to advancing AI-integrated environmental assessment, regenerative construction materials, and climate-resilient design, while fostering international scientific collaboration toward a sustainable and net-zero built environment.</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-presents-inverse-optimization-framework-for-sustainabl">
+      <div class="nc-img"><img src="images/news/2025-sejal-presents-inverse-optimization-framework-for-sustainabl.jpg" alt="Sejal Presents Inverse Optimization Framework for Sustainable Building Design at Net-Zero Future 2025 in Cape Town" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">Sejal Presents Inverse Optimization Framework for Sustainable Building Design at Net-Zero Future 2025 in Cape Town</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag presented the research paper Accelerating Sustainable Building Envelope Design Through Inverse Optimization to Minimize Lifecycle Energy and Embodied Carbon at the Net-Zero Future Conference 2025 in Cape Town, South Africa. The research explores a target-oriented computational approach to identifying sustainable building envelope configurations while minimizing life cycle energy consumption and embodied carbon. The conference facilitated international research exchange on net-zero buildings, innovative design methodologies, and strategies for advancing decarbonization in the built environment.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-parcs-presented-at-adaptation-futures-2025">
+      <div class="nc-img"><img src="images/news/2025-ensure-parcs-presented-at-adaptation-futures-2025.jpg" alt="ENSURE: PARCS Presented at Adaptation Futures 2025" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE: PARCS Presented at Adaptation Futures 2025</h3>
+        <p class="nc-desc">Manish Dixit joined Claudiane Ouellet-Plamondon, Aoife Houlihan Wiberg, and Harlem Acevedo Agudelo to present their international research collaboration at Adaptation Futures 2025 in Christchurch, New Zealand. Their presentation described how living labs in three countries bring residents and researchers together to develop responses to local climate risks. The Port Arthur work was featured as an example of community-based research in a flood-prone region.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-port-arthur-living-lab-featured-at-texas-a-amp-m-show">
+      <div class="nc-img"><img src="images/news/2025-ensure-port-arthur-living-lab-featured-at-texas-a-amp-m-show.jpg" alt="ENSURE: Port Arthur Living Lab Featured at Texas A&amp;amp;M Showcase 2025" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE: Port Arthur Living Lab Featured at Texas A&amp;M Showcase 2025</h3>
+        <p class="nc-desc">At the Texas A&amp;M College of Architecture Showcase on October 9, 2025, doctoral researcher Mana Nemati Aghdam presented the Port Arthur Living Lab during the “Resilient and Sustainable Communities” oral session. The presentation introduced the Living Lab's activities and approaches to studying housing, disaster recovery, and long-term resilience.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-selected-to-serve-as-project-analysis-chair-on-texas-a">
+      <div class="nc-img"><img src="images/news/2025-sejal-selected-to-serve-as-project-analysis-chair-on-texas-a.jpg" alt="Sejal Selected to Serve as Project Analysis Chair on Texas A&amp;amp;M’s Aggie Green Fund Advisory Committee for 2025-2026" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">Sejal Selected to Serve as Project Analysis Chair on Texas A&amp;M’s Aggie Green Fund Advisory Committee for 2025-2026</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag was selected to serve as the Project Analysis Chair and Graduate Student Representative on the Aggie Green Fund Advisory Committee at Texas A&amp;M University for the 2025–2026 academic year. In this leadership role, she contributed to the evaluation of student-led sustainability proposals and supported the university’s efforts to fund projects advancing environmental stewardship, resource conservation, and campus sustainability. Her involvement reflects a commitment to translating sustainability research into actionable institutional initiatives.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-research-highlight-port-arthur-living-lab-connecting-">
+      <div class="nc-img"><img src="images/news/2025-ensure-research-highlight-port-arthur-living-lab-connecting-.jpg" alt="ENSURE Research Highlight: Port Arthur Living Lab: Connecting Research with Community Needs" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE Research Highlight: Port Arthur Living Lab: Connecting Research with Community Needs</h3>
+        <p class="nc-desc">Researchers in Texas A&amp;M University's ENSURE group are working with local partners in Port Arthur, Texas, to better understand housing needs in an area affected by hurricanes and flooding. The Living Lab brings together building research and community input to examine how homes can be safer, more affordable, and less environmentally damaging. The work includes local engagement, housing analysis, and the study of possible design and recovery strategies.</p>
+        <details class="nc-more"><summary>Read more</summary><p>This work is part of a broader international collaboration involving universities across seven countries, with three Living Labs in the United States, Colombia, and Indonesia working with local communities to develop climate-resilient and regenerative solutions.</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-presents-research-on-ai-driven-building-envelope-">
+      <div class="nc-img"><img src="images/news/2025-ensure-lab-presents-research-on-ai-driven-building-envelope-.jpg" alt="ENSURE Lab Presents Research on AI-Driven Building Envelope Optimization at International Conference in Switzerland" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">ENSURE Lab Presents Research on AI-Driven Building Envelope Optimization at International Conference in Switzerland</h3>
+        <p class="nc-desc">ENSURE Lab researcher Sejal Sanjay Shanbhag presented the paper “Inverse Optimization Framework for Reducing Lifecycle Energy and Carbon of Building Envelopes,” co-authored with Dr. Manish Dixit, at the 2025 Sustainable Built Environment Conference in Zurich, Switzerland.</p>
+        <details class="nc-more"><summary>Read more</summary><p>The study proposes a conceptual inverse optimization framework that starts with environmental performance targets to identify suitable building envelope design parameters, potentially reducing computational demands during early design.</p><p>Dr. Dixit also attended the conference alongside Sejal and the international PARCS research team, engaging with global researchers to advance sustainable construction, interdisciplinary collaboration, and climate-responsive built environments.</p><p>The research contributes to ENSURE Lab’s vision of integrating advanced computational methods with life cycle environmental decision-making.</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-bridging-sustainability-and-climate-resilience-in-the-built-">
+      <div class="nc-img"><img src="images/lab/wind-coast.jpg" alt="Bridging Sustainability and Climate Resilience in the Built Environment" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Research</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">Bridging Sustainability and Climate Resilience in the Built Environment</h3>
+        <p class="nc-desc">ENSURE Lab's research is advancing an integrated approach to reducing buildings' life cycle carbon emissions while strengthening resilience to extreme weather. Through predictive modeling, innovative materials, and community-engaged research, the team is developing solutions that reconcile environmental sustainability with climate adaptation across diverse socioeconomic and geographic contexts.</p>
+        <a class="nc-src" href="https://www.arch.tamu.edu/news/2025/06/13/bridging-the-divide-building-resilient-and-sustainable-communities-in-an-era-of-extreme-weather/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-manish-dixit-completes-faculty-development-leave-at-ntnu-nor">
+      <div class="nc-img"><img src="images/news/2025-manish-dixit-completes-faculty-development-leave-at-ntnu-nor.jpg" alt="Manish Dixit Completes Faculty Development Leave at NTNU, Norway, Advancing International Research Collaborations" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Collaboration</div>
+        <span class="nc-date">2025</span>
+        <h3 class="nc-headline">Manish Dixit Completes Faculty Development Leave at NTNU, Norway, Advancing International Research Collaborations</h3>
+        <p class="nc-desc">ENSURE Lab Director Dr. Manish Dixit successfully completed his Faculty Development Leave at the Norwegian University of Science and Technology (NTNU) in Trondheim, Norway. Hosted by Professor Rolf André Bohne in the Department of Civil and Environmental Engineering, the visit fostered international collaborations focused on carbon-negative construction, energy-efficient buildings, climate resilience, and environmental sustainability. Dr. Dixit engaged with leading researchers, doctoral students, and international collaborators, including a visit to NTNU’s Zero Emission Building (ZEB) Living Lab. Supported by Texas A&amp;M University and NTNU, this enriching experience established promising opportunities for collaborative research addressing global sustainability and climate challenges.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-lab-celebrates-thanksgiving-2024-with-friends-and-fam">
+      <div class="nc-img"><img src="images/news/2024-ensure-lab-celebrates-thanksgiving-2024-with-friends-and-fam.jpg" alt="ENSURE Lab Celebrates Thanksgiving 2024 with Friends and Family" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Lab life</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">ENSURE Lab Celebrates Thanksgiving 2024 with Friends and Family</h3>
+        <p class="nc-desc">The ENSURE Lab family came together for a wonderful Thanksgiving dinner in 2024, celebrating friendship, gratitude, and togetherness with our loved ones. The gathering provided a special opportunity to connect beyond research, share memorable moments, and appreciate the friendships and relationships that make ENSURE Lab more than just a research group. We are grateful for our students, colleagues, friends, and families who make this journey meaningful and rewarding.</p>
+        <details class="nc-more"><summary>Read more</summary><p>2025</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-manish-dixit-receives-the-2024-college-of-architecture-schol">
+      <div class="nc-img"><img src="images/news/2024-manish-dixit-receives-the-2024-college-of-architecture-schol.jpg" alt="Manish Dixit Receives the 2024 College of Architecture Scholarly Excellence Award" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Manish Dixit Receives the 2024 College of Architecture Scholarly Excellence Award</h3>
+        <p class="nc-desc">ENSURE Lab Director Dr. Manish Dixit was honored with the 2024 Scholarly Excellence Award at the Texas A&amp;M University College of Architecture Annual Showcase, recognizing his outstanding contributions to research and scholarly excellence. This prestigious recognition reflects ENSURE Lab’s continued efforts to advance sustainable and resilient built environments through innovative, interdisciplinary research. Dr. Dixit expressed his sincere appreciation to current and former graduate students, whose dedication, collaboration, and scholarly contributions have been instrumental in the research group’s achievements. He also acknowledged the continued encouragement and support of the Department of Construction Science and the College of Architecture.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-3-million-international-living-lab-initiative-advances-commu">
+      <div class="nc-img"><img src="images/lab/hands-globe.jpg" alt="$3 Million International Living Lab Initiative Advances Community Climate Resilience" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Funding</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">$3 Million International Living Lab Initiative Advances Community Climate Resilience</h3>
+        <p class="nc-desc">ENSURE Lab and international collaborators secured nearly $3 million through the New Frontiers in Research Fund to develop carbon-neutral, climate-resilient solutions. The initiative establishes living laboratories in the United States, Indonesia, and Colombia, engaging vulnerable communities in co-designing regenerative strategies for buildings, infrastructure, and climate adaptation.</p>
+        <a class="nc-src" href="https://www.arch.tamu.edu/news/2024/10/07/texas-am-and-global-partners-awarded-3-million-to-aid-climate-vulnerable-communities-on-gulf-coast/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-nsf-funded-collaboration-with-penn-state-examines-hygrotherm">
+      <div class="nc-img"><img src="images/lab/colloquia-2025.jpg" alt="NSF-funded collaboration with Penn State examines hygrothermal climate stress on building envelopes" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Research</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">NSF-funded collaboration with Penn State examines hygrothermal climate stress on building envelopes</h3>
+        <p class="nc-desc">ENSURE Lab and Penn State are jointly studying how climate-driven temperature and humidity swings degrade building envelope performance over 100+ year life cycles, integrating climate projections with accelerated weathering tests.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-receives-entrepreneurial-experiences-fund-award-from-t">
+      <div class="nc-img"><img src="images/news/2024-sejal-receives-entrepreneurial-experiences-fund-award-from-t.jpg" alt="Sejal Receives Entrepreneurial Experiences Fund Award from Texas A&amp;amp;M&#x27;s McFerrin Center for Entrepreneurship" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Sejal Receives Entrepreneurial Experiences Fund Award from Texas A&amp;M's McFerrin Center for Entrepreneurship</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag received funding through the Entrepreneurial Experiences Fund administered by Texas A&amp;M University's McFerrin Center for Entrepreneurship to attend Gastech 2024 in Houston, Texas. The award supported her participation in an international energy conference, facilitating engagement with industry professionals, entrepreneurs, and sustainability innovators. The experience provided valuable exposure to emerging energy technologies, entrepreneurial approaches to decarbonization, and opportunities to connect building sustainability research with industry-driven innovation.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-selected-as-strategic-conference-delegate-for-gastech-">
+      <div class="nc-img"><img src="images/news/2024-sejal-selected-as-strategic-conference-delegate-for-gastech-.jpg" alt="Sejal Selected as Strategic Conference Delegate for Gastech 2024 Future Leaders Program" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Sejal Selected as Strategic Conference Delegate for Gastech 2024 Future Leaders Program</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag was selected to participate in the Future Leaders Program at Gastech 2024 in Houston, Texas, receiving sponsorship from Uniper as a Strategic Conference Delegate through TEX-E (Texas Exchange for Energy and Climate Entrepreneurship). The program provided an opportunity to engage with global energy industry leaders, explore emerging technologies, and participate in discussions on energy transition, sustainability, and innovation, fostering connections between academic research and industry practices.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-sanjay-shanbhag-and-kenya-reeves-awarded-4-241-aggie-g">
+      <div class="nc-img"><img src="images/news/2024-sejal-sanjay-shanbhag-and-kenya-reeves-awarded-4-241-aggie-g.jpg" alt="Sejal Sanjay Shanbhag and Kenya Reeves Awarded $4,241 Aggie Green Fund Major Grant for Year Round Campus Textile Recycling" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Funding</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Sejal Sanjay Shanbhag and Kenya Reeves Awarded $4,241 Aggie Green Fund Major Grant for Year Round Campus Textile Recycling</h3>
+        <p class="nc-desc">Sejal Shanbhag and Kenya Reeves received a $4,241.02 Major Grant from the Aggie Green Fund to establish year-round textile recycling at Texas A&amp;M University in partnership with Green City Recycler. Building on a successful Spring 2024 pilot that collected over 3,000 pounds of textiles in one week, the initiative will introduce permanent collection bins near student residences, promoting waste diversion, material reuse, and circular economy practices across campus.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-researcher-wins-best-paper-award-for-building-energy-">
+      <div class="nc-img"><img src="images/news/2024-ensure-researcher-wins-best-paper-award-for-building-energy-.jpg" alt="ENSURE Researcher Wins Best Paper Award for Building Energy Optimization" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">ENSURE Researcher Wins Best Paper Award for Building Energy Optimization</h3>
+        <p class="nc-desc">ENSURE Lab researcher Maryam Abbasi Kamazani received the Best Paper Award at the International Conference on Net Zero Carbon Built Environment in Nottingham, UK. Her research introduces an embodied energy factor to evaluate trade-offs between operational energy savings and embodied energy, advancing more environmentally informed building design decisions.</p>
+        <a class="nc-src" href="https://www.arch.tamu.edu/news/2024/10/13/maryam-abbasi-kamazani-wins-best-paper-for-optimizing-embodied-energy-at-net-zero-carbon-conference/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-sejal-presents-life-cycle-assessment-of-hempcrete-at-net-zer">
+      <div class="nc-img"><img src="images/news/2024-sejal-presents-life-cycle-assessment-of-hempcrete-at-net-zer.jpg" alt="Sejal Presents Life Cycle Assessment of Hempcrete at Net-Zero Future Conference in Oslo" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Sejal Presents Life Cycle Assessment of Hempcrete at Net-Zero Future Conference in Oslo</h3>
+        <p class="nc-desc">Sejal Sanjay Shanbhag participated in the Net-Zero Future Conference in Oslo, Norway, sharing research on the environmental performance of sustainable building materials. The study, Examining the Global Warming Potential of Hempcrete in the United States: A Cradle-to-Gate Life Cycle Assessment, evaluates hempcrete's embodied carbon impacts. The conference facilitated international knowledge exchange on low-carbon construction materials, life cycle assessment, and net-zero building strategies.</p>
+        
+      </div>
+    </article>
+    <article class="nc reveal" id="n-texas-a-amp-m-research-team-wins-engineering-genesis-award-f">
+      <div class="nc-img"><img src="images/news/2024-texas-a-amp-m-research-team-wins-engineering-genesis-award-f.jpg" alt="Texas A&amp;amp;M Research Team Wins Engineering Genesis Award for Innovative Carbon-Negative 3D-Printed Hempcrete Buildings" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2024</span>
+        <h3 class="nc-headline">Texas A&amp;M Research Team Wins Engineering Genesis Award for Innovative Carbon-Negative 3D-Printed Hempcrete Buildings</h3>
+        <p class="nc-desc">A multidisciplinary Texas A&amp;M University research team received the Engineering Genesis Award for Multidisciplinary Research from the Texas A&amp;M College of Engineering for its U.S. Department of Energy ARPA-E-funded project, Hempcrete 3D Printed Buildings for Sustainability and Resilience.</p>
+        <details class="nc-more"><summary>Read more</summary><p>Led by Principal Investigator Petros Sideris, the team includes Co-Principal Investigators Maria Koliou, Zachary Grasley, Anand Puppala, Manish Dixit, and Wei Yan.</p><p>The project brings together expertise in structural engineering, materials science, additive manufacturing, building design, and life cycle environmental assessment to develop innovative, 3D-printable, carbon-negative hempcrete building systems. By integrating sustainable materials with advanced construction technologies and resilience-oriented design, the research aims to reduce the environmental footprint of buildings while improving their long-term performance.</p></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-research-presented-at-asce-inspire-2023">
+      <div class="nc-img"><img src="images/news/2023-ensure-research-presented-at-asce-inspire-2023.jpg" alt="ENSURE research presented at ASCE INSPIRE 2023" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Presentation</div>
+        <span class="nc-date">2023</span>
+        <h3 class="nc-headline">ENSURE research presented at ASCE INSPIRE 2023</h3>
+        <p class="nc-desc">At ASCE INSPIRE 2023, Maryam Abbasi Kamazani presented “Automated Thermal Zoning and Multi-Objective Optimization of Embodied and Operational Energy and Carbon Emissions of Buildings.” Co-authored with Manish K. Dixit, the study combines automated thermal zoning with multi-objective analysis to examine operational and embodied impacts together. The conference provided a forum for discussing resilient, sustainable infrastructure with researchers and practitioners.</p>
+        <details class="nc-more"><summary>Read more</summary><p>2024</p><a class="nc-src" href="https://lnkd.in/p/geZsNfkz" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-ensure-collaborative-research-receives-prestigious-vanadium-">
+      <div class="nc-img"><img src="images/news/2023-ensure-collaborative-research-receives-prestigious-vanadium-.jpg" alt="ENSURE Collaborative Research Receives Prestigious Vanadium Award" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2023</span>
+        <h3 class="nc-headline">ENSURE Collaborative Research Receives Prestigious Vanadium Award</h3>
+        <p class="nc-desc">An interdisciplinary Texas A&amp;M research team, including ENSURE Lab director Manish Dixit, received the Institute of Materials, Minerals and Mining's 2022 Vanadium Award. The award-winning study evaluated how vanadium-based technologies can reduce carbon emissions, improve material efficiency, and support the energy transition across construction and other industries.</p>
+        <a class="nc-src" href="https://artsci.tamu.edu/news/2023/06/news-post.html" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-manish-dixit-selected-for-texas-a-amp-m-university-s-inaugur">
+      <div class="nc-img"><img src="images/news/2023-manish-dixit-selected-for-texas-a-amp-m-university-s-inaugur.jpg" alt="Manish Dixit Selected for Texas A&amp;amp;M University’s Inaugural Research Leadership Fellowship" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Award</div>
+        <span class="nc-date">2023</span>
+        <h3 class="nc-headline">Manish Dixit Selected for Texas A&amp;M University’s Inaugural Research Leadership Fellowship</h3>
+        <p class="nc-desc">ENSURE Lab Director Dr. Manish Dixit was selected as one of 12 faculty members across Texas A&amp;M University to receive the prestigious inaugural Research Leadership Fellowship (RLF) in 2023. Established under the university’s ASCEND initiative, the fellowship recognizes promising research leaders and provides seed funding to develop interdisciplinary teams addressing pressing global challenges.</p>
+        <details class="nc-more"><summary>Read more</summary><p>Dr. Dixit’s fellowship supports the development of an interdisciplinary research institute leveraging artificial intelligence and advanced computational technologies to create environmentally sustainable, energy-efficient, and climate-resilient buildings capable of responding to extreme weather events and public health emergencies. This recognition highlights his leadership in advancing innovative, interdisciplinary research at the intersection of artificial intelligence, building science, environmental sustainability, and resilience.</p><p>The fellowship represents an important milestone in ENSURE Lab’s mission to develop transformative solutions for a more sustainable and resilient built environment.</p><a class="nc-src" href="https://stories.tamu.edu/news/2023/05/11/texas-am-announces-first-round-of-research-leadership-fellowships/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-3-74-million-doe-award-supports-carbon-negative-3d-printed-b">
+      <div class="nc-img"><img src="images/news/2022-3-74-million-doe-award-supports-carbon-negative-3d-printed-b.jpg" alt="$3.74 Million DOE Award Supports Carbon-Negative 3D-Printed Buildings" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Funding</div>
+        <span class="nc-date">2022</span>
+        <h3 class="nc-headline">$3.74 Million DOE Award Supports Carbon-Negative 3D-Printed Buildings</h3>
+        <p class="nc-desc">ENSURE Lab researchers are collaborating on a $3.74 million U.S. Department of Energy ARPA-E project to develop 3D-printed hempcrete buildings. The interdisciplinary research integrates carbon-storing bio-based materials, advanced construction technologies, and hazard resilience to advance environmentally sustainable, affordable, and durable building systems.</p>
+        <a class="nc-src" href="https://engineering.tamu.edu/news/2022/06/cven-texas-am-receives-374m-for-green-3d-printed-hempcrete-buildings-research.html" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-nsf-career-award-advances-life-cycle-energy-carbon-water-mod">
+      <div class="nc-img"><img src="images/news/2021-nsf-career-award-advances-life-cycle-energy-carbon-water-mod.jpg" alt="NSF CAREER Award Advances Life Cycle Energy–Carbon–Water Modeling of Buildings" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Funding</div>
+        <span class="nc-date">2021</span>
+        <h3 class="nc-headline">NSF CAREER Award Advances Life Cycle Energy–Carbon–Water Modeling of Buildings</h3>
+        <p class="nc-desc">ENSURE Lab director Manish Dixit received a $509,000 NSF CAREER award to develop scenario-based models for evaluating buildings' life cycle energy, carbon, and water impacts. The research integrates embodied and operational performance under evolving energy systems, supporting environmentally informed building design, policy development, and education.</p>
+        <details class="nc-more"><summary>Read more</summary><p>2022</p><a class="nc-src" href="https://www.arch.tamu.edu/news/2021/03/15/cosc-profs-study-aims-at-reducing-buildings-energy-use/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a></details>
+      </div>
+    </article>
+    <article class="nc reveal" id="n-space-lab-news-1-2-million-nsf-project-advances-virtual-real">
+      <div class="nc-img"><img src="images/news/2021-space-lab-news-1-2-million-nsf-project-advances-virtual-real.jpg" alt="SPACE Lab news: $1.2 Million NSF Project Advances Virtual Reality Training for Extreme Environments" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+      <div class="nc-body">
+        <div class="nc-type">Funding</div>
+        <span class="nc-date">2021</span>
+        <h3 class="nc-headline">SPACE Lab news: $1.2 Million NSF Project Advances Virtual Reality Training for Extreme Environments</h3>
+        <p class="nc-desc">ENSURE Lab director Manish Dixit leads a $1.2 million NSF-funded interdisciplinary project developing virtual reality simulations for training in unfamiliar and extreme environments, including the Moon and Mars. The research investigates spatial perception and cognitive adaptation to improve training effectiveness and safety where conventional environmental cues are absent.</p>
+        <a class="nc-src" href="https://www.arch.tamu.edu/news/2021/01/08/one-small-virtual-reality-step-for-man-one-giant-leap-for-mankind/" target="_blank" rel="noopener">Read the full story <i aria-hidden="true">&#8599;</i></a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -461,7 +842,7 @@ document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
   if (!btns.length || !grid) return;
 
   // 'Awards' -> 'award' so plural button labels match singular card types
-  const norm = v => (v || '').trim().toLowerCase().replace(/s$/, '');
+  const norm = v => (v || '').trim().toLowerCase().replace(/^presentations$/, 'presentation').replace(/^awards$/, 'award');
   const typeOf = el => {
     const t = el.querySelector('.nc-type, .news-type');
     return norm(t && t.textContent);
